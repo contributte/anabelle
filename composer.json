@@ -1,0 +1,35 @@
+{
+	"name": "ublaboo/anabelle",
+	"type": "library",
+	"description": "JSON-RPC Api documentation generator",
+	"keywords": ["json-rpc", "json", "rpc", "api", "documentation", "docu", "generator", "readme"],
+	"homepage": "https://ublaboo.org/anabelle",
+	"license": ["MIT"],
+	"support": {
+		"issues": "https://github.com/ublaboo/anabelle/issues"
+	},
+	"authors": [
+		{
+			"name": "Pavel Janda",
+			"homepage": "http://paveljanda.com"
+		}
+	],
+	"autoload": {
+		"psr-4": {
+			"Ublaboo\\Anabelle\\": "src/"
+		}
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"Ublaboo\\Anabelle\\Tests\\": "tests"
+		}
+	},
+	"require": {
+		"php": ">= 7.1.0",
+		"erusev/parsedown": "^1.6"
+	},
+	"require-dev": {
+		"nette/tester": "^2.0",
+		"mockery/mockery": "^1.0"
+	}
+}
