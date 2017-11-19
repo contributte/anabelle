@@ -32,10 +32,14 @@ final class MacroSection
 	): void // Intentionally &
 	{
 		/**
-		 * Substitute "#include" macros with actual files
+		 * Find "@" sections and parse their child .md file
+		 * 	== normal section with json-rpc methods
+		 * 
+		 * Find "@@" sections and parse their child .md file
+		 * 	== home section, aditional description etc
 		 */
 		$content = preg_replace_callback(
-			'/^@ (.+[^:]):(.+\.md)/m',
+			'/^@@? (.+[^:]):(.+\.md)/m',
 			function(array $input) use ($inputDirectory, $outputDirectory): string {
 				$inputFile = $inputDirectory . '/' . dirname($input[2]) . '/' . basename($input[2]);
 

@@ -43,6 +43,10 @@ final class Parser
 	 */
 	public function parseFile(string $inputFile, string $outputFile, bool $isLayout): void
 	{
+		if (!file_exists($inputFile)) {
+			throw new DocuGeneratorException("Missing file [$inputFile]");
+		}
+
 		$content = file_get_contents($inputFile);
 
 		foreach ($this->macros as $macro) {
