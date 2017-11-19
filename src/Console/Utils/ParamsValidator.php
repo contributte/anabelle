@@ -26,34 +26,45 @@ final class ParamsValidator
 	 *
 	 * @throws ParamsValidatorException
 	 */
-	public function validateInputDirectory(string $docuDirectory): void
+	public function validateInputParams(
+		string $inputDirectory,
+		string $outputDirectory,
+		bool $overwriteOutputDir
+	): void
 	{
 		/**
 		 * Absolute path?
 		 */
-		if (!file_exists($docuDirectory)) {
+		if (!file_exists($inputDirectory)) {
 			/**
 			 * Relative to the bin file?
 			 */
-			$docuDirectory = $this->binDir . '/' . $docuDirectory;
+			$inputDirectory = $this->binDir . '/' . $inputDirectory;
 
-			if (!file_exists($docuDirectory)) {
-				throw new ParamsValidatorException('Documentation directory does not exist');
+			if (!file_exists($inputDirectory)) {
+				throw new ParamsValidatorException('Input documentation directory does not exist');
 			}
 		}
 
 		/**
-		 * Validate $this->docuDirectory is a directory
+		 * Validate $this->inputDirectory is a directory
 		 */
-		if (!is_dir($docuDirectory)) {
+		if (!is_dir($inputDirectory)) {
 			throw new ParamsValidatorException('Given path is not a directory');
 		}
 
 		/**
 		 * Validate existence of <directory>/index.md
 		 */
-		if (!file_exists($docuDirectory . '/index.md')) {
-			throw new ParamsValidatorException("Missing file {$docuDirectory}/index.md");
+		if (!file_exists($inputDirectory . '/index.md')) {
+			throw new ParamsValidatorException("Missing file {$inputDirectory}/index.md");
+		}
+
+		if (file_exists($outputDirectory) && !$overwriteOutputDir) {
+			throw new ParamsValidatorException(
+				"Output directory path already exists."
+				. " Delete it or use option [-o] as for \"overwrite\" output directory"
+			);
 		}
 	}
 }

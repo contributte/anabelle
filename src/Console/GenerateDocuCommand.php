@@ -7,6 +7,7 @@ namespace Ublaboo\Anabelle\Console;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Ublaboo\Anabelle\Console\Utils\Exception\ParamsValidatorException;
 use Ublaboo\Anabelle\Console\Utils\ParamsValidator;
@@ -27,7 +28,12 @@ class GenerateDocuCommand extends Command
 	/**
 	 * @var string
 	 */
-	private $docuDirectory;
+	private $inputDirectory;
+
+	/**
+	 * @var bool
+	 */
+	private $overwriteOutputDir;
 
 
 	public function __construct(string $binDir)
@@ -45,16 +51,42 @@ class GenerateDocuCommand extends Command
 			->setDescription('Generates a documentation from target directory')
 			->setHelp($this->getDescription());
 
-		 $this->addArgument('directory', InputArgument::REQUIRED, 'Documentation directory');
+		$this->addArgument(
+			'inputDirectory',
+			InputArgument::REQUIRED,
+			'Input documentation directory'
+		);
+
+		$this->addArgument(
+			'outputDirectory',
+			InputArgument::REQUIRED,
+			'Output documentation directory'
+		);
+
+		$this->addOption(
+			'overwriteOutputDir',
+			'-o',
+			InputOption::VALUE_NONE,
+			'Should be the output directory overwritten with ne documentation?'
+		);
 	}
 
 
 	public function initialize(InputInterface $input, OutputInterface $output): void
 	{
-		$this->docuDirectory = $input->getArgument('directory');
+		$this->inputDirectory = $input->getArgument('inputDirectory');
+		$this->outputDirectory = $input->getArgument('outputDirectory');
+		$this->overwriteOutputDir = $input->getOption('overwriteOutputDir');
 
+		/**
+		 * Validate input params (documentation directory structure)
+		 */
 		try {
-			$this->paramsValidator->validateInputDirectory($this->docuDirectory);
+			$this->paramsValidator->validateInputParams(
+				$this->inputDirectory,
+				$this->outputDirectory,
+				$this->overwriteOutputDir
+			);
 		} catch (ParamsValidatorException $e) {
 			$this->printError($output, $e->getMessage());
 			exit(1);
