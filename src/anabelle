@@ -8,7 +8,7 @@ use Ublaboo\Anabelle\Console\GenerateDocuCommand;
 
 $application = new Application('anabelle');
 
-$application->add($command = new GenerateDocuCommand);
+$application->add($command = new GenerateDocuCommand(__DIR__));
 
 $application->setDefaultCommand($command->getName(), true);
 $application->run();
