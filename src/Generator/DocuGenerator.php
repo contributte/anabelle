@@ -5,8 +5,7 @@ declare(strict_types=1);
 namespace Ublaboo\Anabelle\Generator;
 
 use Ublaboo\Anabelle\Generator\Exception\DocuGeneratorException;
-use Ublaboo\Anabelle\Markdown\Macros\MacroInclude;
-use Ublaboo\Anabelle\Parsedown\CustomParsedown;
+use Ublaboo\Anabelle\Markdown\Parser;
 
 final class DocuGenerator
 {
@@ -22,14 +21,9 @@ final class DocuGenerator
 	private $outputDirectory;
 
 	/**
-	 * @var CustomParsedown
+	 * @var Parser
 	 */
-	private $parsedown;
-
-	/**
-	 * @var array
-	 */
-	private $macros = [];
+	private $parser;
 
 
 	public function __construct(string $inputDirectory, string $outputDirectory)
@@ -37,9 +31,7 @@ final class DocuGenerator
 		$this->inputDirectory = $inputDirectory;
 		$this->outputDirectory = $outputDirectory;
 
-		$this->parsedown = new CustomParsedown;
-
-		$this->setupMacros();
+		$this->parser = new Parser(true);
 	}
 
 
@@ -48,21 +40,9 @@ final class DocuGenerator
 	 */
 	public function run(): void
 	{
-		$content = file_get_contents($this->inputDirectory . '/index.md');
-
-		foreach ($this->macros as $macro) {
-			$macro->runMacro($content);
-		}
-
-		file_put_contents(
-			$this->outputDirectory . '/index.html',
-			$this->parsedown->text($content)
+		$this->parser->parseFile(
+			$this->inputDirectory . '/index.md',
+			$this->outputDirectory . '/index.html'
 		);
-	}
-
-
-	private function setupMacros(): void
-	{
-		$this->macros[] = new MacroInclude($this->inputDirectory);
 	}
 }
