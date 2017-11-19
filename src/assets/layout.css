@@ -16,8 +16,10 @@ body {
 	color: #2c3e50;
 	overflow: auto;
 	box-sizing: border-box;
-	width: 100%;
-	height: 100%;
+	width: 100vw;
+	max-width: 100vw;
+	height: 100vh;
+	max-height: 100vh;
 	display: grid;
 	grid-template-columns: auto 300px 900px auto;
 	grid-template-rows: 80px auto 80px;
@@ -34,8 +36,6 @@ header {
 
 nav {
 	grid-area: nav;
-	background-color: #ecf0f1;
-	border-radius: 1px;
 	align-self: start;
 }
 
@@ -55,13 +55,52 @@ footer {
 	grid-area: footer;
 }
 
-a.section-method, a.section-site {
+button.section-method, a.section-site {
 	font-size: 11px;
 	display: block;
-	line-height: 28px;
+	width: 100%;
+	border: 0;
+	margin: 0;
+	line-height: 30px;
 	vertical-align: middle;
 	padding: 0 1em;
-	background-color: rgb(255, 255, 255);
-	color: rgb(80, 80, 80);
-	text-transform: uppercase;
+	background-color: #fff;
+	color: #505050;
+	box-sizing: border-box;
+	text-align: left;
+	border-radius: 0;
+}
+
+button.section-method:hover, a.section-site:hover,
+button.section-method:active, a.section-site:active,
+button.section-method:focus, a.section-site:focus,
+button.section-method:target, a.section-site:target {
+	background-color: #eee;
+	cursor: pointer;
+}
+
+.section-site:first-of-type {
+	font-weight: bold;
+}
+
+.section-method:first-of-type, .section-site:first-of-type {
+	border-top-right-radius: 2px;
+	border-top-left-radius: 2px;
+}
+
+.section-method:last-of-type, .section-site:last-of-type {
+	border-bottom-right-radius: 2px;
+	border-bottom-left-radius: 2px;
+}
+
+.section-method:first-of-type {
+	margin-top: 1em;
+}
+
+iframe {
+	width: 100%;
+	height: 100%;
+	border: 0;
+	padding: 0;
+	margin: 0;
 }

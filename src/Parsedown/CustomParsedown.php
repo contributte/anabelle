@@ -22,11 +22,12 @@ final class CustomParsedown extends \Parsedown
 	{
 		if (preg_match('/^(@@?) ?(.+[^:]):(.+\.php)/', $excerpt['text'], $matches)) {
 			$class = strlen($matches[1]) == 1 ? 'section-site' : 'section-method';
+			$element = strlen($matches[1]) == 1 ? 'a' : 'button';
 
 			return [
 				'extent' => strlen($matches[0]), 
 				'element' => [
-					'name' => 'a',
+					'name' => $element,
 					'text' => $matches[2],
 					'attributes' => [
 						'data-section-href' => $matches[3],
