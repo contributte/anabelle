@@ -1,0 +1,16 @@
+#!/usr/bin/env php
+<?php
+
+require __DIR__ . '/../vendor/autoload.php';
+
+use Symfony\Component\Console\Application;
+use Ublaboo\Anabelle\Console\GenerateDocuCommand;
+
+$application = new Application('anabelle');
+
+$application->add($command = new GenerateDocuCommand);
+
+$application->setDefaultCommand($command->getName(), true);
+$application->run();
+
+exit(0);

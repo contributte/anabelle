@@ -26,10 +26,14 @@
 	},
 	"require": {
 		"php": ">= 7.1.0",
-		"erusev/parsedown": "^1.6"
+		"erusev/parsedown": "^1.6",
+		"symfony/console": "^3.3"
 	},
 	"require-dev": {
 		"nette/tester": "^2.0",
 		"mockery/mockery": "^1.0"
-	}
+	},
+	"bin": [
+		"src/anabelle"
+	]
 }
