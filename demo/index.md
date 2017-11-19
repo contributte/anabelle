@@ -1,2 +1,4 @@
-Awesome cookbook JSON-RPC sAPI
+Awesome cookbook JSON-RPC API
 ==============================
+
+#include methods/user.login.md
