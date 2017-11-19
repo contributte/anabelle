@@ -42,7 +42,8 @@ final class DocuGenerator
 	{
 		$this->parser->parseFile(
 			$this->inputDirectory . '/index.md',
-			$this->outputDirectory . '/index.html'
+			$this->outputDirectory . '/index.php',
+			true
 		);
 	}
 }

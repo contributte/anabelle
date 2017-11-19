@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Ublaboo\Anabelle\Markdown;
 
+use Ublaboo\Anabelle\Generator\Assets;
 use Ublaboo\Anabelle\Generator\Exception\DocuGeneratorException;
 use Ublaboo\Anabelle\Markdown\Macros\MacroInclude;
 use Ublaboo\Anabelle\Markdown\Macros\MacroSection;
@@ -22,10 +23,16 @@ final class Parser
 	 */
 	private $macros = [];
 
+	/**
+	 * @var Assets
+	 */
+	private $assets;
+
 
 	public function __construct(bool $enableSections)
 	{
 		$this->parsedown = new CustomParsedown;
+		$this->assets = new Assets;
 
 		$this->setupMacros($enableSections);
 	}
@@ -34,7 +41,7 @@ final class Parser
 	/**
 	 * @throws DocuGeneratorException
 	 */
-	public function parseFile(string $inputFile, string $outputFile): void
+	public function parseFile(string $inputFile, string $outputFile, bool $isLayout): void
 	{
 		$content = file_get_contents($inputFile);
 
@@ -46,7 +53,11 @@ final class Parser
 			mkdir(dirname($outputFile), 0777, true);
 		}
 
-		file_put_contents($outputFile, $this->parsedown->text($content));
+		$this->assets->saveFile(
+			$this->parsedown->text($content),
+			$outputFile,
+			$isLayout
+		);
 	}
 
 

@@ -35,23 +35,23 @@ final class MacroSection
 		 * Substitute "#include" macros with actual files
 		 */
 		$content = preg_replace_callback(
-			'/^#section (.+[^:]):(.+\.md)/m',
+			'/^@ (.+[^:]):(.+\.md)/m',
 			function(array $input) use ($inputDirectory, $outputDirectory): string {
 				$inputFile = $inputDirectory . '/' . dirname($input[2]) . '/' . basename($input[2]);
 
 				/**
-				 * Output file is .html
+				 * Output file is .php
 				 */
-				$outputFile = preg_replace('/md$/', 'html', $inputFile);
+				$outputFile = preg_replace('/md$/', 'php', $inputFile);
 
 				/**
 				 * Substitute input dir for output dir
 				 */
 				$outputFile = str_replace($inputDirectory, $outputDirectory, $outputFile);
 
-				$this->parser->parseFile($inputFile, $outputFile);
+				$this->parser->parseFile($inputFile, $outputFile, false);
 
-				return preg_replace('/md$/', 'html', $input[0]);
+				return preg_replace('/md$/', 'php', $input[0]);
 			},
 			$content
 		);

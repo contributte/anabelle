@@ -1,4 +1,4 @@
 Awesome cookbook JSON-RPC API
 ==============================
 
-#section user.login:methods/user.login.md
+@ user.login:methods/user.login.md
