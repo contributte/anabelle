@@ -35,6 +35,11 @@ final class Assets
 	/**
 	 * @var string
 	 */
+	private $layoutFavicon;
+
+	/**
+	 * @var string
+	 */
 	private $sectionFile;
 
 	/**
@@ -50,12 +55,13 @@ final class Assets
 
 	public function __construct()
 	{
-		$this->layoutFile = __DIR__ . '/../assets/layout.php';
-		$this->layoutStylesPath = __DIR__ . '/../assets/layout.css';
-		$this->layoutSriptsPath = __DIR__ . '/../assets/layout.js';
+		$this->layoutFile = __DIR__ . '/../../assets/layout.php';
+		$this->layoutStylesPath = __DIR__ . '/../../assets/layout.css';
+		$this->layoutSriptsPath = __DIR__ . '/../../assets/layout.js';
+		$this->layoutFavicon = __DIR__ . '/../../assets/favicon.ico';
 
-		$this->sectionFile = __DIR__ . '/../assets/section.php';
-		$this->sectionStylesPath = __DIR__ . '/../assets/section.css';
+		$this->sectionFile = __DIR__ . '/../../assets/section.php';
+		$this->sectionStylesPath = __DIR__ . '/../../assets/section.css';
 	}
 
 
@@ -63,6 +69,7 @@ final class Assets
 	{
 		if ($isLayout) {
 			$this->saveLayout($content, $outputFile);
+			copy($this->layoutFavicon, dirname($outputFile) . '/favicon.ico');
 		} else {
 			$this->saveSection($content, $outputFile);
 		}

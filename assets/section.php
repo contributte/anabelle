@@ -5,6 +5,8 @@
 <style>{styles}</style>
 </head>
 <body>
-	{content}
+	<main>
+		{content}
+	</main>
 </body>
 </html>
