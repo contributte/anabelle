@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Ublaboo\Anabelle\Generator;
 
 use MatthiasMullie\Minify\CSS;
+use MatthiasMullie\Minify\JS;
 use Ublaboo\Anabelle\Generator\Exception\DocuGeneratorException;
 use Ublaboo\Anabelle\Markdown\Parser;
 
@@ -20,6 +21,11 @@ final class Assets
 	 * @var string
 	 */
 	private $layoutStylesPath;
+
+	/**
+	 * @var string
+	 */
+	private $layoutSriptsPath;
 
 	/**
 	 * @var string|null
@@ -46,6 +52,7 @@ final class Assets
 	{
 		$this->layoutFile = __DIR__ . '/../assets/layout.php';
 		$this->layoutStylesPath = __DIR__ . '/../assets/layout.css';
+		$this->layoutSriptsPath = __DIR__ . '/../assets/layout.js';
 
 		$this->sectionFile = __DIR__ . '/../assets/section.php';
 		$this->sectionStylesPath = __DIR__ . '/../assets/section.css';
@@ -72,6 +79,7 @@ final class Assets
 		$this->replaceContent($template, $content);
 
 		$template = str_replace('{styles}', $this->getLayoutStyles(), $template);
+		$template = str_replace('{scripts}', $this->getLayoutSripts(), $template);
 
 		file_put_contents($outputFile, $this->minifyHtml($template));
 	}
@@ -114,6 +122,14 @@ final class Assets
 		}
 
 		return $this->layoutStyles;
+	}
+
+
+	private function getLayoutSripts(): string
+	{
+		$minifier = new JS($this->layoutSriptsPath);
+
+		return $minifier->minify();
 	}
 
 

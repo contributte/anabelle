@@ -11,5 +11,6 @@
 	<div class="empty-right"></div>
 	<main><iframe src=""></iframe></main>
 	<footer></footer>
+	<script type="text/javascript">{scripts}</script>
 </body>
 </html>
