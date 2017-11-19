@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>{title}</title>
+	<title>{title}</title>
 <style>{styles}</style>
 </head>
 <body>
-{content}
+	{content}
 </body>
 </html>

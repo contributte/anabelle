@@ -1,1 +1,1 @@
-<!DOCTYPE html> <html> <head> <title>Docu</title> <style></style> </head> <body> <p>This is a documentation of our cookbook JSON-RPC API. If you are having any troubles baking your own API client, please contact our chef Pavel Janda.</p> </body> </html> 
+<!DOCTYPE html> <html> <head> <title>API Docu</title> <style></style> </head> <body> <p>This is a documentation of our cookbook JSON-RPC API. If you are having any troubles baking your own API client, please contact our chef Pavel Janda.</p> </body> </html> 

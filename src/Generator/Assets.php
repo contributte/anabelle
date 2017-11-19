@@ -67,6 +67,8 @@ final class Assets
 		$template = file_get_contents($this->layoutFile);
 
 		$this->replaceTitle($template, $content);
+
+		$content = preg_replace('/^<h1>.*<\/h1>\w*$/mU', '', $content);
 		$this->replaceContent($template, $content);
 
 		$template = str_replace('{styles}', $this->getLayoutStyles(), $template);
@@ -93,7 +95,7 @@ final class Assets
 		if (preg_match('/<h1>(.+)<\/h1>/', $content, $matches)) {
 			$template = str_replace('{title}', $matches[1], $template);
 		} else {
-			$template = str_replace('{title}', 'Docu', $template);
+			$template = str_replace('{title}', 'API Docu', $template);
 		}
 	}
 

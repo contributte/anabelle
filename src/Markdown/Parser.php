@@ -7,6 +7,7 @@ namespace Ublaboo\Anabelle\Markdown;
 use Ublaboo\Anabelle\Console\Utils\Logger;
 use Ublaboo\Anabelle\Generator\Assets;
 use Ublaboo\Anabelle\Generator\Exception\DocuGeneratorException;
+use Ublaboo\Anabelle\Markdown\Macros\MacroCleanIndex;
 use Ublaboo\Anabelle\Markdown\Macros\MacroInclude;
 use Ublaboo\Anabelle\Markdown\Macros\MacroSection;
 use Ublaboo\Anabelle\Parsedown\CustomParsedown;
@@ -18,6 +19,11 @@ final class Parser
 	 * @var Logger
 	 */
 	private $logger;
+
+	/**
+	 * @var bool
+	 */
+	private $isLayout;
 
 	/**
 	 * @var CustomParsedown
@@ -35,21 +41,22 @@ final class Parser
 	private $assets;
 
 
-	public function __construct(bool $enableSections, Logger $logger)
+	public function __construct(bool $isLayout, Logger $logger)
 	{
 		$this->logger = $logger;
+		$this->isLayout = $isLayout;
 
 		$this->parsedown = new CustomParsedown;
 		$this->assets = new Assets;
 
-		$this->setupMacros($enableSections);
+		$this->setupMacros();
 	}
 
 
 	/**
 	 * @throws DocuGeneratorException
 	 */
-	public function parseFile(string $inputFile, string $outputFile, bool $isLayout): void
+	public function parseFile(string $inputFile, string $outputFile): void
 	{
 		$this->logger->logProcessingFile($inputFile);
 
@@ -70,16 +77,17 @@ final class Parser
 		$this->assets->saveFile(
 			$this->parsedown->text($content),
 			$outputFile,
-			$isLayout
+			$this->isLayout
 		);
 	}
 
 
-	private function setupMacros(bool $enableSections): void
+	private function setupMacros(): void
 	{
 		$this->macros[] = new MacroInclude;
 
-		if ($enableSections) {
+		if ($this->isLayout) {
+			$this->macros[] = new MacroCleanIndex($this->logger);
 			$this->macros[] = new MacroSection($this->logger);
 		}
 	}

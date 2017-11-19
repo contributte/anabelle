@@ -33,10 +33,10 @@ final class MacroSection implements IMacro
 	): void
 	{
 		/**
-		 * Find "@" sections and parse their child .md file
+		 * Find "@@" sections and parse their child .md file
 		 * 	== normal section with json-rpc methods
 		 * 
-		 * Find "@@" sections and parse their child .md file
+		 * Find "@" sections and parse their child .md file
 		 * 	== home section, aditional description etc
 		 */
 		$content = preg_replace_callback(
@@ -54,7 +54,7 @@ final class MacroSection implements IMacro
 				 */
 				$outputFile = str_replace($inputDirectory, $outputDirectory, $outputFile);
 
-				$this->parser->parseFile($inputFile, $outputFile, false);
+				$this->parser->parseFile($inputFile, $outputFile);
 
 				return preg_replace('/md$/', 'php', $input[0]);
 			},
