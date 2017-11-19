@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace Ublaboo\Anabelle\Markdown\Macros;
 
+use Ublaboo\Anabelle\Console\Utils\Logger;
 use Ublaboo\Anabelle\Generator\Exception\DocuGeneratorException;
 use Ublaboo\Anabelle\Markdown\Parser;
 
-final class MacroSection
+final class MacroSection implements IMacro
 {
 
 	/**
@@ -16,9 +17,9 @@ final class MacroSection
 	private $parser;
 
 
-	public function __construct()
+	public function __construct(Logger $logger)
 	{
-		$this->parser = new Parser(false);
+		$this->parser = new Parser(false, $logger);
 	}
 
 
@@ -28,8 +29,8 @@ final class MacroSection
 	public function runMacro(
 		string $inputDirectory,
 		string $outputDirectory,
-		string & $content
-	): void // Intentionally &
+		string & $content // Intentionally &
+	): void
 	{
 		/**
 		 * Find "@" sections and parse their child .md file

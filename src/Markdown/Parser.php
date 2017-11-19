@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Ublaboo\Anabelle\Markdown;
 
+use Ublaboo\Anabelle\Console\Utils\Logger;
 use Ublaboo\Anabelle\Generator\Assets;
 use Ublaboo\Anabelle\Generator\Exception\DocuGeneratorException;
 use Ublaboo\Anabelle\Markdown\Macros\MacroInclude;
@@ -14,12 +15,17 @@ final class Parser
 {
 
 	/**
+	 * @var Logger
+	 */
+	private $logger;
+
+	/**
 	 * @var CustomParsedown
 	 */
 	private $parsedown;
 
 	/**
-	 * @var array
+	 * @var IMacro[]
 	 */
 	private $macros = [];
 
@@ -29,8 +35,10 @@ final class Parser
 	private $assets;
 
 
-	public function __construct(bool $enableSections)
+	public function __construct(bool $enableSections, Logger $logger)
 	{
+		$this->logger = $logger;
+
 		$this->parsedown = new CustomParsedown;
 		$this->assets = new Assets;
 
@@ -43,6 +51,8 @@ final class Parser
 	 */
 	public function parseFile(string $inputFile, string $outputFile, bool $isLayout): void
 	{
+		$this->logger->logProcessingFile($inputFile);
+
 		if (!file_exists($inputFile)) {
 			throw new DocuGeneratorException("Missing file [$inputFile]");
 		}
@@ -70,7 +80,7 @@ final class Parser
 		$this->macros[] = new MacroInclude;
 
 		if ($enableSections) {
-			$this->macros[] = new MacroSection;
+			$this->macros[] = new MacroSection($this->logger);
 		}
 	}
 }

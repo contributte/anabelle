@@ -10,6 +10,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Ublaboo\Anabelle\Console\Utils\Exception\ParamsValidatorException;
+use Ublaboo\Anabelle\Console\Utils\Logger;
 use Ublaboo\Anabelle\Console\Utils\ParamsValidator;
 use Ublaboo\Anabelle\Generator\DocuGenerator;
 use Ublaboo\Anabelle\Generator\Exception\DocuGeneratorException;
@@ -41,6 +42,11 @@ final class GenerateDocuCommand extends Command
 	 * @var bool
 	 */
 	private $overwriteOutputDir;
+
+	/**
+	 * @var Logger|null
+	 */
+	private $logger;
 
 
 	public function __construct(string $binDir)
@@ -84,6 +90,7 @@ final class GenerateDocuCommand extends Command
 		$this->inputDirectory = $input->getArgument('inputDirectory');
 		$this->outputDirectory = $input->getArgument('outputDirectory');
 		$this->overwriteOutputDir = $input->getOption('overwriteOutputDir');
+		$this->logger = new Logger($output);
 
 		/**
 		 * Validate input params (documentation directory structure)
@@ -103,7 +110,11 @@ final class GenerateDocuCommand extends Command
 
 	protected function execute(InputInterface $input, OutputInterface $output): void
 	{
-		$docuGenerator = new DocuGenerator($this->inputDirectory, $this->outputDirectory);
+		$docuGenerator = new DocuGenerator(
+			$this->inputDirectory,
+			$this->outputDirectory,
+			$this->logger
+		);
 
 		try {
 			$docuGenerator->run();

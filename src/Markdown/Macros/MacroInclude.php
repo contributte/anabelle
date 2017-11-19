@@ -6,7 +6,7 @@ namespace Ublaboo\Anabelle\Markdown\Macros;
 
 use Ublaboo\Anabelle\Generator\Exception\DocuGeneratorException;
 
-final class MacroInclude
+final class MacroInclude implements IMacro
 {
 
 	/**
@@ -15,8 +15,8 @@ final class MacroInclude
 	public function runMacro(
 		string $inputDirectory,
 		string $outputDirectory,
-		string & $content
-	): void // Intentionally &
+		string & $content // Intentionally &
+	): void
 	{
 		/**
 		 * Substitute "#include" macros with actual files
