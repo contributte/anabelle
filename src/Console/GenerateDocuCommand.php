@@ -11,8 +11,10 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Ublaboo\Anabelle\Console\Utils\Exception\ParamsValidatorException;
 use Ublaboo\Anabelle\Console\Utils\ParamsValidator;
+use Ublaboo\Anabelle\Generator\DocuGenerator;
+use Ublaboo\Anabelle\Generator\Exception\DocuGeneratorException;
 
-class GenerateDocuCommand extends Command
+final class GenerateDocuCommand extends Command
 {
 
 	/**
@@ -29,6 +31,11 @@ class GenerateDocuCommand extends Command
 	 * @var string
 	 */
 	private $inputDirectory;
+
+	/**
+	 * @var string
+	 */
+	private $outputDirectory;
 
 	/**
 	 * @var bool
@@ -96,7 +103,14 @@ class GenerateDocuCommand extends Command
 
 	protected function execute(InputInterface $input, OutputInterface $output): void
 	{
-		// Code here
+		$docuGenerator = new DocuGenerator($this->inputDirectory, $this->outputDirectory);
+
+		try {
+			$docuGenerator->run();
+		} catch (DocuGeneratorException $e) {
+			$this->printError($output, $e->getMessage());
+			exit(1);
+		}
 	}
 
 
