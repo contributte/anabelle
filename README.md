@@ -3,101 +3,33 @@ ublaboo/anabelle
 
 ## JSON-RPC Api documentation generator
 
-Example docu directory:
 
-`index.md`:
+### Example:
 
-```md
-# Awesome cookbook JSON-RPC API doc
+There is an example documentation directory: `demo`, as you can see above.
 
-@ Home:home.md
-@ About project:about.md
+### Extended Markdown syntax:
 
-@@ user.login:methods/user.login.md
-@@ user.logout:methods/user.logout.md
+- `#include <file.md>` == content of `<file.md>` will be placed here
+- `@ <sectionName>:<sectionFile.md>` == high-level section definition
+- `@@ <sectionName>:<sectionFile.md>` == method section definition
+
+### How to use it:
+
+```bash
+~ $ cd myApi
+~/myApi $ composer require ublaboo/anabelle
+~/myApi $ vendor/bin/anabelle docuDir docuOutputDir [-o, --overwriteOutputDir]
 ```
 
-(Everything except for `#`, `@` and `@@` sections will be removed)
+### Generator workflow:
 
-`home.md`:
-
-```md
-## Home
-
-This is a documentation of our cookbook JSON-RPC API. If you are having any troubles baking your own API client, please contact our chef Pavel Janda.
-
-### Specification
-
-#### Endpoint
-
-All api calls should be targeting uri `api.example.io`. According to [JSON-RPC specification](http://www.jsonrpc.org/specification), each and every request object has to contain following properties:
-
-- `jsonrpc`: JSON-RPC version (`"2.0"`)
-- `method`: Name of the method to be invoked
-- `params: Parameters of particular call (optional)
-- `id`: An string identifying this call (may be `null`)
-
-Example request payload:
-
-\```json
-{
-	"jsonrpc": "2.0",
-	"method": "Receipe.store",
-	"params": {
-		"name": "Bread with butter",
-		"ingredients": [
-			"bread",
-			"butter"
-		],
-		"timeNeeded": 2
-	},
-	"id": null
-}
-\```
-```
-
-`about.md`:
-
-```md
-## About
-
-Blah blah blah about
-
-```
-
-`methods/user.login.md`:
-
-```md
-## user.login
-
-### Example request:
-
-\```json
-{
-	"jsonrpc": "2.0",
-	"method": "user.login",
-	"params": {
-		"username": "bob",
-		"password": "the_creep"
-	},
-	"id": null
-}
-\```
-```
-
-`methods/user.logout.md`:
-
-```md
-## user.logout
-
-### Example request:
-
-\```json
-{
-	"jsonrpc": "2.0",
-	"method": "user.logout",
-	"params": {},
-	"id": null
-}
-\```
-```
+1. Most important (and only required) file is `index.md`. In this file, you can use only (different Markdown markup is ignored in `index.md`):
+	- `# <h1>`
+	- `#include <file.md>`
+	- `@ <sectionName>:<sectionFile.md>`
+	- `@@ <sectionName>:<sectionFile.md>`)
+1. `#include` macros are replaced
+1. `<h1>` is used as documentation page title
+1. `@` and `@@` sections are rendered in the sidebar nav
+1. Content of `@` and `@@` sections is rendered into separate files and loaded into the main section detail after clicking particular section link in the nav
