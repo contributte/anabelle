@@ -6,17 +6,22 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	var buttons = document.querySelectorAll('[data-section-href]');
 
 	for (var i = 0; i < buttons.length; i++) {
-		buttons[i].addEventListener("click", function() {
-			var sectionLink = this.getAttribute("data-section-href");
+		buttons[i].addEventListener("click", function(event) {
+			event.stopPropagation();
+			event.preventDefault();
 
-			document.getElementsByTagName('iframe')[0].setAttribute("src", sectionLink);
+			window.location.hash = this.getAttribute("data-target");
 		});
 	}
 
 	if (buttons.length) {
-		var sectionLink = buttons[0].getAttribute("data-section-href");
+		if (window.location.hash) {
+			onHashChangeRouter();
+		} else {
+			var sectionLink = buttons[0].getAttribute("data-section-href");
 
-		document.getElementsByTagName('iframe')[0].setAttribute("src", sectionLink);
+			document.getElementsByTagName('iframe')[0].setAttribute("src", sectionLink);
+		}
 	}
 });
 
@@ -64,3 +69,23 @@ document.getElementsByTagName("iframe")[0].addEventListener("load", function() {
 		jsonAreas[i].innerHTML = content;
 	}
 });
+
+var onHashChangeRouter = function() {
+	if (window.location.hash) {
+		var hash = window.location.hash.replace(/#/, '');
+		var sectionLink = document.querySelectorAll('[data-target="'+hash+'"]');
+
+		if (sectionLink.length) {
+			var sectionSrc = sectionLink[0].getAttribute("data-section-href");
+
+			document.getElementsByTagName('iframe')[0].setAttribute("src", sectionSrc);
+		}
+	}
+};
+
+/**
+ * Simple router
+ */
+window.onhashchange = function() {
+	onHashChangeRouter();
+};

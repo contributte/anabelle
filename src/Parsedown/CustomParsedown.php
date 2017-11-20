@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Ublaboo\Anabelle\Parsedown;
 
+use Nette\Utils\Strings;
+
 final class CustomParsedown extends \Parsedown
 {
 
@@ -31,7 +33,8 @@ final class CustomParsedown extends \Parsedown
 					'text' => $matches[2],
 					'attributes' => [
 						'data-section-href' => $matches[3],
-						'class' => $class
+						'class' => $class,
+						'data-target' => Strings::webalize($matches[2])
 					]
 				]
 			];
