@@ -9,6 +9,8 @@ use Ublaboo\Anabelle\Generator\Assets;
 use Ublaboo\Anabelle\Generator\Exception\DocuFileGeneratorException;
 use Ublaboo\Anabelle\Generator\Exception\DocuGeneratorException;
 use Ublaboo\Anabelle\Markdown\DocuScope;
+use Ublaboo\Anabelle\Markdown\Macros\MacroBlockVariable;
+use Ublaboo\Anabelle\Markdown\Macros\MacroBlockVariableOutput;
 use Ublaboo\Anabelle\Markdown\Macros\MacroCleanIndex;
 use Ublaboo\Anabelle\Markdown\Macros\MacroInclude;
 use Ublaboo\Anabelle\Markdown\Macros\MacroInlineVariable;
@@ -107,6 +109,8 @@ final class Parser
 		$this->macros[] = new MacroInclude;
 		$this->macros[] = new MacroInlineVariable($this->docuScope);
 		$this->macros[] = new MacroInlineVariableOutput($this->docuScope);
+		$this->macros[] = new MacroBlockVariable($this->docuScope);
+		$this->macros[] = new MacroBlockVariableOutput($this->docuScope);
 
 		if ($this->isLayout) {
 			$this->macros[] = new MacroCleanIndex;

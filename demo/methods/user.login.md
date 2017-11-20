@@ -13,3 +13,7 @@
 	"id": null
 }
 ```
+
+### Example success response:
+
+{$$successEmptyResponse}

@@ -9,8 +9,12 @@ html, body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-	margin: 0 0 1em 0;
+	margin: 1.2em 0;
 	font-weight: 600;
+}
+
+h1:first-child, h2:first-child, h3:first-child, h4:first-child, h5:first-child, h6:first-child {
+	margin: 0 0 1em 0;
 }
 
 p {
