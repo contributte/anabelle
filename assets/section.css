@@ -4,6 +4,8 @@ html, body {
 	height: 100%;
 	width: 100%;
 	font-size: 12px;
+	line-height: 18px;
+	vertical-align: middle;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -108,4 +110,8 @@ pre:last-child {
 
 .language-json-number {
 	color: #138C58;
+}
+
+.language-json-key {
+	color: #4a51bf;
 }

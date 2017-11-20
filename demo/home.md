@@ -10,7 +10,7 @@ All api calls should be targeting uri `api.example.io`. According to [JSON-RPC s
 
 - `jsonrpc`: JSON-RPC version (`"2.0"`)
 - `method`: Name of the method to be invoked
-- `params: Parameters of particular call (optional)
+- `params`: Parameters of particular call (optional)
 - `id`: An string identifying this call (may be `null`)
 
 #### Example request payload:

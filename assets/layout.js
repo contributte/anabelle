@@ -34,25 +34,33 @@ document.getElementsByTagName("iframe")[0].addEventListener("load", function() {
 	var jsonAreas = this.contentWindow.document.getElementsByClassName('language-json');
 
 	for (var i = 0; i < jsonAreas.length; i++) {
+		var content = jsonAreas[i].innerHTML;
+		/**
+		 * Key
+		 */
+		content = content.replace(
+			/"([^"]+)":/g,
+			"<span class=language-json-key>&quot;$1&quot;:</span>"
+		);
+
 		/**
 		 * String
 		 */
-		jsonAreas[i].innerHTML = jsonAreas[i].innerHTML.replace(
-			/"([^"]+)"/g,
-			"<span class=language-json-string>\"$1\"</span>"
+		content = content.replace(
+			/"([^"]+)"([^:])/g,
+			"<span class=language-json-string>&quot;$1&quot;</span>$2"
 		);
 
 		/**
 		 * Number
 		 */
-		jsonAreas[i].innerHTML = jsonAreas[i].innerHTML.replace(
+		content = content.replace(
 			/([ ,:{\n])(\d+)/g,
 			"$1<span class=language-json-number>$2</span>"
 		);
 		
-		jsonAreas[i].innerHTML = jsonAreas[i].innerHTML.replace(
-			/class=language-json-(.+)/,
-			"class=\"language-json-$1\""
-		);
+		//content = content.replace(/class=language-json-([^>]+)/, "class=\"language-json-$1\"");
+
+		jsonAreas[i].innerHTML = content;
 	}
 });
