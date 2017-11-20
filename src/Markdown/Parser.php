@@ -6,9 +6,13 @@ namespace Ublaboo\Anabelle\Markdown;
 
 use Ublaboo\Anabelle\Console\Utils\Logger;
 use Ublaboo\Anabelle\Generator\Assets;
+use Ublaboo\Anabelle\Generator\Exception\DocuFileGeneratorException;
 use Ublaboo\Anabelle\Generator\Exception\DocuGeneratorException;
+use Ublaboo\Anabelle\Markdown\DocuScope;
 use Ublaboo\Anabelle\Markdown\Macros\MacroCleanIndex;
 use Ublaboo\Anabelle\Markdown\Macros\MacroInclude;
+use Ublaboo\Anabelle\Markdown\Macros\MacroInlineVariable;
+use Ublaboo\Anabelle\Markdown\Macros\MacroInlineVariableOutput;
 use Ublaboo\Anabelle\Markdown\Macros\MacroSection;
 use Ublaboo\Anabelle\Parsedown\CustomParsedown;
 
@@ -16,14 +20,19 @@ final class Parser
 {
 
 	/**
+	 * @var bool
+	 */
+	private $isLayout;
+
+	/**
 	 * @var Logger
 	 */
 	private $logger;
 
 	/**
-	 * @var bool
+	 * @var DocuScope
 	 */
-	private $isLayout;
+	private $docuScope;
 
 	/**
 	 * @var CustomParsedown
@@ -41,10 +50,11 @@ final class Parser
 	private $assets;
 
 
-	public function __construct(bool $isLayout, Logger $logger)
+	public function __construct(bool $isLayout, Logger $logger, DocuScope $docuScope)
 	{
-		$this->logger = $logger;
 		$this->isLayout = $isLayout;
+		$this->logger = $logger;
+		$this->docuScope = $docuScope;
 
 		$this->parsedown = new CustomParsedown;
 		$this->assets = new Assets;
@@ -55,6 +65,7 @@ final class Parser
 
 	/**
 	 * @throws DocuGeneratorException
+	 * @throws DocuFileGeneratorException
 	 */
 	public function parseFile(string $inputFile, string $outputFile): void
 	{
@@ -67,7 +78,16 @@ final class Parser
 		$content = file_get_contents($inputFile);
 
 		foreach ($this->macros as $macro) {
-			$macro->runMacro(dirname($inputFile), dirname($outputFile), $content);
+			try {
+				$macro->runMacro(dirname($inputFile), dirname($outputFile), $content);
+			} catch (DocuGeneratorException $e) {
+				throw new DocuFileGeneratorException(
+					$inputFile,
+					$e->getMessage(),
+					$e->getCode(),
+					$e
+				);
+			}
 		}
 
 		if (!file_exists(dirname($outputFile))) {
@@ -85,10 +105,12 @@ final class Parser
 	private function setupMacros(): void
 	{
 		$this->macros[] = new MacroInclude;
+		$this->macros[] = new MacroInlineVariable($this->docuScope);
+		$this->macros[] = new MacroInlineVariableOutput($this->docuScope);
 
 		if ($this->isLayout) {
-			$this->macros[] = new MacroCleanIndex($this->logger);
-			$this->macros[] = new MacroSection($this->logger);
+			$this->macros[] = new MacroCleanIndex;
+			$this->macros[] = new MacroSection($this->logger, $this->docuScope);
 		}
 	}
 }

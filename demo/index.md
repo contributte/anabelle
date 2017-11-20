@@ -1,5 +1,8 @@
 # Awesome cookbook JSON-RPC API doc
 
+$projectName = Awesome Cookbook
+$projectVersion = 2.3.4
+
 @ Home:home.md
 @ About project:about.md
 

@@ -13,6 +13,7 @@ use Ublaboo\Anabelle\Console\Utils\Exception\ParamsValidatorException;
 use Ublaboo\Anabelle\Console\Utils\Logger;
 use Ublaboo\Anabelle\Console\Utils\ParamsValidator;
 use Ublaboo\Anabelle\Generator\DocuGenerator;
+use Ublaboo\Anabelle\Generator\Exception\DocuFileGeneratorException;
 use Ublaboo\Anabelle\Generator\Exception\DocuGeneratorException;
 
 final class GenerateDocuCommand extends Command
@@ -119,6 +120,9 @@ final class GenerateDocuCommand extends Command
 		try {
 			$docuGenerator->run();
 		} catch (DocuGeneratorException $e) {
+			$this->printError($output, $e->getMessage());
+			exit(1);
+		} catch (DocuFileGeneratorException $e) {
 			$this->printError($output, $e->getMessage());
 			exit(1);
 		}
