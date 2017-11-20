@@ -2,7 +2,7 @@
  * 1, Make nav sections clickable - load apropriate section into the iframe
  * 2, Load immediately first section from the nav
  */
-document.addEventListener("DOMContentLoaded", function(event) { 
+document.addEventListener("DOMContentLoaded", function(event) {
 	var buttons = document.querySelectorAll('[data-section-href]');
 
 	for (var i = 0; i < buttons.length; i++) {
@@ -25,4 +25,34 @@ document.addEventListener("DOMContentLoaded", function(event) {
  */
 document.getElementsByTagName("iframe")[0].addEventListener("load", function() {
 	this.style.height = this.contentWindow.document.body.scrollHeight + 'px';
-})
+});
+
+/**
+ * Syntax highlighting - JSON
+ */
+document.getElementsByTagName("iframe")[0].addEventListener("load", function() {
+	var jsonAreas = this.contentWindow.document.getElementsByClassName('language-json');
+
+	for (var i = 0; i < jsonAreas.length; i++) {
+		/**
+		 * String
+		 */
+		jsonAreas[i].innerHTML = jsonAreas[i].innerHTML.replace(
+			/"([^"]+)"/g,
+			"<span class=language-json-string>\"$1\"</span>"
+		);
+
+		/**
+		 * Number
+		 */
+		jsonAreas[i].innerHTML = jsonAreas[i].innerHTML.replace(
+			/([ ,:{\n])(\d+)/g,
+			"$1<span class=language-json-number>$2</span>"
+		);
+		
+		jsonAreas[i].innerHTML = jsonAreas[i].innerHTML.replace(
+			/class=language-json-(.+)/,
+			"class=\"language-json-$1\""
+		);
+	}
+});
