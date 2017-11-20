@@ -1,17 +1,6 @@
 # Awesome cookbook JSON-RPC API doc
 
-$projectName = Awesome Cookbook
-$projectVersion = 2.3.4
-
-$$successEmptyResponse
-```json
-{
-	"jsonrpc": "2.0",
-	"result": {},
-	"id": null
-}
-```
-$$
+#include variables.md
 
 @ Home:home.md
 @ About project:about.md
