@@ -108,6 +108,8 @@ final class GenerateDocuCommand extends Command
 
 	public function initialize(InputInterface $input, OutputInterface $output): void
 	{
+		$input->validate();
+
 		$this->inputDirectory = $input->getArgument('inputDirectory');
 		$this->outputDirectory = $input->getArgument('outputDirectory');
 		$this->authCredentials = new AuthCredentials(
