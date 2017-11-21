@@ -87,7 +87,9 @@ vendor/bin/anabelle docuDir docuOutputDir -o
 vendor/bin/anabelle docuDir docuOutputDir --overwriteOutputDir
 ```
 
-#### Add http auth to generated php files
+#### Add http auth to generated files
+
+**Beware! Anabelle generates by default .html files. If you are using http auth, it generates .php files due to the need of validating http auth headers.**
 
 ```bash
 vendor/bin/anabelle docuDir docuOutputDir -u user -p pass

@@ -18,12 +18,19 @@ final class MacroSection implements IMacro
 	 */
 	private $parser;
 
+	/**
+	 * @var AuthCredentials
+	 */
+	private $authCredentials;
+
 
 	public function __construct(
 		Logger $logger,
 		AuthCredentials $authCredentials,
 		DocuScope $docuScope
 	) {
+		$this->authCredentials = $authCredentials;
+
 		$this->parser = new Parser(false, $authCredentials, $logger, $docuScope);
 	}
 
@@ -37,6 +44,8 @@ final class MacroSection implements IMacro
 		string & $content // Intentionally &
 	): void
 	{
+		$fileType = $this->authCredentials->getUser() ? 'php' : 'html';
+
 		/**
 		 * Find "@@" sections and parse their child .md file
 		 * 	== normal section with json-rpc methods
@@ -46,13 +55,13 @@ final class MacroSection implements IMacro
 		 */
 		$content = preg_replace_callback(
 			'/^@@? (.+[^:]):(.+\.md)/m',
-			function(array $input) use ($inputDirectory, $outputDirectory): string {
+			function(array $input) use ($inputDirectory, $outputDirectory, $fileType): string {
 				$inputFile = $inputDirectory . '/' . dirname($input[2]) . '/' . basename($input[2]);
 
 				/**
-				 * Output file is .php
+				 * Output file is of type .(php|html)
 				 */
-				$outputFile = preg_replace('/md$/', 'php', $inputFile);
+				$outputFile = preg_replace('/md$/', $fileType, $inputFile);
 
 				/**
 				 * Substitute input dir for output dir
@@ -61,7 +70,7 @@ final class MacroSection implements IMacro
 
 				$this->parser->parseFile($inputFile, $outputFile);
 
-				return preg_replace('/md$/', 'php', $input[0]);
+				return preg_replace('/md$/', $fileType, $input[0]);
 			},
 			$content
 		);

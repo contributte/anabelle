@@ -22,7 +22,7 @@ final class CustomParsedown extends \Parsedown
 	 */
 	protected function inlineSection($excerpt): ?array
 	{
-		if (preg_match('/^(@@?) ?(.+[^:]):(.+\.php)/', $excerpt['text'], $matches)) {
+		if (preg_match('/^(@@?) ?(.+[^:]):(.+\.(php|html))/', $excerpt['text'], $matches)) {
 			$class = strlen($matches[1]) == 1 ? 'section-site' : 'section-method';
 			$element = strlen($matches[1]) == 1 ? 'a' : 'button';
 

@@ -25,6 +25,11 @@ final class DocuGenerator
 	private $outputDirectory;
 
 	/**
+	 * @var AuthCredentials
+	 */
+	private $authCredentials;
+
+	/**
 	 * @var Logger
 	 */
 	private $logger;
@@ -56,9 +61,11 @@ final class DocuGenerator
 	 */
 	public function run(): void
 	{
+		$fileType = $this->authCredentials->getUser() ? 'php' : 'html';
+
 		$this->parser->parseFile(
 			$this->inputDirectory . '/index.md',
-			$this->outputDirectory . '/index.php'
+			$this->outputDirectory . "/index.{$fileType}"
 		);
 	}
 }
