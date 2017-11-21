@@ -1,3 +1,4 @@
+{httpAuth}
 <!DOCTYPE html>
 <html>
 <head>

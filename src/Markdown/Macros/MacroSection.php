@@ -6,6 +6,7 @@ namespace Ublaboo\Anabelle\Markdown\Macros;
 
 use Ublaboo\Anabelle\Console\Utils\Logger;
 use Ublaboo\Anabelle\Generator\Exception\DocuGeneratorException;
+use Ublaboo\Anabelle\Http\AuthCredentials;
 use Ublaboo\Anabelle\Markdown\DocuScope;
 use Ublaboo\Anabelle\Markdown\Parser;
 
@@ -18,9 +19,12 @@ final class MacroSection implements IMacro
 	private $parser;
 
 
-	public function __construct(Logger $logger, DocuScope $docuScope)
-	{
-		$this->parser = new Parser(false, $logger, $docuScope);
+	public function __construct(
+		Logger $logger,
+		AuthCredentials $authCredentials,
+		DocuScope $docuScope
+	) {
+		$this->parser = new Parser(false, $authCredentials, $logger, $docuScope);
 	}
 
 

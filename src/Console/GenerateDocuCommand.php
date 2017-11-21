@@ -15,6 +15,7 @@ use Ublaboo\Anabelle\Console\Utils\ParamsValidator;
 use Ublaboo\Anabelle\Generator\DocuGenerator;
 use Ublaboo\Anabelle\Generator\Exception\DocuFileGeneratorException;
 use Ublaboo\Anabelle\Generator\Exception\DocuGeneratorException;
+use Ublaboo\Anabelle\Http\AuthCredentials;
 
 final class GenerateDocuCommand extends Command
 {
@@ -38,6 +39,11 @@ final class GenerateDocuCommand extends Command
 	 * @var string
 	 */
 	private $outputDirectory;
+
+	/**
+	 * @var AuthCredentials
+	 */
+	private $authCredentials;
 
 	/**
 	 * @var bool
@@ -78,6 +84,20 @@ final class GenerateDocuCommand extends Command
 		);
 
 		$this->addOption(
+			'httpAuthUser',
+			'-u',
+			InputOption::VALUE_OPTIONAL,
+			'Should be there any HTTP authentication?'
+		);
+
+		$this->addOption(
+			'httpAuthPass',
+			'-p',
+			InputOption::VALUE_OPTIONAL,
+			'Should be there any HTTP authentication?'
+		);
+
+		$this->addOption(
 			'overwriteOutputDir',
 			'-o',
 			InputOption::VALUE_NONE,
@@ -90,6 +110,10 @@ final class GenerateDocuCommand extends Command
 	{
 		$this->inputDirectory = $input->getArgument('inputDirectory');
 		$this->outputDirectory = $input->getArgument('outputDirectory');
+		$this->authCredentials = new AuthCredentials(
+			$input->getOption('httpAuthUser'),
+			$input->getOption('httpAuthPass')
+		);
 		$this->overwriteOutputDir = $input->getOption('overwriteOutputDir');
 		$this->logger = new Logger($output);
 
@@ -100,6 +124,7 @@ final class GenerateDocuCommand extends Command
 			$this->paramsValidator->validateInputParams(
 				$this->inputDirectory,
 				$this->outputDirectory,
+				$this->authCredentials,
 				$this->overwriteOutputDir
 			);
 		} catch (ParamsValidatorException $e) {
@@ -114,6 +139,7 @@ final class GenerateDocuCommand extends Command
 		$docuGenerator = new DocuGenerator(
 			$this->inputDirectory,
 			$this->outputDirectory,
+			$this->authCredentials,
 			$this->logger
 		);
 

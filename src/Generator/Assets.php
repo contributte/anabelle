@@ -7,6 +7,7 @@ namespace Ublaboo\Anabelle\Generator;
 use MatthiasMullie\Minify\CSS;
 use MatthiasMullie\Minify\JS;
 use Ublaboo\Anabelle\Generator\Exception\DocuGeneratorException;
+use Ublaboo\Anabelle\Http\AuthCredentials;
 use Ublaboo\Anabelle\Markdown\Parser;
 
 final class Assets
@@ -52,8 +53,13 @@ final class Assets
 	 */
 	private $sectionStyles;
 
+	/**
+	 * @var AuthCredentials
+	 */
+	private $authCredentials;
 
-	public function __construct()
+
+	public function __construct(AuthCredentials $authCredentials)
 	{
 		$this->layoutFile = __DIR__ . '/../../assets/layout.php';
 		$this->layoutStylesPath = __DIR__ . '/../../assets/layout.css';
@@ -62,6 +68,8 @@ final class Assets
 
 		$this->sectionFile = __DIR__ . '/../../assets/section.php';
 		$this->sectionStylesPath = __DIR__ . '/../../assets/section.css';
+
+		$this->authCredentials = $authCredentials;
 	}
 
 
@@ -80,6 +88,7 @@ final class Assets
 	{
 		$template = file_get_contents($this->layoutFile);
 
+		$this->replaceHttpAuth($template);
 		$this->replaceTitle($template, $content);
 
 		$content = preg_replace('/^<h1>.*<\/h1>\w*$/mU', '', $content);
@@ -96,12 +105,19 @@ final class Assets
 	{
 		$template = file_get_contents($this->sectionFile);
 
+		$this->replaceHttpAuth($template);
 		$this->replaceTitle($template, $content);
 		$this->replaceContent($template, $content);
 
 		$template = str_replace('{styles}', $this->getSectionStyles(), $template);
 
 		file_put_contents($outputFile, $this->minifyHtml($template));
+	}
+
+
+	public function replaceHttpAuth(& $template): void // Intentionally &
+	{
+		$template = str_replace('{httpAuth}', $this->getHttpAuthSnippet(), $template);
 	}
 
 
@@ -158,5 +174,22 @@ final class Assets
 			' ',
 			$html
 		);
+	}
+
+
+	public function getHttpAuthSnippet(): string
+	{
+		if ($this->authCredentials->getUser()) {
+			$u = $this->authCredentials->getUser();
+			$p = $this->authCredentials->getPass();
+
+			return "<?php if (!isset(\$_SERVER['PHP_AUTH_USER']) || \$_SERVER['PHP_AUTH_USER'] !== '{$u}' || \$_SERVER['PHP_AUTH_PW'] !== '{$p}') {"
+				. "	header('WWW-Authenticate: Basic realm=\"API Docu\"');"
+				. "	header('HTTP/1.0 401 Unauthorized');"
+				. "	die('Invalid authentication');"
+				. '} ?>';
+		}
+
+		return '';
 	}
 }

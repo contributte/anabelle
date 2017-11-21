@@ -8,6 +8,7 @@ use Ublaboo\Anabelle\Console\Utils\Logger;
 use Ublaboo\Anabelle\Generator\Assets;
 use Ublaboo\Anabelle\Generator\Exception\DocuFileGeneratorException;
 use Ublaboo\Anabelle\Generator\Exception\DocuGeneratorException;
+use Ublaboo\Anabelle\Http\AuthCredentials;
 use Ublaboo\Anabelle\Markdown\DocuScope;
 use Ublaboo\Anabelle\Markdown\Macros\MacroBlockVariable;
 use Ublaboo\Anabelle\Markdown\Macros\MacroBlockVariableOutput;
@@ -25,6 +26,11 @@ final class Parser
 	 * @var bool
 	 */
 	private $isLayout;
+
+	/**
+	 * @var AuthCredentials
+	 */
+	private $authCredentials;
 
 	/**
 	 * @var Logger
@@ -52,14 +58,19 @@ final class Parser
 	private $assets;
 
 
-	public function __construct(bool $isLayout, Logger $logger, DocuScope $docuScope)
-	{
+	public function __construct(
+		bool $isLayout,
+		AuthCredentials $authCredentials,
+		Logger $logger,
+		DocuScope $docuScope
+	) {
 		$this->isLayout = $isLayout;
+		$this->authCredentials = $authCredentials;
 		$this->logger = $logger;
 		$this->docuScope = $docuScope;
 
 		$this->parsedown = new CustomParsedown;
-		$this->assets = new Assets;
+		$this->assets = new Assets($authCredentials);
 
 		$this->setupMacros();
 	}
@@ -114,7 +125,11 @@ final class Parser
 
 		if ($this->isLayout) {
 			$this->macros[] = new MacroCleanIndex;
-			$this->macros[] = new MacroSection($this->logger, $this->docuScope);
+			$this->macros[] = new MacroSection(
+				$this->logger,
+				$this->authCredentials,
+				$this->docuScope
+			);
 		}
 	}
 }

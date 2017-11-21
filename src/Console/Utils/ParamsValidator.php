@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Ublaboo\Anabelle\Console\Utils;
 
 use Ublaboo\Anabelle\Console\Utils\Exception\ParamsValidatorException;
+use Ublaboo\Anabelle\Http\AuthCredentials;
 
 final class ParamsValidator
 {
@@ -29,6 +30,7 @@ final class ParamsValidator
 	public function validateInputParams(
 		string $inputDirectory,
 		string $outputDirectory,
+		AuthCredentials $authCredentials,
 		bool $overwriteOutputDir
 	): void
 	{
@@ -65,6 +67,15 @@ final class ParamsValidator
 				"Output directory path already exists."
 				. " Delete it or use option [-o] as for \"overwrite\" output directory"
 			);
+		}
+
+		/**
+		 * Validate HTTP AUTH
+		 */
+		if (empty($authCredentials->getPass()) && !empty($authCredentials->getUser())) {
+			throw new ParamsValidatorException("Please set --httpAuthPass [-p]");
+		} elseif (!empty($authCredentials->getPass()) && empty($authCredentials->getUser())) {
+			throw new ParamsValidatorException("Please set --httpAuthUser [-u]");
 		}
 	}
 }
