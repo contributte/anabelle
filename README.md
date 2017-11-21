@@ -4,11 +4,11 @@ ublaboo/anabelle
 ## JSON-RPC Api documentation generator
 
 
-### Example:
+### Example
 
 There is an example documentation directory: `demo`, as you can see above.
 
-### Extended Markdown syntax:
+### Extended Markdown syntax
 
 #### `#include <file.md>`
 
@@ -22,7 +22,7 @@ There is an example documentation directory: `demo`, as you can see above.
 $uuid = 123e4567-e89b-12d3-a456-426655440000
 ```
 
-Inline variable usage:
+Inline variable usage
 
 ```md
 User uuid is {$uuid}
@@ -40,7 +40,7 @@ $$successEmptyResponse
 $$
 ```
 
-Block variable usage:
+Block variable usage
 
 ```md
 Server returns response:
@@ -69,15 +69,33 @@ Method section definition. This macro available only in `index.md` file.
 ```
 
 
-## How to use anabelle:
+## How to use anabelle
 
 ```bash
 ~ $ cd myApi
 ~/myApi $ composer require ublaboo/anabelle
-~/myApi $ vendor/bin/anabelle docuDir docuOutputDir [-o, --overwriteOutputDir]
+~/myApi $ vendor/bin/anabelle docuDir docuOutputDir
 ```
 
-## Generator workflow:
+### CLI options
+
+#### Automatically overwrite output directory
+
+```bash
+vendor/bin/anabelle docuDir docuOutputDir -o
+// Or
+vendor/bin/anabelle docuDir docuOutputDir --overwriteOutputDir
+```
+
+#### Add http auth to generated php files
+
+```bash
+vendor/bin/anabelle docuDir docuOutputDir -u user -p pass
+// Or
+vendor/bin/anabelle docuDir docuOutputDir --httpAuthUser user -httpAuthPass pass
+```
+
+## Generator workflow
 
 1. Most important (and only required) file is `index.md`. In this file, you can use only (different Markdown markup is ignored in `index.md`):
 	- `# <h1>`
