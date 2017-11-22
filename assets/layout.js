@@ -68,16 +68,26 @@ var onHashChangeRouter = function() {
 	if (window.location.hash) {
 		var hash = window.location.hash.replace(/#/, "");
 		var sectionLink = document.querySelectorAll('[data-target="'+hash+'"]');
+		var activeLinks = document.querySelectorAll('.active[data-target]');
+
+		for (var i = 0; i < activeLinks.length; i++) {
+			activeLinks[i].classList.remove('active');
+		}
 
 		if (sectionLink.length) {
+			sectionLink = sectionLink[0];
+
 			var xhr = new XMLHttpRequest();
 
 			xhr.addEventListener("load", function(e) {
 				document.getElementById("section").innerHTML = this.response;
+
+				sectionLink.classList.add('active');
+
 				initSyntaxHighlighting();
 			});
 
-			xhr.open("GET", sectionLink[0].getAttribute("data-section-src"));
+			xhr.open("GET", sectionLink.getAttribute("data-section-src"));
 			xhr.send();
 		}
 	}

@@ -1,4 +1,4 @@
-html, body {
+html {
 	margin: 0;
 	padding: 0;
 	height: 100%;
@@ -6,6 +6,8 @@ html, body {
 }
 
 body {
+	margin: 0;
+	padding: 0;
 	background-color: #2980b9;
 	background-color: #34495e;
 	font-size: 12px;
@@ -24,7 +26,30 @@ body {
 		"header header header header"
 		"empty-left nav main empty-right"
 		"footer footer footer footer";
-	grid-column-gap: 2em;
+	grid-column-gap: 25px;
+}
+
+@media screen and (min-width: 1500px) {
+	body {
+		grid-template-columns: auto 350px 1050px auto !important;
+		font-size: 13px !important;
+	}
+
+	main {
+		font-size: 15px !important;
+	}
+
+	code {
+		font-size: 13px !important;
+	}
+
+	button.section-method, a.section-site {
+		font-size: 13px !important;
+	}
+
+	pre {
+		font-size: 14px !important;
+	}
 }
 
 header {
@@ -32,9 +57,7 @@ header {
 }
 
 header > h1 {
-	color: #fff;
-	font-family: monospace;
-	font-weight: normal;
+	color: #eee;
 	text-align: center;
 	line-height: 80px;
 	vertical-align: middle;
@@ -63,7 +86,7 @@ button.section-method, a.section-site {
 	width: 100%;
 	border: 0;
 	margin: 0;
-	line-height: 30px;
+	line-height: 32px;
 	vertical-align: middle;
 	padding: 0 1em;
 	background-color: #fff;
@@ -72,6 +95,7 @@ button.section-method, a.section-site {
 	text-align: left;
 	border-radius: 0;
 	cursor: pointer;
+	border-left: 4px solid transparent;
 }
 
 button.section-method:hover, a.section-site:hover,
@@ -81,6 +105,12 @@ button.section-method:target, a.section-site:target {
 	background-color: #eee;
 	cursor: pointer;
 	outline: none;
+	text-decoration: none;
+}
+
+button.section-method.active, a.section-site.active {
+	background-color: #eee;
+	border-left: 4px solid #f39c12;
 }
 
 .section-site:first-of-type {
@@ -99,14 +129,6 @@ button.section-method:target, a.section-site:target {
 
 .section-method:first-of-type {
 	margin-top: 1em;
-}
-
-iframe {
-	width: 100%;
-	height: 0;
-	border: 0;
-	padding: 0;
-	margin: 0;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -171,7 +193,7 @@ a:hover {
 
 main {
 	background-color: #fff;
-	padding: 1em;
+	padding: 25px;
 	border-radius: 2px;
 	box-sizing: border-box;
 	font-size: 14px;
@@ -182,7 +204,7 @@ main {
 pre {
 	background-color: #ecf0f1;
 	padding: 0.5em;
-	font-size: 12px;
+	font-size: 13px;
 	font-family: "Lucida Console", Monaco, monospace;
 }
 
