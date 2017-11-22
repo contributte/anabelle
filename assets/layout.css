@@ -10,7 +10,6 @@ body {
 	padding: 0;
 	background-color: #2980b9;
 	background-color: #34495e;
-	font-size: 12px;
 	font-family: Arial, Helvetica, sans-serif;
 	color: #2c3e50;
 	overflow: auto;
@@ -20,7 +19,6 @@ body {
 	height: 100vh;
 	max-height: 100vh;
 	display: grid;
-	grid-template-columns: auto 300px 900px auto;
 	grid-template-rows: 80px auto 80px;
 	grid-template-areas:
 		"header header header header"
@@ -29,26 +27,49 @@ body {
 	grid-column-gap: 25px;
 }
 
-@media screen and (min-width: 1500px) {
+@media screen and (min-width: 0px) {
 	body {
-		grid-template-columns: auto 350px 1050px auto !important;
-		font-size: 13px !important;
+		grid-template-columns: auto 300px 900px auto;
+		font-size: 12px;
 	}
 
 	main {
-		font-size: 15px !important;
+		font-size: 14px;
 	}
 
 	code {
-		font-size: 13px !important;
+		font-size: 12px;
 	}
 
 	button.section-method, a.section-site {
-		font-size: 13px !important;
+		font-size: 12px;
 	}
 
 	pre {
-		font-size: 14px !important;
+		font-size: 13px;
+	}
+}
+
+@media screen and (min-width: 1500px) {
+	body {
+		grid-template-columns: auto 350px 1050px auto;
+		font-size: 13px;
+	}
+
+	main {
+		font-size: 15px;
+	}
+
+	code {
+		font-size: 13px;
+	}
+
+	button.section-method, a.section-site {
+		font-size: 13px;
+	}
+
+	pre {
+		font-size: 14px;
 	}
 }
 
@@ -81,7 +102,6 @@ footer {
 }
 
 button.section-method, a.section-site {
-	font-size: 12px;
 	display: block;
 	width: 100%;
 	border: 0;
@@ -196,7 +216,6 @@ main {
 	padding: 25px;
 	border-radius: 2px;
 	box-sizing: border-box;
-	font-size: 14px;
 	grid-area: main;
 	align-self: start;
 }
@@ -204,7 +223,6 @@ main {
 pre {
 	background-color: #ecf0f1;
 	padding: 0.5em;
-	font-size: 13px;
 	font-family: "Lucida Console", Monaco, monospace;
 }
 
@@ -212,7 +230,6 @@ code {
 	background-color: #ecf0f1;
 	color: #8e44ad;
 	padding: 2px 4px;
-	font-size: 12px;
 	font-family: "Lucida Console", Monaco, monospace;
 }
 
