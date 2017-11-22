@@ -92,13 +92,7 @@ final class Assets
 
 	private function saveSection(string $content, string $outputFile): void
 	{
-		$template = $content;
-
-		$this->replaceHttpAuth($template);
-		$this->replaceTitle($template, $content);
-		$this->replaceContent($template, $content);
-
-		file_put_contents($outputFile, $this->minifyHtml($template));
+		file_put_contents($outputFile, $this->minifyHtml($content));
 	}
 
 
