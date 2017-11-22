@@ -32,7 +32,7 @@ final class CustomParsedown extends \Parsedown
 					'name' => $element,
 					'text' => $matches[2],
 					'attributes' => [
-						'data-section-href' => $matches[3],
+						'data-section-src' => $matches[3],
 						'class' => $class,
 						'data-target' => Strings::webalize($matches[2])
 					]

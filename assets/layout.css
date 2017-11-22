@@ -5,10 +5,6 @@ html, body {
 	width: 100%;
 }
 
-h1, h2, h3, h4, h5, h6, p {
-	margin: 0;
-}
-
 body {
 	background-color: #2980b9;
 	background-color: #34495e;
@@ -35,6 +31,15 @@ header {
 	grid-area: header;
 }
 
+header > h1 {
+	color: #fff;
+	font-family: monospace;
+	font-weight: normal;
+	text-align: center;
+	line-height: 80px;
+	vertical-align: middle;
+}
+
 nav {
 	grid-area: nav;
 	align-self: start;
@@ -46,10 +51,6 @@ nav {
 
 .empty-right {
 	grid-area: empty-right;
-}
-
-main {
-	grid-area: main;
 }
 
 footer {
@@ -106,4 +107,111 @@ iframe {
 	border: 0;
 	padding: 0;
 	margin: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	margin: 1.2em 0;
+	font-weight: 600;
+}
+
+h1:first-child, h2:first-child, h3:first-child, h4:first-child, h5:first-child, h6:first-child {
+	margin: 0 0 1em 0;
+}
+
+p {
+	margin: 0 0 1em 0;
+}
+
+h1 {
+	font-size: 2.2em;
+}
+
+h2 {
+	font-size: 1.7em;
+}
+
+h3 {
+	font-size: 1.37em;
+}
+
+h4 {
+	font-size: 1em;
+}
+
+h5 {
+	font-size: 1.03em;
+}
+
+h6 {
+	font-size: .87em;
+}
+
+ul {
+	margin: 1em 0 1.5em;
+}
+
+h2:first-of-type::before {
+	content: "Section: ";
+	font-weight: normal;
+	color: #949aa0;
+}
+
+a {
+	color: #3498db;
+	text-decoration: none;
+}
+
+a:visited {
+	color: #3498db;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+main {
+	background-color: #fff;
+	padding: 1em;
+	border-radius: 2px;
+	box-sizing: border-box;
+	font-size: 14px;
+	grid-area: main;
+	align-self: start;
+}
+
+pre {
+	background-color: #ecf0f1;
+	padding: 0.5em;
+	font-size: 12px;
+	font-family: "Lucida Console", Monaco, monospace;
+}
+
+code {
+	background-color: #ecf0f1;
+	color: #8e44ad;
+	padding: 2px 4px;
+	font-size: 12px;
+	font-family: "Lucida Console", Monaco, monospace;
+}
+
+pre code {
+	background-color: #ecf0f1;
+	color: #2c3e50;
+	padding: none;
+}
+
+pre:last-child {
+	margin-bottom: 0;
+}
+
+.language-json-string {
+	color: #e67e22;
+}
+
+.language-json-number {
+	color: #138C58;
+}
+
+.language-json-key {
+	color: #4a51bf;
 }

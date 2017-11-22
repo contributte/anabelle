@@ -39,16 +39,6 @@ final class Assets
 	private $layoutFavicon;
 
 	/**
-	 * @var string
-	 */
-	private $sectionFile;
-
-	/**
-	 * @var string
-	 */
-	private $sectionStylesPath;
-
-	/**
 	 * @var string|null
 	 */
 	private $sectionStyles;
@@ -67,7 +57,6 @@ final class Assets
 		$this->layoutFavicon = __DIR__ . '/../../assets/favicon.ico';
 
 		$this->sectionFile = __DIR__ . '/../../assets/section.php';
-		$this->sectionStylesPath = __DIR__ . '/../../assets/section.css';
 
 		$this->authCredentials = $authCredentials;
 	}
@@ -103,13 +92,11 @@ final class Assets
 
 	private function saveSection(string $content, string $outputFile): void
 	{
-		$template = file_get_contents($this->sectionFile);
+		$template = $content;
 
 		$this->replaceHttpAuth($template);
 		$this->replaceTitle($template, $content);
 		$this->replaceContent($template, $content);
-
-		$template = str_replace('{styles}', $this->getSectionStyles(), $template);
 
 		file_put_contents($outputFile, $this->minifyHtml($template));
 	}
@@ -153,17 +140,6 @@ final class Assets
 		$minifier = new JS($this->layoutSriptsPath);
 
 		return $minifier->minify();
-	}
-
-
-	private function getSectionStyles(): string
-	{
-		if ($this->sectionStyles === null) {
-			$minifier = new CSS($this->sectionStylesPath);
-			$this->sectionStyles = $minifier->minify();
-		}
-
-		return $this->sectionStyles;
 	}
 
 

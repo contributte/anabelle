@@ -7,13 +7,11 @@
 	<link rel="shortcut icon" type="image/x-icon" href="favicon.ico"/>
 </head>
 <body>
-	<header>{title}</header>
+	<header><h1>{title}</h1></header>
 	<div class="empty-left"></div>
 	<nav>{content}</nav>
 	<div class="empty-right"></div>
-	<main>
-		<iframe src="" scrolling="no"></iframe>
-	</main>
+	<main id="section"></main>
 	<footer></footer>
 	<script type="text/javascript">{scripts}</script>
 </body>
