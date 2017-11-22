@@ -70,6 +70,9 @@ document.getElementsByTagName("iframe")[0].addEventListener("load", function() {
 	}
 });
 
+/**
+ * Simple router
+ */
 var onHashChangeRouter = function() {
 	if (window.location.hash) {
 		var hash = window.location.hash.replace(/#/, '');
@@ -83,9 +86,4 @@ var onHashChangeRouter = function() {
 	}
 };
 
-/**
- * Simple router
- */
-window.onhashchange = function() {
-	onHashChangeRouter();
-};
+window.addEventListener('hashchange', onHashChangeRouter);
