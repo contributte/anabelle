@@ -1,8 +1,9 @@
 ublaboo/anabelle
 ================
 
-## JSON-RPC Api documentation generator
+## Api documentation generator (JSON-RPC / REST)
 
+(No matter whether you're using REST or JSON-RPC)
 
 ### Example
 
