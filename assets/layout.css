@@ -281,11 +281,32 @@ code {
 pre code {
 	background-color: #ecf0f1;
 	color: #2c3e50;
-	padding: none;
+	padding: none !important;
 }
 
 pre:last-child {
 	margin-bottom: 0;
+}
+
+pre > .language-http-headers, pre > .language-json {
+	display: block;
+	position: relative;
+}
+
+pre > .language-http-headers::after, pre > .language-json::after {
+	position: absolute;
+	right: 0;
+	top: 0;
+	color: #BFBFBF;
+	font-size: 14px;
+}
+
+pre > .language-http-headers::after {
+	content: 'HTTP Headers';
+}
+
+pre > .language-json::after {
+	content: 'JSON';
 }
 
 .language-json-string {
