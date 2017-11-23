@@ -21,12 +21,12 @@ final class Assets
 	/**
 	 * @var string
 	 */
-	private $layoutStylesPath;
+	private $layoutStylesPaths;
 
 	/**
 	 * @var string
 	 */
-	private $layoutSriptsPath;
+	private $layoutSriptsPaths;
 
 	/**
 	 * @var string|null
@@ -52,8 +52,14 @@ final class Assets
 	public function __construct(AuthCredentials $authCredentials)
 	{
 		$this->layoutFile = __DIR__ . '/../../assets/layout.php';
-		$this->layoutStylesPath = __DIR__ . '/../../assets/layout.css';
-		$this->layoutSriptsPath = __DIR__ . '/../../assets/layout.js';
+		$this->layoutStylesPaths = [
+			__DIR__ . '/../../assets/highlight-json.css',
+			__DIR__ . '/../../assets/layout.css'
+		];
+		$this->layoutSriptsPaths = [
+			__DIR__ . '/../../assets/highlight-json.min.js',
+			__DIR__ . '/../../assets/layout.js'
+		];
 		$this->layoutFavicon = __DIR__ . '/../../assets/favicon.ico';
 
 		$this->sectionFile = __DIR__ . '/../../assets/section.php';
@@ -121,7 +127,12 @@ final class Assets
 	private function getLayoutStyles(): string
 	{
 		if ($this->layoutStyles === null) {
-			$minifier = new CSS($this->layoutStylesPath);
+			$minifier = new CSS;
+
+			foreach ($this->layoutStylesPaths as $file) {
+				$minifier->add($file);
+			}
+
 			$this->layoutStyles = $minifier->minify();
 		}
 
@@ -131,7 +142,11 @@ final class Assets
 
 	private function getLayoutSripts(): string
 	{
-		$minifier = new JS($this->layoutSriptsPath);
+		$minifier = new JS;
+
+		foreach ($this->layoutSriptsPaths as $file) {
+			$minifier->add($file);
+		}
 
 		return $minifier->minify();
 	}

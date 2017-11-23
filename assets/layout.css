@@ -267,8 +267,9 @@ main {
 
 pre {
 	background-color: #ecf0f1;
-	padding: 0.5em;
+	padding: 0.75em;
 	font-family: "Lucida Console", Monaco, monospace;
+	position: relative;
 }
 
 code {
@@ -282,43 +283,19 @@ pre code {
 	background-color: #ecf0f1;
 	color: #2c3e50;
 	padding: 0 !important;
-	white-space: pre-wrap;
-	overflow: auto;
+	overflow-x: auto;
+	display: block;
+	position: relative;
 }
 
 pre:last-child {
 	margin-bottom: 0;
 }
 
-pre > .language-http-headers, pre > .language-json {
-	display: block;
-	position: relative;
-}
-
-pre > .language-http-headers::after, pre > .language-json::after {
+pre .language-name {
 	position: absolute;
-	right: 0;
-	top: 0;
+	right: 0.5em;
+	top: 0.5em;
 	color: #BFBFBF;
 	font-size: 14px;
-}
-
-pre > .language-http-headers::after {
-	content: 'HTTP Headers';
-}
-
-pre > .language-json::after {
-	content: 'JSON';
-}
-
-.language-json-string {
-	color: #e67e22;
-}
-
-.language-json-number {
-	color: #138C58;
-}
-
-.language-json-key {
-	color: #4a51bf;
 }

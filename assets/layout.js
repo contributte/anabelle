@@ -3,36 +3,26 @@
  */
 var initSyntaxHighlighting = function() {
 	var jsonAreas = document.getElementById("section").getElementsByClassName("language-json");
+	var httpheadersAreas = document.getElementById("section").getElementsByClassName("language-http-headers");
 
 	for (var i = 0; i < jsonAreas.length; i++) {
-		var content = jsonAreas[i].innerHTML;
-		/**
-		 * Key
-		 */
-		content = content.replace(
-			/"([^"]+)":/g,
-			"<span class=language-json-key>&quot;$1&quot;:</span>"
-		);
+		hljs.highlightBlock(jsonAreas[i]);
 
-		/**
-		 * String
-		 */
-		content = content.replace(
-			/"([^"]+)"([^:])/g,
-			"<span class=language-json-string>&quot;$1&quot;</span>$2"
-		);
+		var languageName = document.createElement('div');
+		languageName.classList.add('language-name');
+		languageName.innerText = 'JSON';
 
-		/**
-		 * Number
-		 */
-		content = content.replace(
-			/([ ,:{\n])(\d+)/g,
-			"$1<span class=language-json-number>$2</span>"
-		);
-		
-		//content = content.replace(/class=language-json-([^>]+)/, "class=\"language-json-$1\"");
+		jsonAreas[i].parentElement.appendChild(languageName);
+	}
 
-		jsonAreas[i].innerHTML = content;
+	for (var i = 0; i < httpheadersAreas.length; i++) {
+		hljs.highlightBlock(httpheadersAreas[i]);
+
+		var languageName = document.createElement('div');
+		languageName.classList.add('language-name');
+		languageName.innerText = 'HTTP Headers';
+
+		httpheadersAreas[i].parentElement.appendChild(languageName);
 	}
 };
 
