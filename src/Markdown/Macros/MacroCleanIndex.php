@@ -25,18 +25,18 @@ final class MacroCleanIndex implements IMacro
 		$methodSections = [];
 
 		/**
-		 * Everything except for "#", "@" and "@@" lines should be dropped
+		 * Everything except for title and sections
 		 */
 		$lines = explode("\n", $content);
 
 		foreach ($lines as $line) {
-			if (preg_match('/^(@@?) ?.+[^:]:.+\.md/', $line, $matches)) { // "@", "@@" section
+			if (preg_match('/^(@@?) ?.+[^:]:.+\.md/', $line, $matches)) { // Section
 				if (sizeof($matches[1]) == 1) {
 					$siteSections[] = $line;
 				} else {
 					$methodSections[] = $line;
 				}
-			} elseif(preg_match('/^# ?[^#].+/', $line)) { // "#" heading
+			} elseif(preg_match('/^# ?[^#].+/', $line)) { // Title
 				if ($heading !== 'API Docu') { // Take only first heading
 					$heading = $line;
 				}

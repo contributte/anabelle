@@ -6,9 +6,7 @@ namespace Ublaboo\Anabelle\Generator;
 
 use MatthiasMullie\Minify\CSS;
 use MatthiasMullie\Minify\JS;
-use Ublaboo\Anabelle\Generator\Exception\DocuGeneratorException;
 use Ublaboo\Anabelle\Http\AuthCredentials;
-use Ublaboo\Anabelle\Markdown\Parser;
 
 final class Assets
 {
@@ -19,12 +17,12 @@ final class Assets
 	private $layoutFile;
 
 	/**
-	 * @var string
+	 * @var array
 	 */
 	private $layoutStylesPaths;
 
 	/**
-	 * @var string
+	 * @var array
 	 */
 	private $layoutSriptsPaths;
 
@@ -61,8 +59,6 @@ final class Assets
 			__DIR__ . '/../../assets/layout.js'
 		];
 		$this->layoutFavicon = __DIR__ . '/../../assets/favicon.ico';
-
-		$this->sectionFile = __DIR__ . '/../../assets/section.php';
 
 		$this->authCredentials = $authCredentials;
 	}
@@ -102,13 +98,13 @@ final class Assets
 	}
 
 
-	public function replaceHttpAuth(& $template): void // Intentionally &
+	public function replaceHttpAuth(string & $template): void // Intentionally &
 	{
 		$template = str_replace('{httpAuth}', $this->getHttpAuthSnippet(), $template);
 	}
 
 
-	private function replaceTitle(& $template, $content): void // Intentionally &
+	private function replaceTitle(string & $template, string $content): void // Intentionally &
 	{
 		if (preg_match('/<h1>(.+)<\/h1>/', $content, $matches)) {
 			$template = str_replace('{title}', $matches[1], $template);
@@ -118,7 +114,7 @@ final class Assets
 	}
 
 
-	private function replaceContent(& $template, $content): void // Intentionally &
+	private function replaceContent(string & $template, string $content): void // Intentionally &
 	{
 		$template = str_replace('{content}', $content, $template);
 	}
@@ -164,7 +160,7 @@ final class Assets
 
 	public function getHttpAuthSnippet(): string
 	{
-		if ($this->authCredentials->getUser()) {
+		if ($this->authCredentials->getUser() !== null) {
 			$u = $this->authCredentials->getUser();
 			$p = $this->authCredentials->getPass();
 

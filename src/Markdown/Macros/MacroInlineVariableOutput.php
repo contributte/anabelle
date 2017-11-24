@@ -4,32 +4,10 @@ declare(strict_types=1);
 
 namespace Ublaboo\Anabelle\Markdown\Macros;
 
-use Ublaboo\Anabelle\Generator\Exception\DocuGeneratorException;
-use Ublaboo\Anabelle\Markdown\DocuScope;
-
-final class MacroInlineVariableOutput implements IMacro
+final class MacroInlineVariableOutput extends AbstractMacroVariable implements IMacro
 {
 
-	/**
-	 * @var DocuScope
-	 */
-	private $docuScope;
-
-
-	public function __construct(DocuScope $docuScope)
-	{
-		$this->docuScope = $docuScope;
-	}
-
-
-	/**
-	 * @throws DocuGeneratorException
-	 */
-	public function runMacro(
-		string $inputDirectory,
-		string $outputDirectory,
-		string & $content // Intentionally &
-	): void
+	protected function runVariableMacro(string & $content): void // Intentionally &
 	{
 		/**
 		 * Remove lines with inline variables definition and put then into DocuScope

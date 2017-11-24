@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Ublaboo\Anabelle\Console;
 
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Helper\FormatterHelper;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -51,7 +52,7 @@ final class GenerateDocuCommand extends Command
 	private $overwriteOutputDir;
 
 	/**
-	 * @var Logger|null
+	 * @var Logger
 	 */
 	private $logger;
 
@@ -159,8 +160,12 @@ final class GenerateDocuCommand extends Command
 
 	private function printError(OutputInterface $output, string $message): void
 	{
-		$block = $this->getHelper('formatter')->formatBlock($message, 'error', true);
+		$formatter = $this->getHelper('formatter');
 
-		$output->writeln("\n{$block}\n");
+		if ($formatter instanceof FormatterHelper) {
+			$block = $formatter->formatBlock($message, 'error', true);
+
+			$output->writeln("\n{$block}\n");
+		}
 	}
 }
