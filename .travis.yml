@@ -1,0 +1,13 @@
+language: php
+php:
+  - 7.1
+
+matrix:
+  fast_finish: true
+
+install:
+  - composer self-update
+  - composer install --no-interaction --prefer-source
+
+script:
+  - vendor/bin/tester tests/

@@ -1,0 +1,12 @@
+checks:
+  php: true
+
+tools:
+  external_code_coverage: true
+
+filter:
+  excluded_paths:
+    - assets/
+    - demo/
+    - demo-src/
+    - tests/*
