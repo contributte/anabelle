@@ -1,3 +1,10 @@
+[![Build Status](https://travis-ci.org/ublaboo/anabelle.svg?branch=master)](https://travis-ci.org/ublaboo/anabelle)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/ublaboo/anabelle/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/ublaboo/anabelle/?branch=master)
+[![Latest Stable Version](https://poser.pugx.org/ublaboo/anabelle/v/stable)](https://packagist.org/packages/ublaboo/anabelle)
+[![License](https://poser.pugx.org/ublaboo/anabelle/license)](https://packagist.org/packages/ublaboo/anabelle)
+[![Total Downloads](https://poser.pugx.org/ublaboo/anabelle/downloads)](https://packagist.org/packages/ublaboo/anabelle)
+[![Gitter](https://img.shields.io/gitter/room/nwjs/nw.js.svg)](https://gitter.im/ublaboo/help)
+
 ublaboo/anabelle
 ================
 
