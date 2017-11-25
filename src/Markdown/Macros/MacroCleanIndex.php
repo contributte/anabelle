@@ -20,44 +20,50 @@ final class MacroCleanIndex implements IMacro
 		string & $content // Intentionally &
 	): void
 	{
-		$heading = 'Docu';
-		$siteSections = [];
-		$methodSections = [];
-
 		/**
 		 * Everything except for title and sections
 		 */
+		$heading = $this->findHeading($content);
+
 		$lines = explode("\n", $content);
 
-		foreach ($lines as $line) {
-			if (preg_match('/^(@@?) ?.+[^:]:.+\.md/', $line, $matches)) { // Section
-				if (sizeof($matches[1]) == 1) {
-					$siteSections[] = $line;
-				} else {
-					$methodSections[] = $line;
-				}
-			} elseif(preg_match('/^# ?[^#].+/', $line)) { // Title
-				if ($heading !== 'API Docu') { // Take only first heading
-					$heading = $line;
-				}
-			}
-		}
+		[1 => $siteSections, 2 => $methodSections] = $this->findSections($lines);
 
 		/**
 		 * Now put allowed lines back together
 		 */
 		$content = "$heading\n\n";
 
-		if (!empty($siteSections)) {
-			foreach ($siteSections as $siteSection) {
-				$content .= "$siteSection\n";
+		foreach ($siteSections as $siteSection) {
+			$content .= "$siteSection\n";
+		}
+
+		foreach ($methodSections as $methodSection) {
+			$content .= "$methodSection\n";
+		}
+	}
+
+
+	private function findHeading(string $content): string
+	{
+		if (preg_match('/^# ?[^#].+/m', $content, $matches)) {
+			return $matches[0];
+		}
+
+		return '# API Docu';
+	}
+
+
+	private function findSections(array $lines): array
+	{
+		$return = [1 => [], 2 => []];
+
+		foreach ($lines as $line) {
+			if (preg_match('/^(@@?) ?.+[^:]:.+\.md/', $line, $matches)) { // Section
+				$return[sizeof($matches[1])][] = $line;
 			}
 		}
 
-		if (!empty($methodSections)) {
-			foreach ($methodSections as $methodSection) {
-				$content .= "$methodSection\n";
-			}
-		}
+		return $return;
 	}
 }
