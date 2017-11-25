@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace Ublaboo\Anabelle\Markdown\Macros;
 
-use Ublaboo\Anabelle\Console\Utils\Logger;
 use Ublaboo\Anabelle\Generator\Exception\DocuGeneratorException;
-use Ublaboo\Anabelle\Markdown\Parser;
 
 final class MacroCleanIndex implements IMacro
 {
