@@ -34,6 +34,21 @@ final class ParamsValidator
 		bool $overwriteOutputDir
 	): void
 	{
+		$this->validateInputDirectory($inputDirectory, $outputDirectory, $overwriteOutputDir);
+		$this->validateIndexFile($inputDirectory);
+		$this->validateAuthCredentials($authCredentials);
+	}
+
+
+	/**
+	 * @throws ParamsValidatorException
+	 */
+	private function validateInputDirectory(
+		string $inputDirectory,
+		string $outputDirectory,
+		bool $overwriteOutputDir
+	): void
+	{
 		/**
 		 * Absolute path?
 		 */
@@ -55,20 +70,34 @@ final class ParamsValidator
 			throw new ParamsValidatorException('Given path is not a directory');
 		}
 
-		/**
-		 * Validate existence of <directory>/index.md
-		 */
-		if (!file_exists($inputDirectory . '/index.md')) {
-			throw new ParamsValidatorException("Missing file {$inputDirectory}/index.md");
-		}
-
 		if (file_exists($outputDirectory) && !$overwriteOutputDir) {
 			throw new ParamsValidatorException(
 				"Output directory path already exists."
 				. " Delete it or use option [-o] as for \"overwrite\" output directory"
 			);
 		}
+	}
 
+
+	/**
+	 * @throws ParamsValidatorException
+	 */
+	private function validateIndexFile(string $inputDirectory): void
+	{
+		/**
+		 * Validate existence of <directory>/index.md
+		 */
+		if (!file_exists($inputDirectory . '/index.md')) {
+			throw new ParamsValidatorException("Missing file {$inputDirectory}/index.md");
+		}
+	}
+
+
+	/**
+	 * @throws ParamsValidatorException
+	 */
+	private function validateAuthCredentials(AuthCredentials $authCredentials): void
+	{
 		/**
 		 * Validate HTTP AUTH
 		 */
