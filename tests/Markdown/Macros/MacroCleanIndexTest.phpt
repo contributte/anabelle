@@ -10,6 +10,9 @@ use Tester\Assert;
 use Tester\TestCase;
 use Ublaboo\Anabelle\Markdown\Macros\MacroCleanIndex;
 
+/**
+ * @testCase
+ */
 class MacroCleanIndexTest extends TestCase
 {
 

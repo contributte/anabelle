@@ -15,6 +15,9 @@ use Ublaboo\Anabelle\Http\AuthCredentials;
 use Ublaboo\Anabelle\Markdown\DocuScope;
 use Ublaboo\Anabelle\Markdown\Macros\MacroSection;
 
+/**
+ * @testCase
+ */
 class MacroSectionTest extends TestCase
 {
 
