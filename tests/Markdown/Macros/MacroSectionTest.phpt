@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Ublaboo\Anabelle\Tests\Console\Utils;
+namespace Ublaboo\Anabelle\Tests\Markdown\Macros;
 
 require_once __DIR__ . '/../../bootstrap.php';
 
