@@ -58,7 +58,7 @@ final class MacroCleanIndex implements IMacro
 
 		foreach ($lines as $line) {
 			if (preg_match('/^(@@?) ?.+[^:]:.+\.md/', $line, $matches)) { // Section
-				$return[sizeof($matches[1])][] = $line;
+				$return[strlen($matches[1])][] = $line;
 			}
 		}
 
