@@ -14,7 +14,7 @@ ublaboo/anabelle
 
 ### Example
 
-There is an example documentation directory: `demo`, as you can see above.
+There is an example documentation directory: `demo`, as you can see above. Generated example documentation: https://ublaboo.github.io/anabelle.
 
 ### Extended Markdown syntax
 
