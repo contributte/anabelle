@@ -10,7 +10,7 @@ ublaboo/anabelle
 
 ## Api documentation generator (JSON-RPC / REST)
 
-(No matter whether you're using REST or JSON-RPC)
+(No matter whether you're using REST or JSON-RPC or some other api architecture/scheme)
 
 ### Example
 
@@ -74,6 +74,15 @@ Method section definition. This macro available only in `index.md` file.
 @@ user.logout:methods/user.logout.md
 @@ user.register:methods/user.register.md
 @@ user.confirm-registration:methods/user.confirm-registration.md
+```
+
+#### `[File link](foo/bar/data.json)`
+
+[File link](foo/bar/data.json) will create a link to file (`foo/bar/data.json`). The file will be copied to documentation output directory for safety reasons.
+
+```md
+[File link](foo/bar/data.json)
+[Project root directory file link](../app/schema/user.json)
 ```
 
 

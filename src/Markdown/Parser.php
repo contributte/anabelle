@@ -14,6 +14,7 @@ use Ublaboo\Anabelle\Markdown\Macros\MacroBlockVariable;
 use Ublaboo\Anabelle\Markdown\Macros\MacroBlockVariableOutput;
 use Ublaboo\Anabelle\Markdown\Macros\MacroCleanIndex;
 use Ublaboo\Anabelle\Markdown\Macros\MacroInclude;
+use Ublaboo\Anabelle\Markdown\Macros\MacroInlineFileLink;
 use Ublaboo\Anabelle\Markdown\Macros\MacroInlineVariable;
 use Ublaboo\Anabelle\Markdown\Macros\MacroInlineVariableOutput;
 use Ublaboo\Anabelle\Markdown\Macros\MacroSection;
@@ -120,6 +121,7 @@ final class Parser
 		$this->macros[] = new MacroInclude;
 		$this->macros[] = new MacroInlineVariable($this->docuScope);
 		$this->macros[] = new MacroInlineVariableOutput($this->docuScope);
+		$this->macros[] = new MacroInlineFileLink($this->docuScope);
 		$this->macros[] = new MacroBlockVariable($this->docuScope);
 		$this->macros[] = new MacroBlockVariableOutput($this->docuScope);
 
