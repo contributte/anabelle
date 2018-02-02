@@ -15,6 +15,11 @@ final class MacroInlineFileLink implements IMacro
 	const LINK_PATTERN = '/\[((?:[^][]++|(?R))*+)\]\(([^\)]*)\)/um';
 
 	/**
+	 * @var DocuScope
+	 */
+	private $docuScope;
+
+	/**
 	 * @var callable
 	 */
 	private $fileHashAlgo;
@@ -22,6 +27,7 @@ final class MacroInlineFileLink implements IMacro
 
 	public function __construct(DocuScope $docuScope, callable $fileHashAlgo = null)
 	{
+		$this->docuScope = $docuScope;
 		$this->fileHashAlgo = $fileHashAlgo ?: [FileHash::class, 'md5File'];
 	}
 
@@ -40,7 +46,7 @@ final class MacroInlineFileLink implements IMacro
 		 */
 		$content = preg_replace_callback(
 			self::LINK_PATTERN,
-			function(array $input) use ($inputDirectory, $outputDirectory): string {
+			function(array $input) use ($inputDirectory): string {
 				$text = $input[1];
 				$path = trim($input[2], '/');
 
@@ -48,7 +54,7 @@ final class MacroInlineFileLink implements IMacro
 					$fileHash = call_user_func($this->fileHashAlgo, $inputDirectory . '/' . $path);
 					$fileName = $fileHash . '.' . pathinfo($path, PATHINFO_EXTENSION);
 
-					$targetPath = $outputDirectory . '/_files' . '/' . $fileName;
+					$targetPath = $this->docuScope->getOutputDirectory() . '/_files' . '/' . $fileName;
 
 					if (!file_exists(dirname($targetPath))) {
 						mkdir(dirname($targetPath), 0755, true);

@@ -51,7 +51,12 @@ final class DocuGenerator
 		$this->authCredentials = $authCredentials;
 		$this->logger = $logger;
 
-		$this->parser = new Parser(true, $authCredentials, $logger, new DocuScope);
+		$this->parser = new Parser(
+			true,
+			$authCredentials,
+			$logger,
+			new DocuScope($outputDirectory)
+		);
 	}
 
 

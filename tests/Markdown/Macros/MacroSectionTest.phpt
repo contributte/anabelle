@@ -61,12 +61,16 @@ class MacroSectionTest extends TestCase
 
 		$logger->shouldReceive('writeln');
 
+		$docuScope = new DocuScope(TEST_DOCU_DIR);
+
 		$macro = new MacroSection(
 			new Logger($logger),
 			new AuthCredentials(null, null),
-			new DocuScope
+			$docuScope
 		);
 		$macro->runMacro(TEST_DOCU_DIR, TEST_DOCU_DIR . '/../testOutputDir', $content);
+
+		Assert::same(TEST_DOCU_DIR, $docuScope->getOutputDirectory());
 
 		Assert::same($expectedOutput, $content);
 	}

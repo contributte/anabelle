@@ -22,7 +22,7 @@ class MacroInlineFileLinkTest extends TestCase
 		$content = file_get_contents(__DIR__ . '/files/input_MacroInlineFileLinkTest.md');
 		$expected = file_get_contents(__DIR__ . '/files/expected_MacroInlineFileLinkTest.md');
 
-		$macro = new MacroInlineFileLink(new DocuScope, function(string $path): string {
+		$macro = new MacroInlineFileLink(new DocuScope(__DIR__ . '/files'), function(string $path): string {
 			return 'testhash';
 		});
 		$macro->runMacro(__DIR__ . '/files', __DIR__ . '/files', $content);
