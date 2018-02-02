@@ -6,11 +6,24 @@ namespace Ublaboo\Anabelle\Markdown\Macros;
 
 use Nette\Utils\Html;
 use Ublaboo\Anabelle\Generator\Exception\DocuGeneratorException;
+use Ublaboo\Anabelle\Markdown\DocuScope;
+use Ublaboo\Anabelle\Markdown\Macros\Utils\FileHash;
 
 final class MacroInlineFileLink implements IMacro
 {
 
 	const LINK_PATTERN = '/\[((?:[^][]++|(?R))*+)\]\(([^\)]*)\)/um';
+
+	/**
+	 * @var callable
+	 */
+	private $fileHashAlgo;
+
+
+	public function __construct(DocuScope $docuScope, callable $fileHashAlgo = null)
+	{
+		$this->fileHashAlgo = $fileHashAlgo ?: [FileHash::class, 'md5File'];
+	}
 
 
 	/**
@@ -32,7 +45,10 @@ final class MacroInlineFileLink implements IMacro
 				$path = trim($input[2], '/');
 
 				if (file_exists($inputDirectory . '/' . $path)) {
-					$targetPath = str_replace(['../', './'], '', $outputDirectory . '/' . $path);
+					$fileHash = call_user_func($this->fileHashAlgo, $inputDirectory . '/' . $path);
+					$fileName = $fileHash . '.' . pathinfo($path, PATHINFO_EXTENSION);
+
+					$targetPath = $outputDirectory . '/_files' . '/' . $fileName;
 
 					if (!file_exists(dirname($targetPath))) {
 						mkdir(dirname($targetPath), 0755, true);
@@ -42,7 +58,7 @@ final class MacroInlineFileLink implements IMacro
 
 					$targetPath = preg_replace('~^[^/]+/~', '', $targetPath);
 
-					return (string) Html::el('a')->href($targetPath)
+					return (string) Html::el('a')->href('_files/' . basename($targetPath))
 						->setText($text)
 						->target('_blank');
 				}
