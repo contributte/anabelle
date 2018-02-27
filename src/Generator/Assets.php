@@ -109,7 +109,7 @@ final class Assets
 		if (preg_match('/<h1>(.+)<\/h1>/', $content, $matches)) {
 			$template = str_replace('{title}', $matches[1], $template);
 		} else {
-			$template = str_replace('{title}', 'API Docu', $template);
+			$template = str_replace('{title}', 'API Docs', $template);
 		}
 	}
 

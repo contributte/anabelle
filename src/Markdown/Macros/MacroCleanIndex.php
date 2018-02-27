@@ -48,7 +48,7 @@ final class MacroCleanIndex implements IMacro
 			return $matches[0];
 		}
 
-		return '# API Docu';
+		return '# API Docs';
 	}
 
 
