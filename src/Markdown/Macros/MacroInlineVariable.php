@@ -7,7 +7,7 @@ namespace Ublaboo\Anabelle\Markdown\Macros;
 final class MacroInlineVariable extends AbstractMacroVariable implements IMacro
 {
 
-	protected function runVariableMacro(string & $content): void // Intentionally &
+	protected function runVariableMacro(string & $content, int $depth): void // Intentionally &
 	{
 		/**
 		 * Remove lines with inline variables definition and put then into DocuScope

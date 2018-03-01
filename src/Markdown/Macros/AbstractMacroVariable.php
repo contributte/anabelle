@@ -10,6 +10,8 @@ use Ublaboo\Anabelle\Markdown\DocuScope;
 abstract class AbstractMacroVariable
 {
 
+	protected const MAX_EXECUTE_DEPTH = 3;
+
 	/**
 	 * @var DocuScope
 	 */
@@ -31,9 +33,38 @@ abstract class AbstractMacroVariable
 		string & $content // Intentionally &
 	): void
 	{
-		$this->runVariableMacro($content);
+		$this->runVariableMacro($content, 1);
 	}
 
 
-	abstract protected function runVariableMacro(string & $content): void; // Intentionally &
+	abstract protected function runVariableMacro(
+		string & $content,
+		int $depth
+	): void; // Intentionally &
+
+
+	/**
+	 * @return AbstractMacroVariable[]
+	 */
+	protected function getMacrosToRunOnBlockVariables(): array
+	{
+		return [
+			new MacroInlineVariable($this->docuScope),
+			new MacroInlineVariableOutput($this->docuScope),
+			new MacroBlockVariable($this->docuScope),
+			new MacroBlockVariableOutput($this->docuScope),
+		];
+	}
+
+
+	/**
+	 * @return AbstractMacroVariable[]
+	 */
+	protected function getMacrosToRunOnInlineVariables(): array
+	{
+		return [
+			new MacroInlineVariable($this->docuScope),
+			new MacroInlineVariableOutput($this->docuScope),
+		];
+	}
 }

@@ -7,14 +7,14 @@ namespace Ublaboo\Anabelle\Markdown\Macros;
 final class MacroBlockVariableOutput extends AbstractMacroVariable implements IMacro
 {
 
-	protected function runVariableMacro(string & $content): void // Intentionally &
+	protected function runVariableMacro(string & $content, int $depth): void // Intentionally &
 	{
 		/**
 		 * Remove lines with inline variables definition and put then into DocuScope
 		 */
 		$content = preg_replace_callback(
 			'/(^.*)?\{\$\$([a-zA-Z_0-9]+)\}/m',
-			function(array $input): string {
+			function(array $input) use ($depth): string {
 				$whitespacePrefix = '';
 
 				/**
@@ -31,6 +31,12 @@ final class MacroBlockVariableOutput extends AbstractMacroVariable implements IM
 				}
 
 				$block = $this->docuScope->getBlockVariable($input[2]);
+
+				if ($depth <= parent::MAX_EXECUTE_DEPTH) {
+					foreach ($this->getMacrosToRunOnBlockVariables() as $macro) {
+						$macro->runVariableMacro($block, $depth + 1);
+					}
+				}
 
 				return $input[1] . preg_replace('/\n/m', "\n{$whitespacePrefix}", $block);
 			},
