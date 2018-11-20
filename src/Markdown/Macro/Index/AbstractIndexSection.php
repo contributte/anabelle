@@ -9,6 +9,9 @@ use Ublaboo\Anabelle\Markdown\Macro\Index\Exception\PartDidNotMatchException;
 abstract class AbstractIndexSection implements IIndexSection
 {
 
+	/**
+	 * @var string
+	 */
 	protected static $pattern = '/.+/';
 
 	/**

@@ -7,5 +7,8 @@ namespace Ublaboo\Anabelle\Markdown\Macro\Index;
 final class IndexTitle extends AbstractIndexSection
 {
 
+	/**
+	 * @var string
+	 */
 	protected static $pattern = '/^# .+/';
 }

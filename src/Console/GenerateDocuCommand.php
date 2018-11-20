@@ -111,11 +111,11 @@ final class GenerateDocuCommand extends Command
 		$httpAuthPass = $input->getOption('httpAuthPass');
 		$overwriteOutputDir = $input->getOption('overwriteOutputDir');
 
-		if (!is_string($inputDirectory) && $inputDirectory !== null) {
+		if (!is_string($inputDirectory)) {
 			throw new \UnexpectedValueException;
 		}
 
-		if (!is_string($outputDirectory) && $outputDirectory !== null) {
+		if (!is_string($outputDirectory)) {
 			throw new \UnexpectedValueException;
 		}
 
@@ -139,7 +139,7 @@ final class GenerateDocuCommand extends Command
 			$httpAuthPass
 		);
 
-		$this->overwriteOutputDir = $input->getOption('overwriteOutputDir');
+		$this->overwriteOutputDir = $overwriteOutputDir;
 
 		$this->logger = new Logger($output);
 
