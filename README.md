@@ -118,6 +118,7 @@ vendor/bin/anabelle docs-src docs --httpAuthUser user -httpAuthPass pass
 
 1. Most important (and only required) file is `index.md`. In this file, you can use only (different Markdown markup is ignored in `index.md`):
 	- `# <h1>`
+	- `## <h2>`
 	- `#include <file.md>`
 	- `$variable = <value>`
 	- `$$blockVariable ... $$`
@@ -125,5 +126,6 @@ vendor/bin/anabelle docs-src docs --httpAuthUser user -httpAuthPass pass
 	- `@@ <sectionName>:<sectionFile.md>`)
 1. `#include` macros are replaced
 1. `<h1>` is used as documentation page title
+1. `<h2>` can be used wherever you want in the sidebar
 1. `@` and `@@` sections are rendered in the sidebar nav
 1. Content of `@` and `@@` sections is rendered into separate files and loaded into the main section detail after clicking particular section link in the nav
