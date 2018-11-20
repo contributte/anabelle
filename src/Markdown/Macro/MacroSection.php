@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Ublaboo\Anabelle\Markdown\Macros;
+namespace Ublaboo\Anabelle\Markdown\Macro;
 
 use Ublaboo\Anabelle\Console\Utils\Logger;
 use Ublaboo\Anabelle\Generator\Exception\DocuGeneratorException;
@@ -78,9 +78,11 @@ final class MacroSection implements IMacro
 
 				$return = preg_replace('/md$/', $fileType, $input[0]);
 
-				if ($return === null) {
+				if (!is_string($return)) {
 					throw new \UnexpectedValueException;
 				}
+
+				return $return;
 			},
 			$content
 		);

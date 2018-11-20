@@ -2,7 +2,7 @@
 	"name": "ublaboo/anabelle",
 	"type": "library",
 	"description": "JSON-RPC Api documentation generator",
-	"keywords": ["json-rpc", "json", "rpc", "api", "documentation", "docu", "generator", "readme"],
+	"keywords": ["json-rpc", "json", "rpc", "api", "documentation", "docs", "generator", "readme"],
 	"homepage": "https://ublaboo.org/anabelle",
 	"license": ["MIT"],
 	"support": {
@@ -43,6 +43,7 @@
 		"src/anabelle"
 	],
 	"scripts": {
+		"generateDocs": "src/anabelle docs-src docs -o",
 		"tests": "vendor/bin/tester tests",
 		"phpstan": "vendor/bin/phpstan analyse src -c vendor/gamee/php-code-checker-rules/phpstan.neon --level 7",
 		"phpcs": "vendor/bin/phpcs --standard=vendor/gamee/php-code-checker-rules/ruleset.xml --extensions=php,phpt --tab-width=4 --ignore=temp -sp src",

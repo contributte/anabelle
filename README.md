@@ -91,7 +91,7 @@ Method section definition. This macro available only in `index.md` file.
 ```bash
 ~ $ cd myApi
 ~/myApi $ composer require ublaboo/anabelle
-~/myApi $ vendor/bin/anabelle docu-src docu
+~/myApi $ vendor/bin/anabelle docs-src docs
 ```
 
 ### CLI options
@@ -99,9 +99,9 @@ Method section definition. This macro available only in `index.md` file.
 #### Automatically overwrite output directory
 
 ```bash
-vendor/bin/anabelle docu-src docu -o
+vendor/bin/anabelle docs-src docs -o
 // Or
-vendor/bin/anabelle docu-src docu --overwriteOutputDir
+vendor/bin/anabelle docs-src docs --overwriteOutputDir
 ```
 
 #### Add http auth to generated files
@@ -109,9 +109,9 @@ vendor/bin/anabelle docu-src docu --overwriteOutputDir
 **Beware! Anabelle generates by default .html files. If you are using http auth, it generates .php files due to the need of validating http auth headers.**
 
 ```bash
-vendor/bin/anabelle docu-src docu -u user -p pass
+vendor/bin/anabelle docs-src docs -u user -p pass
 // Or
-vendor/bin/anabelle docu-src docu --httpAuthUser user -httpAuthPass pass
+vendor/bin/anabelle docs-src docs --httpAuthUser user -httpAuthPass pass
 ```
 
 ## Generator workflow

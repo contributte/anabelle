@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Ublaboo\Anabelle\Markdown\Macros\Utils;
+namespace Ublaboo\Anabelle\Markdown\Macro\Utils;
 
 final class FileHash
 {

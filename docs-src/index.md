@@ -5,5 +5,7 @@
 @ Home:home.md
 @ About project:about.md
 
+## Methods
+
 @@ user.login:methods/user.login.md
 @@ user.logout:methods/user.logout.md

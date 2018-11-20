@@ -105,33 +105,39 @@ final class GenerateDocuCommand extends Command
 	{
 		$input->validate();
 
-		if (!is_string($input->getArgument('inputDirectory'))) {
+		$inputDirectory = $input->getArgument('inputDirectory');
+		$outputDirectory = $input->getArgument('outputDirectory');
+		$httpAuthUser = $input->getOption('httpAuthUser');
+		$httpAuthPass = $input->getOption('httpAuthPass');
+		$overwriteOutputDir = $input->getOption('overwriteOutputDir');
+
+		if (!is_string($inputDirectory) && $inputDirectory !== null) {
 			throw new \UnexpectedValueException;
 		}
 
-		if (!is_string($input->getArgument('outputDirectory'))) {
+		if (!is_string($outputDirectory) && $outputDirectory !== null) {
 			throw new \UnexpectedValueException;
 		}
 
-		$this->inputDirectory = $input->getArgument('inputDirectory');
-		$this->outputDirectory = $input->getArgument('outputDirectory');
-
-		if (!is_string($input->getOption('httpAuthUser'))) {
+		if (!is_string($httpAuthUser) && $httpAuthUser !== null) {
 			throw new \UnexpectedValueException;
 		}
 
-		if (!is_string($input->getOption('httpAuthPass'))) {
+		if (!is_string($httpAuthPass) && $httpAuthPass !== null) {
 			throw new \UnexpectedValueException;
 		}
+
+		if (!is_bool($overwriteOutputDir)) {
+			throw new \UnexpectedValueException;
+		}
+
+		$this->inputDirectory = $inputDirectory;
+		$this->outputDirectory = $outputDirectory;
 
 		$this->authCredentials = new AuthCredentials(
-			$input->getOption('httpAuthUser'),
-			$input->getOption('httpAuthPass')
+			$httpAuthUser,
+			$httpAuthPass
 		);
-
-		if (!is_bool($input->getOption('overwriteOutputDir'))) {
-			throw new \UnexpectedValueException;
-		}
 
 		$this->overwriteOutputDir = $input->getOption('overwriteOutputDir');
 

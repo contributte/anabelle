@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Ublaboo\Anabelle\Tests\Markdown\Macros;
+namespace Ublaboo\Anabelle\Tests\Markdown\Macro;
 
 require_once __DIR__ . '/../../bootstrap.php';
 
 use Tester\Assert;
 use Tester\TestCase;
 use Ublaboo\Anabelle\Markdown\DocuScope;
-use Ublaboo\Anabelle\Markdown\Macros\MacroInlineFileLink;
+use Ublaboo\Anabelle\Markdown\Macro\MacroInlineFileLink;
 
 /**
  * @testCase

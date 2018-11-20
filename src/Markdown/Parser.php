@@ -9,15 +9,15 @@ use Ublaboo\Anabelle\Generator\Assets;
 use Ublaboo\Anabelle\Generator\Exception\DocuFileGeneratorException;
 use Ublaboo\Anabelle\Generator\Exception\DocuGeneratorException;
 use Ublaboo\Anabelle\Http\AuthCredentials;
-use Ublaboo\Anabelle\Markdown\Macros\IMacro;
-use Ublaboo\Anabelle\Markdown\Macros\MacroBlockVariable;
-use Ublaboo\Anabelle\Markdown\Macros\MacroBlockVariableOutput;
-use Ublaboo\Anabelle\Markdown\Macros\MacroCleanIndex;
-use Ublaboo\Anabelle\Markdown\Macros\MacroInclude;
-use Ublaboo\Anabelle\Markdown\Macros\MacroInlineFileLink;
-use Ublaboo\Anabelle\Markdown\Macros\MacroInlineVariable;
-use Ublaboo\Anabelle\Markdown\Macros\MacroInlineVariableOutput;
-use Ublaboo\Anabelle\Markdown\Macros\MacroSection;
+use Ublaboo\Anabelle\Markdown\Macro\IMacro;
+use Ublaboo\Anabelle\Markdown\Macro\MacroBlockVariable;
+use Ublaboo\Anabelle\Markdown\Macro\MacroBlockVariableOutput;
+use Ublaboo\Anabelle\Markdown\Macro\MacroInclude;
+use Ublaboo\Anabelle\Markdown\Macro\MacroIndex;
+use Ublaboo\Anabelle\Markdown\Macro\MacroInlineFileLink;
+use Ublaboo\Anabelle\Markdown\Macro\MacroInlineVariable;
+use Ublaboo\Anabelle\Markdown\Macro\MacroInlineVariableOutput;
+use Ublaboo\Anabelle\Markdown\Macro\MacroSection;
 use Ublaboo\Anabelle\Parsedown\CustomParsedown;
 
 final class Parser
@@ -86,7 +86,7 @@ final class Parser
 		$this->logger->logProcessingFile($inputFile);
 
 		if (!file_exists($inputFile)) {
-			throw new DocuGeneratorException("Missing file [$inputFile]");
+			throw new DocuGeneratorException(sprintf('Missing file [%s]', $inputFile));
 		}
 
 		$content = file_get_contents($inputFile);
@@ -126,7 +126,7 @@ final class Parser
 		$this->macros[] = new MacroBlockVariableOutput($this->docuScope);
 
 		if ($this->isLayout) {
-			$this->macros[] = new MacroCleanIndex;
+			$this->macros[] = new MacroIndex;
 			$this->macros[] = new MacroSection(
 				$this->logger,
 				$this->authCredentials,

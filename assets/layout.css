@@ -238,10 +238,17 @@ ul {
 	margin: 1em 0 1.5em;
 }
 
-h2:first-of-type::before {
+main h2:first-of-type::before {
 	content: "Section: ";
 	font-weight: normal;
 	color: #949aa0;
+}
+
+nav h2 {
+	font-weight: normal;
+	font-size: 1.4em;
+	margin: 0.8em 0;
+	color: #eee;
 }
 
 a {

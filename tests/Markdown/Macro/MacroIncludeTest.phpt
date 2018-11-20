@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Ublaboo\Anabelle\Tests\Markdown\Macros;
+namespace Ublaboo\Anabelle\Tests\Markdown\Macro;
 
 require_once __DIR__ . '/../../bootstrap.php';
 
 use Tester\Assert;
 use Tester\TestCase;
-use Ublaboo\Anabelle\Markdown\Macros\MacroInclude;
+use Ublaboo\Anabelle\Markdown\Macro\MacroInclude;
 
 /**
  * @testCase

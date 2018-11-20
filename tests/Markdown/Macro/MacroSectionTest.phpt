@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Ublaboo\Anabelle\Tests\Markdown\Macros;
+namespace Ublaboo\Anabelle\Tests\Markdown\Macro;
 
 require_once __DIR__ . '/../../bootstrap.php';
 
@@ -13,7 +13,7 @@ use Tester\TestCase;
 use Ublaboo\Anabelle\Console\Utils\Logger;
 use Ublaboo\Anabelle\Http\AuthCredentials;
 use Ublaboo\Anabelle\Markdown\DocuScope;
-use Ublaboo\Anabelle\Markdown\Macros\MacroSection;
+use Ublaboo\Anabelle\Markdown\Macro\MacroSection;
 
 /**
  * @testCase

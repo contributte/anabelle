@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Ublaboo\Anabelle\Markdown\Macros;
+namespace Ublaboo\Anabelle\Markdown\Macro;
 
 use Nette\Utils\Html;
 use Ublaboo\Anabelle\Generator\Exception\DocuGeneratorException;
 use Ublaboo\Anabelle\Markdown\DocuScope;
-use Ublaboo\Anabelle\Markdown\Macros\Utils\FileHash;
+use Ublaboo\Anabelle\Markdown\Macro\Utils\FileHash;
 
 final class MacroInlineFileLink implements IMacro
 {
