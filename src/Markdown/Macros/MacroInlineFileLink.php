@@ -12,7 +12,7 @@ use Ublaboo\Anabelle\Markdown\Macros\Utils\FileHash;
 final class MacroInlineFileLink implements IMacro
 {
 
-	const LINK_PATTERN = '/\[((?:[^][]++|(?R))*+)\]\(([^\)]*)\)/um';
+	private const LINK_PATTERN = '/\[((?:[^][]++|(?R))*+)\]\(([^\)]*)\)/um';
 
 	/**
 	 * @var DocuScope
@@ -25,7 +25,7 @@ final class MacroInlineFileLink implements IMacro
 	private $fileHashAlgo;
 
 
-	public function __construct(DocuScope $docuScope, callable $fileHashAlgo = null)
+	public function __construct(DocuScope $docuScope, ?callable $fileHashAlgo = null)
 	{
 		$this->docuScope = $docuScope;
 		$this->fileHashAlgo = $fileHashAlgo ?: [FileHash::class, 'md5File'];
@@ -64,9 +64,13 @@ final class MacroInlineFileLink implements IMacro
 
 					$targetPath = preg_replace('~^[^/]+/~', '', $targetPath);
 
+					if ($targetPath === null) {
+						throw new \UnexpectedValueException;
+					}
+
 					return (string) Html::el('a')->href('_files/' . basename($targetPath))
 						->setText($text)
-						->target('_blank');
+						->setAttribute('target', '_blank');
 				}
 
 				return "[$text]($path)";

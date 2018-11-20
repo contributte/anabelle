@@ -30,11 +30,6 @@ final class DocuGenerator
 	private $authCredentials;
 
 	/**
-	 * @var Logger
-	 */
-	private $logger;
-
-	/**
 	 * @var Parser
 	 */
 	private $parser;
@@ -49,7 +44,6 @@ final class DocuGenerator
 		$this->inputDirectory = $inputDirectory;
 		$this->outputDirectory = $outputDirectory;
 		$this->authCredentials = $authCredentials;
-		$this->logger = $logger;
 
 		$this->parser = new Parser(
 			true,
@@ -66,7 +60,9 @@ final class DocuGenerator
 	 */
 	public function run(): void
 	{
-		$fileType = $this->authCredentials->getUser() ? 'php' : 'html';
+		$fileType = $this->authCredentials->getUser() === null
+			? 'html'
+			: 'php';
 
 		$this->parser->parseFile(
 			$this->inputDirectory . '/index.md',

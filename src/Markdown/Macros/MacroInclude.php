@@ -9,7 +9,7 @@ use Ublaboo\Anabelle\Generator\Exception\DocuGeneratorException;
 final class MacroInclude implements IMacro
 {
 
-	const INCLUDE_PATTERN = '/^#include (.+\.\w{1,4})/um';
+	private const INCLUDE_PATTERN = '/^#include (.+\.\w{1,4})/um';
 
 
 	/**
@@ -41,13 +41,19 @@ final class MacroInclude implements IMacro
 	 */
 	public function includeFile(string $directory, string $filename): string
 	{
-		if (!file_exists("$directory/$filename")) {
+		if (!file_exists(sprintf('%s/%s', $directory, $filename))) {
 			throw new DocuGeneratorException(
-				sprintf("Can not include non-existing file %s/%s", $directory, $filename)
+				sprintf('Can not include non-existing file %s/%s', $directory, $filename)
 			);
 		}
 
 		$includeContent = file_get_contents("$directory/$filename");
+
+		if ($includeContent === false) {
+			throw new DocuGeneratorException(
+				sprintf('Can not include non-existing file %s/%s', $directory, $filename)
+			);
+		}
 
 		$includeContent = preg_replace_callback(
 			self::INCLUDE_PATTERN,
@@ -58,6 +64,10 @@ final class MacroInclude implements IMacro
 			},
 			$includeContent
 		);
+
+		if ($includeContent === null) {
+			throw new \UnexpectedValueException;
+		}
 
 		return $includeContent;
 	}

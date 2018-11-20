@@ -11,7 +11,7 @@ class DocuFileGeneratorException extends \RuntimeException
 	{
 		parent::__construct(
 			$message . ' @ ' . str_replace('/./', '/', $fileName),
-			$code,
+			$code ?? 0,
 			$previous
 		);
 	}

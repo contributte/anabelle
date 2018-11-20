@@ -9,6 +9,12 @@ final class FileHash
 
 	public static function md5File(string $destination): string
 	{
-		return md5_file($destination);
+		$hash = md5_file($destination);
+
+		if ($hash === false) {
+			throw new \UnexpectedValueException(sprintf('Could not md5_file(%s)', $destination));
+		}
+
+		return $hash;
 	}
 }

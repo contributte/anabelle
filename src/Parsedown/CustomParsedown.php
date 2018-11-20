@@ -20,11 +20,15 @@ final class CustomParsedown extends \Parsedown
 	/**
 	 * Either "section" or "home" element
 	 */
-	protected function inlineSection($excerpt): ?array
+	protected function inlineSection(array $excerpt): ?array
 	{
-		if (preg_match('/^(@@?) ?(.+[^:]):(.+\.(php|html))/', $excerpt['text'], $matches)) {
-			$class = strlen($matches[1]) == 1 ? 'section-site' : 'section-method';
-			$element = strlen($matches[1]) == 1 ? 'a' : 'button';
+		if (preg_match('/^(@@?) ?(.+[^:]):(.+\.(php|html))/', $excerpt['text'], $matches) === 1) {
+			$class = strlen($matches[1]) === 1
+				? 'section-site'
+				: 'section-method';
+			$element = strlen($matches[1]) === 1
+				? 'a'
+				: 'button';
 
 			return [
 				'extent' => strlen($matches[0]), 
@@ -34,9 +38,9 @@ final class CustomParsedown extends \Parsedown
 					'attributes' => [
 						'data-section-src' => $matches[3],
 						'class' => $class,
-						'data-target' => Strings::webalize($matches[2])
-					]
-				]
+						'data-target' => Strings::webalize($matches[2]),
+					],
+				],
 			];
 		}
 

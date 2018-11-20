@@ -44,7 +44,7 @@ final class MacroCleanIndex implements IMacro
 
 	private function findHeading(string $content): string
 	{
-		if (preg_match('/^# ?[^#].+/m', $content, $matches)) {
+		if (preg_match('/^# ?[^#].+/m', $content, $matches) === 1) {
 			return $matches[0];
 		}
 
@@ -57,7 +57,7 @@ final class MacroCleanIndex implements IMacro
 		$return = [1 => [], 2 => []];
 
 		foreach ($lines as $line) {
-			if (preg_match('/^(@@?) ?.+[^:]:.+\.md/', $line, $matches)) { // Section
+			if (preg_match('/^(@@?) ?.+[^:]:.+\.md/', $line, $matches) === 1) { // Section
 				$return[strlen($matches[1])][] = $line;
 			}
 		}

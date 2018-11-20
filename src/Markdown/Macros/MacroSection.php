@@ -44,7 +44,9 @@ final class MacroSection implements IMacro
 		string & $content // Intentionally &
 	): void
 	{
-		$fileType = $this->authCredentials->getUser() ? 'php' : 'html';
+		$fileType = $this->authCredentials->getUser() === null
+			? 'html'
+			: 'php';
 
 		/**
 		 * Find "@@" sections and parse their child .md file
@@ -63,6 +65,10 @@ final class MacroSection implements IMacro
 				 */
 				$outputFile = preg_replace('/md$/', $fileType, $inputFile);
 
+				if ($outputFile === null) {
+					throw new \UnexpectedValueException;
+				}
+
 				/**
 				 * Substitute input dir for output dir
 				 */
@@ -70,7 +76,11 @@ final class MacroSection implements IMacro
 
 				$this->parser->parseFile($inputFile, $outputFile);
 
-				return preg_replace('/md$/', $fileType, $input[0]);
+				$return = preg_replace('/md$/', $fileType, $input[0]);
+
+				if ($return === null) {
+					throw new \UnexpectedValueException;
+				}
 			},
 			$content
 		);

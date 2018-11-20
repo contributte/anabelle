@@ -101,9 +101,11 @@ final class ParamsValidator
 		/**
 		 * Validate HTTP AUTH
 		 */
-		if (empty($authCredentials->getPass()) && !empty($authCredentials->getUser())) {
+		if ($authCredentials->getPass() === null && $authCredentials->getUser() !== null) {
 			throw new ParamsValidatorException("Please set --httpAuthPass [-p]");
-		} elseif (!empty($authCredentials->getPass()) && empty($authCredentials->getUser())) {
+		}
+
+		if ($authCredentials->getPass() !== null && $authCredentials->getUser() === null) {
 			throw new ParamsValidatorException("Please set --httpAuthUser [-u]");
 		}
 	}

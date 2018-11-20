@@ -37,11 +37,6 @@ final class Assets
 	private $layoutFavicon;
 
 	/**
-	 * @var string|null
-	 */
-	private $sectionStyles;
-
-	/**
 	 * @var AuthCredentials
 	 */
 	private $authCredentials;
@@ -52,11 +47,11 @@ final class Assets
 		$this->layoutFile = __DIR__ . '/../../assets/layout.php';
 		$this->layoutStylesPaths = [
 			__DIR__ . '/../../assets/highlight-json.css',
-			__DIR__ . '/../../assets/layout.css'
+			__DIR__ . '/../../assets/layout.css',
 		];
 		$this->layoutSriptsPaths = [
 			__DIR__ . '/../../assets/highlight-json.min.js',
-			__DIR__ . '/../../assets/layout.js'
+			__DIR__ . '/../../assets/layout.js',
 		];
 		$this->layoutFavicon = __DIR__ . '/../../assets/favicon.ico';
 
@@ -83,10 +78,19 @@ final class Assets
 		$this->replaceTitle($template, $content);
 
 		$content = preg_replace('/^<h1>.*<\/h1>\w*$/mU', '', $content);
+
+		if ($content === null) {
+			throw new \UnexpectedValueException;
+		}
+
 		$this->replaceContent($template, $content);
 
 		$template = str_replace('{styles}', $this->getLayoutStyles(), $template);
 		$template = str_replace('{scripts}', $this->getLayoutSripts(), $template);
+
+		if (is_array($template)) {
+			throw new \UnexpectedValueException;
+		}
 
 		file_put_contents($outputFile, $this->minifyHtml($template));
 	}
@@ -106,11 +110,9 @@ final class Assets
 
 	private function replaceTitle(string & $template, string $content): void // Intentionally &
 	{
-		if (preg_match('/<h1>(.+)<\/h1>/', $content, $matches)) {
-			$template = str_replace('{title}', $matches[1], $template);
-		} else {
-			$template = str_replace('{title}', 'API Docs', $template);
-		}
+		$template = preg_match('/<h1>(.+)<\/h1>/', $content, $matches) === 1
+			? str_replace('{title}', $matches[1], $template)
+			: str_replace('{title}', 'API Docs', $template);
 	}
 
 
@@ -150,11 +152,17 @@ final class Assets
 
 	private function minifyHtml(string $html): string
 	{
-		return preg_replace(
+		$return = preg_replace(
 			'#(?ix)(?>[^\S ]\s*|\s{2,})(?=(?:(?:[^<]++|<(?!/?(?:textarea|pre)\b))*+)(?:<(?>textarea|pre)\b|\z))#',
 			' ',
 			$html
 		);
+
+		if ($return === null) {
+			throw new \UnexpectedValueException;
+		}
+
+		return $return;
 	}
 
 

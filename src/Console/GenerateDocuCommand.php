@@ -22,11 +22,6 @@ final class GenerateDocuCommand extends Command
 {
 
 	/**
-	 * @var string
-	 */
-	private $binDir;
-
-	/**
 	 * @var ParamsValidator
 	 */
 	private $paramsValidator;
@@ -62,7 +57,6 @@ final class GenerateDocuCommand extends Command
 		parent::__construct();
 
 		$this->paramsValidator = new ParamsValidator($binDir);
-		$this->binDir = $binDir;
 	}
 
 
@@ -111,13 +105,36 @@ final class GenerateDocuCommand extends Command
 	{
 		$input->validate();
 
+		if (!is_string($input->getArgument('inputDirectory'))) {
+			throw new \UnexpectedValueException;
+		}
+
+		if (!is_string($input->getArgument('outputDirectory'))) {
+			throw new \UnexpectedValueException;
+		}
+
 		$this->inputDirectory = $input->getArgument('inputDirectory');
 		$this->outputDirectory = $input->getArgument('outputDirectory');
+
+		if (!is_string($input->getOption('httpAuthUser'))) {
+			throw new \UnexpectedValueException;
+		}
+
+		if (!is_string($input->getOption('httpAuthPass'))) {
+			throw new \UnexpectedValueException;
+		}
+
 		$this->authCredentials = new AuthCredentials(
 			$input->getOption('httpAuthUser'),
 			$input->getOption('httpAuthPass')
 		);
+
+		if (!is_bool($input->getOption('overwriteOutputDir'))) {
+			throw new \UnexpectedValueException;
+		}
+
 		$this->overwriteOutputDir = $input->getOption('overwriteOutputDir');
+
 		$this->logger = new Logger($output);
 
 		/**

@@ -9,7 +9,7 @@ use Ublaboo\Anabelle\Generator\Assets;
 use Ublaboo\Anabelle\Generator\Exception\DocuFileGeneratorException;
 use Ublaboo\Anabelle\Generator\Exception\DocuGeneratorException;
 use Ublaboo\Anabelle\Http\AuthCredentials;
-use Ublaboo\Anabelle\Markdown\DocuScope;
+use Ublaboo\Anabelle\Markdown\Macros\IMacro;
 use Ublaboo\Anabelle\Markdown\Macros\MacroBlockVariable;
 use Ublaboo\Anabelle\Markdown\Macros\MacroBlockVariableOutput;
 use Ublaboo\Anabelle\Markdown\Macros\MacroCleanIndex;
