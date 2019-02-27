@@ -8,7 +8,6 @@ html {
 body {
 	margin: 0;
 	padding: 0;
-	background-color: #2980b9;
 	background-color: #34495e;
 	font-family: Arial, Helvetica, sans-serif;
 	color: #2c3e50;
@@ -84,6 +83,16 @@ body {
 	nav {
 		grid-area: nav;
 		align-self: start;
+		overflow: scroll;
+		max-height: calc(100vh - 80px - 25px);
+		-webkit-box-shadow: inset 0px -4px 4px 0px rgba(52,73,94,1);
+		-moz-box-shadow: inset 0px -4px 4px 0px rgba(52,73,94,1);
+		box-shadow: inset 0px -4px 4px 0px rgba(52,73,94,1);
+		border-radius: 2px;
+	}
+
+	nav p {
+		margin-bottom: 0;
 	}
 
 	main {
