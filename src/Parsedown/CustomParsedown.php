@@ -37,7 +37,7 @@ final class CustomParsedown extends \Parsedown
 					'text' => $matches[2],
 					'attributes' => [
 						'data-section-src' => $matches[3],
-						'class' => $class,
+						'class' => sprintf('%s search-item', $class),
 						'data-target' => Strings::webalize($matches[2]),
 					],
 				],

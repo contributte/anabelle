@@ -153,10 +153,10 @@ header > h1 {
 	margin: 0 !important;
 }
 
-button.section-method, a.section-site {
+button.section-method, a.section-site, .search-box{
 	font-size: 12px;
 	font-family: monospace;
-	letter-spacing: -0.3px;
+	letter-spacing: -.3px;
 	display: block;
 	width: 100%;
 	border: 0;
@@ -171,6 +171,33 @@ button.section-method, a.section-site {
 	border-radius: 0;
 	cursor: pointer;
 	border-left: 4px solid transparent;
+	word-break: break-word;
+}
+
+.search-item b {
+	color:#222;
+}
+
+.search-box {
+	padding: 0;
+	margin-bottom:1em;
+	border-radius:2px;
+}
+
+.search-box input {
+	display: block;
+	line-height:32px;
+	border: 0;
+	padding: 0 1em;
+	width:100%;
+	box-sizing: border-box;
+	font-size: 12px;
+	background-color: transparent;
+	font-weight: bold;
+}
+
+.search-box input:focus {
+	outline: none;
 }
 
 button.section-method:hover, a.section-site:hover,

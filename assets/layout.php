@@ -11,7 +11,12 @@
 <body>
 	<header><h1>{title}</h1></header>
 	<div class="empty-left"></div>
-	<nav>{content}</nav>
+	<nav>
+		<div class="search-box">
+			<input type="text" name="search" id="search-input" placeholder="Search..." autocomplete="off">
+		</div>
+		{content}
+	</nav>
 	<div class="empty-right"></div>
 	<main id="section"></main>
 	<footer></footer>

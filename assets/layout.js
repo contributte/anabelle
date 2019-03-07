@@ -84,3 +84,37 @@ var onHashChangeRouter = function() {
 };
 
 window.addEventListener("hashchange", onHashChangeRouter);
+
+var input = document.getElementById("search-input");
+
+input.addEventListener(
+	"keyup",
+	function() {
+		var phrase = this.value.toLowerCase();
+		var searchItems = document.getElementsByClassName("search-item");
+
+		for (var i = 0; i < searchItems.length; i++) {
+			var content = searchItems.item(i).innerHTML;
+
+			searchItems.item(i).innerHTML = content.replace(/\<(\/)?b\>/gi, '');
+		}
+
+		if (phrase === "") {
+			for (var i = 0; i < searchItems.length; i++) {
+				searchItems.item(i).style.display = "block";
+			}
+		} else {
+			for (var i = 0; i < searchItems.length; i++) {
+				var content = searchItems.item(i).innerHTML;
+
+				if (content.toLowerCase().includes(phrase)) {
+					searchItems.item(i).style.display = "block";
+					var regex = new RegExp("(.+)?(" + phrase + ")(.+)?", "gi");
+					searchItems.item(i).innerHTML = content.replace(regex, '$1<b>$2</b>$3');
+				} else {
+					searchItems.item(i).style.display = "none";
+				}
+			}
+		}
+	}
+);
