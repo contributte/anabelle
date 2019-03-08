@@ -85,9 +85,9 @@ var onHashChangeRouter = function() {
 
 window.addEventListener("hashchange", onHashChangeRouter);
 
-var input = document.getElementById("search-input");
+var searchInput = document.getElementById("search-input");
 
-input.addEventListener(
+searchInput.addEventListener(
 	"keyup",
 	function() {
 		var phrase = this.value.toLowerCase();
@@ -117,4 +117,14 @@ input.addEventListener(
 			}
 		}
 	}
+);
+
+document.addEventListener(
+	"keyup",
+	function(e) {
+		if (e.keyCode === 70) {
+			searchInput.focus();
+		}
+	},
+	false
 );
