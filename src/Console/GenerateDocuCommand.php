@@ -178,6 +178,8 @@ final class GenerateDocuCommand extends Command
 			$this->printError($output, $e->getMessage());
 			exit(1);
 		}
+
+		return 0;
 	}
 
 
