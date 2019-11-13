@@ -63,7 +63,8 @@ final class Parser
 		bool $isLayout,
 		AuthCredentials $authCredentials,
 		Logger $logger,
-		DocuScope $docuScope
+		DocuScope $docuScope,
+		?string $addCss
 	) {
 		$this->isLayout = $isLayout;
 		$this->authCredentials = $authCredentials;
@@ -71,7 +72,7 @@ final class Parser
 		$this->docuScope = $docuScope;
 
 		$this->parsedown = new CustomParsedown;
-		$this->assets = new Assets($authCredentials);
+		$this->assets = new Assets($authCredentials, $addCss);
 
 		$this->setupMacros();
 	}

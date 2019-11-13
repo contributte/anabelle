@@ -32,6 +32,11 @@ final class GenerateDocuCommand extends Command
 	private $inputDirectory;
 
 	/**
+	 * @var string|null
+	 */
+	private $addCss;
+
+	/**
 	 * @var string
 	 */
 	private $outputDirectory;
@@ -98,6 +103,13 @@ final class GenerateDocuCommand extends Command
 			InputOption::VALUE_NONE,
 			'Should be the output directory overwritten with ne documentation?'
 		);
+
+		$this->addOption(
+			'addCss',
+			null,
+			InputOption::VALUE_REQUIRED,
+			'Include special css file?'
+		);
 	}
 
 
@@ -110,6 +122,7 @@ final class GenerateDocuCommand extends Command
 		$httpAuthUser = $input->getOption('httpAuthUser');
 		$httpAuthPass = $input->getOption('httpAuthPass');
 		$overwriteOutputDir = $input->getOption('overwriteOutputDir');
+		$addCss = $input->getOption('addCss');
 
 		if (!is_string($inputDirectory)) {
 			throw new \UnexpectedValueException;
@@ -131,8 +144,13 @@ final class GenerateDocuCommand extends Command
 			throw new \UnexpectedValueException;
 		}
 
+		if (!is_string($addCss) && $addCss !== null) {
+			throw new \UnexpectedValueException;
+		}
+
 		$this->inputDirectory = $inputDirectory;
 		$this->outputDirectory = $outputDirectory;
+		$this->addCss = $addCss;
 
 		$this->authCredentials = new AuthCredentials(
 			$httpAuthUser,
@@ -150,6 +168,7 @@ final class GenerateDocuCommand extends Command
 			$this->paramsValidator->validateInputParams(
 				$this->inputDirectory,
 				$this->outputDirectory,
+				$this->addCss,
 				$this->authCredentials,
 				$this->overwriteOutputDir
 			);
@@ -165,6 +184,7 @@ final class GenerateDocuCommand extends Command
 		$docuGenerator = new DocuGenerator(
 			$this->inputDirectory,
 			$this->outputDirectory,
+			$this->addCss,
 			$this->authCredentials,
 			$this->logger
 		);
