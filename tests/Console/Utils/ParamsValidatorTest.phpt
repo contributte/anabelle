@@ -24,6 +24,7 @@ class ParamsValidatorTest extends TestCase
 			$paramsValidator->validateInputParams(
 				'nonExistingDir',
 				'',
+				null,
 				$auth,
 				false
 			);
@@ -33,6 +34,7 @@ class ParamsValidatorTest extends TestCase
 			$paramsValidator->validateInputParams(
 				__FILE__,
 				'',
+				null,
 				$auth,
 				false
 			);
@@ -42,6 +44,7 @@ class ParamsValidatorTest extends TestCase
 			$paramsValidator->validateInputParams(
 				__DIR__,
 				'',
+				null,
 				$auth,
 				false
 			);
@@ -54,10 +57,21 @@ class ParamsValidatorTest extends TestCase
 			$paramsValidator->validateInputParams(
 				TEST_DOCU_DIR,
 				TEST_DOCU_DIR,
+				null,
 				$auth,
 				false
 			);
 		}, ParamsValidatorException::class, $m);
+
+		Assert::exception(function() use ($paramsValidator, $auth, $m): void {
+			$paramsValidator->validateInputParams(
+				TEST_DOCU_DIR,
+				TEST_DOCU_DIR,
+				TEST_DOCU_DIR . '/styles.css-css-css-css',
+				$auth,
+				true
+			);
+		}, ParamsValidatorException::class, 'CSS file does not exist');
 	}
 }
 
