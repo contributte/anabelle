@@ -42,13 +42,21 @@ final class Assets
 	private $authCredentials;
 
 
-	public function __construct(AuthCredentials $authCredentials)
-	{
+	public function __construct(
+		AuthCredentials $authCredentials,
+		?string $addCss
+	) {
 		$this->layoutFile = __DIR__ . '/../../assets/layout.php';
+
 		$this->layoutStylesPaths = [
 			__DIR__ . '/../../assets/highlight-json.css',
 			__DIR__ . '/../../assets/layout.css',
 		];
+
+		if ($addCss !== null) {
+			$this->layoutStylesPaths[] = $addCss;
+		}
+
 		$this->layoutSriptsPaths = [
 			__DIR__ . '/../../assets/highlight-json.min.js',
 			__DIR__ . '/../../assets/layout.js',

@@ -31,7 +31,7 @@ final class MacroSection implements IMacro
 	) {
 		$this->authCredentials = $authCredentials;
 
-		$this->parser = new Parser(false, $authCredentials, $logger, $docuScope);
+		$this->parser = new Parser(false, $authCredentials, $logger, $docuScope, null);
 	}
 
 

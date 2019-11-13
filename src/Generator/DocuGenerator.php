@@ -38,6 +38,7 @@ final class DocuGenerator
 	public function __construct(
 		string $inputDirectory,
 		string $outputDirectory,
+		?string $addCss,
 		AuthCredentials $authCredentials,
 		Logger $logger
 	) {
@@ -49,7 +50,8 @@ final class DocuGenerator
 			true,
 			$authCredentials,
 			$logger,
-			new DocuScope($outputDirectory)
+			new DocuScope($outputDirectory),
+			$addCss
 		);
 	}
 

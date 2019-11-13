@@ -30,6 +30,7 @@ final class ParamsValidator
 	public function validateInputParams(
 		string $inputDirectory,
 		string $outputDirectory,
+		?string $specialCssFile,
 		AuthCredentials $authCredentials,
 		bool $overwriteOutputDir
 	): void
@@ -37,6 +38,22 @@ final class ParamsValidator
 		$this->validateInputDirectory($inputDirectory, $outputDirectory, $overwriteOutputDir);
 		$this->validateIndexFile($inputDirectory);
 		$this->validateAuthCredentials($authCredentials);
+		$this->validateSpecialCssFile($specialCssFile);
+	}
+
+
+	/**
+	 * @throws ParamsValidatorException
+	 */
+	private function validateSpecialCssFile(?string $specialCssFile): void
+	{
+		if ($specialCssFile === null) {
+			return;
+		}
+
+		if (!file_exists($specialCssFile) || !is_file($specialCssFile)) {
+			throw new ParamsValidatorException('CSS file does not exist');
+		}
 	}
 
 

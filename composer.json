@@ -34,8 +34,7 @@
 	"require-dev": {
 		"nette/tester": "^2.3",
 		"mockery/mockery": "^1.0",
-		"gamee/php-code-checker-rules": "^1.2",
-		"symplify/easy-coding-standard": "^6.0"
+		"gamee/php-code-checker-rules": "^1.2"
 	},
 	"bin": [
 		"src/anabelle"
