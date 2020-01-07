@@ -71,6 +71,7 @@ var onHashChangeRouter = function() {
 
 			xhr.addEventListener("load", function(e) {
 				document.getElementById("section").innerHTML = this.response;
+				document.getElementById("section").dataset.section = hash;
 
 				sectionLink.classList.add('active');
 
