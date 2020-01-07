@@ -179,7 +179,7 @@ final class GenerateDocuCommand extends Command
 	}
 
 
-	protected function execute(InputInterface $input, OutputInterface $output): ?int
+	protected function execute(InputInterface $input, OutputInterface $output): int
 	{
 		$docuGenerator = new DocuGenerator(
 			$this->inputDirectory,
@@ -193,10 +193,10 @@ final class GenerateDocuCommand extends Command
 			$docuGenerator->run();
 		} catch (DocuGeneratorException $e) {
 			$this->printError($output, $e->getMessage());
-			exit(1);
+			return 1;
 		} catch (DocuFileGeneratorException $e) {
 			$this->printError($output, $e->getMessage());
-			exit(1);
+			return 1;
 		}
 
 		return 0;
