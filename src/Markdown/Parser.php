@@ -2,23 +2,23 @@
 
 declare(strict_types=1);
 
-namespace Ublaboo\Anabelle\Markdown;
+namespace Contributte\Anabelle\Markdown;
 
-use Ublaboo\Anabelle\Console\Utils\Logger;
-use Ublaboo\Anabelle\Generator\Assets;
-use Ublaboo\Anabelle\Generator\Exception\DocuFileGeneratorException;
-use Ublaboo\Anabelle\Generator\Exception\DocuGeneratorException;
-use Ublaboo\Anabelle\Http\AuthCredentials;
-use Ublaboo\Anabelle\Markdown\Macro\IMacro;
-use Ublaboo\Anabelle\Markdown\Macro\MacroBlockVariable;
-use Ublaboo\Anabelle\Markdown\Macro\MacroBlockVariableOutput;
-use Ublaboo\Anabelle\Markdown\Macro\MacroInclude;
-use Ublaboo\Anabelle\Markdown\Macro\MacroIndex;
-use Ublaboo\Anabelle\Markdown\Macro\MacroInlineFileLink;
-use Ublaboo\Anabelle\Markdown\Macro\MacroInlineVariable;
-use Ublaboo\Anabelle\Markdown\Macro\MacroInlineVariableOutput;
-use Ublaboo\Anabelle\Markdown\Macro\MacroSection;
-use Ublaboo\Anabelle\Parsedown\CustomParsedown;
+use Contributte\Anabelle\Console\Utils\Logger;
+use Contributte\Anabelle\Generator\Assets;
+use Contributte\Anabelle\Generator\Exception\DocuFileGeneratorException;
+use Contributte\Anabelle\Generator\Exception\DocuGeneratorException;
+use Contributte\Anabelle\Http\AuthCredentials;
+use Contributte\Anabelle\Markdown\Macro\IMacro;
+use Contributte\Anabelle\Markdown\Macro\MacroBlockVariable;
+use Contributte\Anabelle\Markdown\Macro\MacroBlockVariableOutput;
+use Contributte\Anabelle\Markdown\Macro\MacroInclude;
+use Contributte\Anabelle\Markdown\Macro\MacroIndex;
+use Contributte\Anabelle\Markdown\Macro\MacroInlineFileLink;
+use Contributte\Anabelle\Markdown\Macro\MacroInlineVariable;
+use Contributte\Anabelle\Markdown\Macro\MacroInlineVariableOutput;
+use Contributte\Anabelle\Markdown\Macro\MacroSection;
+use Contributte\Anabelle\Parsedown\CustomParsedown;
 
 final class Parser
 {

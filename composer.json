@@ -1,12 +1,12 @@
 {
-	"name": "ublaboo/anabelle",
+	"name": "contributte/anabelle",
 	"type": "library",
 	"description": "JSON-RPC Api documentation generator",
 	"keywords": ["json-rpc", "json", "rpc", "api", "documentation", "docs", "generator", "readme"],
-	"homepage": "https://ublaboo.org/anabelle",
+	"homepage": "https://contributte.org/anabelle",
 	"license": ["MIT"],
 	"support": {
-		"issues": "https://github.com/ublaboo/anabelle/issues"
+		"issues": "https://github.com/contributte/anabelle/issues"
 	},
 	"authors": [
 		{
@@ -16,12 +16,12 @@
 	],
 	"autoload": {
 		"psr-4": {
-			"Ublaboo\\Anabelle\\": "src/"
+			"Contributte\\Anabelle\\": "src/"
 		}
 	},
 	"autoload-dev": {
 		"psr-4": {
-			"Ublaboo\\Anabelle\\Tests\\": "tests"
+			"Contributte\\Anabelle\\Tests\\": "tests"
 		}
 	},
 	"require": {
@@ -40,7 +40,6 @@
 		"src/anabelle"
 	],
 	"scripts": {
-		"generateDocs": "src/anabelle docs-src docs -o",
 		"tests": "vendor/bin/tester tests",
 		"phpstan": "vendor/bin/phpstan analyse src -c vendor/gamee/php-code-checker-rules/phpstan.neon --level 7",
 		"phpcs": "vendor/bin/phpcs --standard=vendor/gamee/php-code-checker-rules/ruleset.xml --extensions=php,phpt --tab-width=4 --ignore=temp -sp src",

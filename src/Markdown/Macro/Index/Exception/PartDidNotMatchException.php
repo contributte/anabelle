@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Ublaboo\Anabelle\Markdown\Macro\Index\Exception;
+namespace Contributte\Anabelle\Markdown\Macro\Index\Exception;
 
 final class PartDidNotMatchException extends \Exception
 {

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Ublaboo\Anabelle\Parsedown;
+namespace Contributte\Anabelle\Parsedown;
 
 use Nette\Utils\Strings;
 

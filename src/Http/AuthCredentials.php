@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Ublaboo\Anabelle\Http;
+namespace Contributte\Anabelle\Http;
 
 final class AuthCredentials
 {

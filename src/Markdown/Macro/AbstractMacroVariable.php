@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Ublaboo\Anabelle\Markdown\Macro;
+namespace Contributte\Anabelle\Markdown\Macro;
 
-use Ublaboo\Anabelle\Generator\Exception\DocuGeneratorException;
-use Ublaboo\Anabelle\Markdown\DocuScope;
+use Contributte\Anabelle\Generator\Exception\DocuGeneratorException;
+use Contributte\Anabelle\Markdown\DocuScope;
 
 abstract class AbstractMacroVariable
 {

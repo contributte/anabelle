@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Ublaboo\Anabelle\Markdown\Macro;
+namespace Contributte\Anabelle\Markdown\Macro;
 
 final class MacroInlineVariableOutput extends AbstractMacroVariable implements IMacro
 {

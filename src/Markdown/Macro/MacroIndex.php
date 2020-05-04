@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Ublaboo\Anabelle\Markdown\Macro;
+namespace Contributte\Anabelle\Markdown\Macro;
 
-use Ublaboo\Anabelle\Generator\Exception\DocuGeneratorException;
-use Ublaboo\Anabelle\Markdown\Macro\Index\Exception\PartDidNotMatchException;
-use Ublaboo\Anabelle\Markdown\Macro\Index\IndexSection;
-use Ublaboo\Anabelle\Markdown\Macro\Index\IndexSubTitle;
-use Ublaboo\Anabelle\Markdown\Macro\Index\IndexTitle;
+use Contributte\Anabelle\Generator\Exception\DocuGeneratorException;
+use Contributte\Anabelle\Markdown\Macro\Index\Exception\PartDidNotMatchException;
+use Contributte\Anabelle\Markdown\Macro\Index\IndexSection;
+use Contributte\Anabelle\Markdown\Macro\Index\IndexSubTitle;
+use Contributte\Anabelle\Markdown\Macro\Index\IndexTitle;
 
 final class MacroIndex implements IMacro
 {

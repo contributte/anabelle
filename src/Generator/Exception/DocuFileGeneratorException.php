@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Ublaboo\Anabelle\Generator\Exception;
+namespace Contributte\Anabelle\Generator\Exception;
 
 class DocuFileGeneratorException extends \RuntimeException
 {

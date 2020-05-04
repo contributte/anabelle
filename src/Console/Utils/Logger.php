@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Ublaboo\Anabelle\Console\Utils;
+namespace Contributte\Anabelle\Console\Utils;
 
 use Symfony\Component\Console\Output\OutputInterface;
 

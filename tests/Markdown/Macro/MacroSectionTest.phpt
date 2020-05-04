@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Ublaboo\Anabelle\Tests\Markdown\Macro;
+namespace Contributte\Anabelle\Tests\Markdown\Macro;
 
 require_once __DIR__ . '/../../bootstrap.php';
 
@@ -10,10 +10,10 @@ use Mockery;
 use Symfony\Component\Console\Output\OutputInterface;
 use Tester\Assert;
 use Tester\TestCase;
-use Ublaboo\Anabelle\Console\Utils\Logger;
-use Ublaboo\Anabelle\Http\AuthCredentials;
-use Ublaboo\Anabelle\Markdown\DocuScope;
-use Ublaboo\Anabelle\Markdown\Macro\MacroSection;
+use Contributte\Anabelle\Console\Utils\Logger;
+use Contributte\Anabelle\Http\AuthCredentials;
+use Contributte\Anabelle\Markdown\DocuScope;
+use Contributte\Anabelle\Markdown\Macro\MacroSection;
 
 /**
  * @testCase

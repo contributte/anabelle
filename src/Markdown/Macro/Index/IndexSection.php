@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Ublaboo\Anabelle\Markdown\Macro\Index;
+namespace Contributte\Anabelle\Markdown\Macro\Index;
 
 final class IndexSection extends AbstractIndexSection
 {

@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Ublaboo\Anabelle\Tests\Console\Utils;
+namespace Contributte\Anabelle\Tests\Console\Utils;
 
 require_once __DIR__ . '/../../bootstrap.php';
 
 use Tester\Assert;
 use Tester\TestCase;
-use Ublaboo\Anabelle\Console\Utils\Exception\ParamsValidatorException;
-use Ublaboo\Anabelle\Console\Utils\ParamsValidator;
-use Ublaboo\Anabelle\Http\AuthCredentials;
+use Contributte\Anabelle\Console\Utils\Exception\ParamsValidatorException;
+use Contributte\Anabelle\Console\Utils\ParamsValidator;
+use Contributte\Anabelle\Http\AuthCredentials;
 
 class ParamsValidatorTest extends TestCase
 {

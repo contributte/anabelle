@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Ublaboo\Anabelle\Markdown\Macro;
+namespace Contributte\Anabelle\Markdown\Macro;
 
-use Ublaboo\Anabelle\Console\Utils\Logger;
-use Ublaboo\Anabelle\Generator\Exception\DocuGeneratorException;
-use Ublaboo\Anabelle\Http\AuthCredentials;
-use Ublaboo\Anabelle\Markdown\DocuScope;
-use Ublaboo\Anabelle\Markdown\Parser;
+use Contributte\Anabelle\Console\Utils\Logger;
+use Contributte\Anabelle\Generator\Exception\DocuGeneratorException;
+use Contributte\Anabelle\Http\AuthCredentials;
+use Contributte\Anabelle\Markdown\DocuScope;
+use Contributte\Anabelle\Markdown\Parser;
 
 final class MacroSection implements IMacro
 {

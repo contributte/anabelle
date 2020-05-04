@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Ublaboo\Anabelle\Markdown;
+namespace Contributte\Anabelle\Markdown;
 
-use Ublaboo\Anabelle\Generator\Exception\DocuGeneratorException;
+use Contributte\Anabelle\Generator\Exception\DocuGeneratorException;
 
 final class DocuScope
 {

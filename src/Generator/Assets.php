@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Ublaboo\Anabelle\Generator;
+namespace Contributte\Anabelle\Generator;
 
 use MatthiasMullie\Minify\CSS;
 use MatthiasMullie\Minify\JS;
-use Ublaboo\Anabelle\Http\AuthCredentials;
+use Contributte\Anabelle\Http\AuthCredentials;
 
 final class Assets
 {

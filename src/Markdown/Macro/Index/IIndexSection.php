@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Ublaboo\Anabelle\Markdown\Macro\Index;
+namespace Contributte\Anabelle\Markdown\Macro\Index;
 
-use Ublaboo\Anabelle\Markdown\Macro\Index\Exception\PartDidNotMatchException;
+use Contributte\Anabelle\Markdown\Macro\Index\Exception\PartDidNotMatchException;
 
 interface IIndexSection
 {

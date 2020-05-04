@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Ublaboo\Anabelle\Console\Utils;
+namespace Contributte\Anabelle\Console\Utils;
 
-use Ublaboo\Anabelle\Console\Utils\Exception\ParamsValidatorException;
-use Ublaboo\Anabelle\Http\AuthCredentials;
+use Contributte\Anabelle\Console\Utils\Exception\ParamsValidatorException;
+use Contributte\Anabelle\Http\AuthCredentials;
 
 final class ParamsValidator
 {
