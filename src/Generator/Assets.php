@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Contributte\Anabelle\Generator;
 
+use Contributte\Anabelle\Http\AuthCredentials;
 use MatthiasMullie\Minify\CSS;
 use MatthiasMullie\Minify\JS;
-use Contributte\Anabelle\Http\AuthCredentials;
 
 final class Assets
 {

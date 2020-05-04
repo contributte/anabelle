@@ -4,12 +4,6 @@ declare(strict_types=1);
 
 namespace Contributte\Anabelle\Console;
 
-use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Helper\FormatterHelper;
-use Symfony\Component\Console\Input\InputArgument;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Output\OutputInterface;
 use Contributte\Anabelle\Console\Utils\Exception\ParamsValidatorException;
 use Contributte\Anabelle\Console\Utils\Logger;
 use Contributte\Anabelle\Console\Utils\ParamsValidator;
@@ -17,6 +11,12 @@ use Contributte\Anabelle\Generator\DocuGenerator;
 use Contributte\Anabelle\Generator\Exception\DocuFileGeneratorException;
 use Contributte\Anabelle\Generator\Exception\DocuGeneratorException;
 use Contributte\Anabelle\Http\AuthCredentials;
+use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Helper\FormatterHelper;
+use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Output\OutputInterface;
 
 final class GenerateDocuCommand extends Command
 {

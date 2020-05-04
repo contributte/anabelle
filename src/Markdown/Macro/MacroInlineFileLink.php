@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Contributte\Anabelle\Markdown\Macro;
 
-use Nette\Utils\Html;
 use Contributte\Anabelle\Generator\Exception\DocuGeneratorException;
 use Contributte\Anabelle\Markdown\DocuScope;
 use Contributte\Anabelle\Markdown\Macro\Utils\FileHash;
+use Nette\Utils\Html;
 
 final class MacroInlineFileLink implements IMacro
 {
