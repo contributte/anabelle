@@ -6,7 +6,7 @@
 
 ### Example (demo)
 
-There is an example repository: [here](http://github.com/planette/playground/tree/master/contributte-anabelle). Generated documentation can be viewed here: [examples.contributte.org/packages/anabelle/](https://examples.contributte.org/packages/datagrid/).
+There is an example repository: [here](http://github.com/planette/playground/tree/master/contributte-anabelle). Generated documentation can be viewed here: [examples.contributte.org/packages/anabelle/](https://examples.contributte.org/packages/anabelle/).
 
 ### Extended Markdown syntax
 
