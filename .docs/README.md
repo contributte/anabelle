@@ -81,9 +81,9 @@ Method section definition. This macro available only in `index.md` file.
 ## How to use anabelle
 
 ```bash
-~ $ cd myApi
-~/myApi $ composer require contributte/anabelle
-~/myApi $ vendor/bin/anabelle docs-src docs
+cd myApi
+composer require contributte/anabelle
+vendor/bin/anabelle docs-src docs
 ```
 
 ### CLI options
