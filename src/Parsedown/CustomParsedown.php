@@ -1,17 +1,16 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace Contributte\Anabelle\Parsedown;
 
 use Nette\Utils\Strings;
+use Parsedown;
 
-final class CustomParsedown extends \Parsedown
+final class CustomParsedown extends Parsedown
 {
 
-	function __construct()
+	public function __construct()
 	{
-		$this->InlineTypes['@'][]= 'Section';
+		$this->InlineTypes['@'][] = 'Section';
 
 		$this->inlineMarkerList .= '@';
 	}
@@ -19,6 +18,9 @@ final class CustomParsedown extends \Parsedown
 
 	/**
 	 * Either "section" or "home" element
+	 *
+	 * @param array<mixed> $excerpt
+	 * @return array<mixed>|null
 	 */
 	protected function inlineSection(array $excerpt): ?array
 	{
@@ -31,7 +33,7 @@ final class CustomParsedown extends \Parsedown
 				: 'button';
 
 			return [
-				'extent' => strlen($matches[0]), 
+				'extent' => strlen($matches[0]),
 				'element' => [
 					'name' => $element,
 					'text' => $matches[2],
@@ -46,4 +48,5 @@ final class CustomParsedown extends \Parsedown
 
 		return null;
 	}
+
 }

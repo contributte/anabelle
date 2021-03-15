@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace Contributte\Anabelle\Markdown\Macro\Index;
 
@@ -9,18 +7,13 @@ use Contributte\Anabelle\Markdown\Macro\Index\Exception\PartDidNotMatchException
 abstract class AbstractIndexSection implements IIndexSection
 {
 
-	/**
-	 * @var string
-	 */
+	/** @var string */
 	protected static $pattern = '/.+/';
 
-	/**
-	 * @var string
-	 */
+	/** @var string */
 	private $contentString;
 
-
-	private function __construct(string $contentString)
+	final private function __construct(string $contentString)
 	{
 		$this->contentString = $contentString;
 	}
@@ -34,7 +27,7 @@ abstract class AbstractIndexSection implements IIndexSection
 		$matched = preg_match(static::$pattern, $line, $matches);
 
 		if ($matched !== 1) {
-			throw new PartDidNotMatchException;
+			throw new PartDidNotMatchException();
 		}
 
 		return new static($matches[0]);
@@ -45,4 +38,5 @@ abstract class AbstractIndexSection implements IIndexSection
 	{
 		return $this->contentString;
 	}
+
 }

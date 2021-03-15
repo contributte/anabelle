@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace Contributte\Anabelle\Markdown\Macro;
 
@@ -12,11 +10,8 @@ abstract class AbstractMacroVariable
 
 	protected const MAX_EXECUTE_DEPTH = 3;
 
-	/**
-	 * @var DocuScope
-	 */
+	/** @var DocuScope */
 	protected $docuScope;
-
 
 	public function __construct(DocuScope $docuScope)
 	{
@@ -30,7 +25,7 @@ abstract class AbstractMacroVariable
 	public function runMacro(
 		string $inputDirectory,
 		string $outputDirectory,
-		string & $content // Intentionally &
+		string &$content // Intentionally &
 	): void
 	{
 		$this->runVariableMacro($content, 1);
@@ -38,10 +33,9 @@ abstract class AbstractMacroVariable
 
 
 	abstract protected function runVariableMacro(
-		string & $content,
+		string &$content,
 		int $depth
 	): void; // Intentionally &
-
 
 	/**
 	 * @return AbstractMacroVariable[]
@@ -67,4 +61,5 @@ abstract class AbstractMacroVariable
 			new MacroInlineVariableOutput($this->docuScope),
 		];
 	}
+
 }

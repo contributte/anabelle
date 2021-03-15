@@ -1,51 +1,38 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace Contributte\Anabelle\Generator;
 
 use Contributte\Anabelle\Http\AuthCredentials;
 use MatthiasMullie\Minify\CSS;
 use MatthiasMullie\Minify\JS;
+use UnexpectedValueException;
 
 final class Assets
 {
 
-	/**
-	 * @var string
-	 */
+	/** @var string */
 	private $layoutFile;
 
-	/**
-	 * @var array
-	 */
+	/** @var array<string> */
 	private $layoutStylesPaths;
 
-	/**
-	 * @var array
-	 */
+	/** @var array<string> */
 	private $layoutSriptsPaths;
 
-	/**
-	 * @var string|null
-	 */
+	/** @var string|null */
 	private $layoutStyles;
 
-	/**
-	 * @var string
-	 */
+	/** @var string */
 	private $layoutFavicon;
 
-	/**
-	 * @var AuthCredentials
-	 */
+	/** @var AuthCredentials */
 	private $authCredentials;
-
 
 	public function __construct(
 		AuthCredentials $authCredentials,
 		?string $addCss
-	) {
+	)
+	{
 		$this->layoutFile = __DIR__ . '/../../assets/layout.php';
 
 		$this->layoutStylesPaths = [
@@ -88,7 +75,7 @@ final class Assets
 		$content = preg_replace('/^<h1>.*<\/h1>\w*$/mU', '', $content);
 
 		if ($content === null) {
-			throw new \UnexpectedValueException;
+			throw new UnexpectedValueException();
 		}
 
 		$this->replaceContent($template, $content);
@@ -97,7 +84,7 @@ final class Assets
 		$template = str_replace('{scripts}', $this->getLayoutSripts(), $template);
 
 		if (is_array($template)) {
-			throw new \UnexpectedValueException;
+			throw new UnexpectedValueException();
 		}
 
 		file_put_contents($outputFile, $this->minifyHtml($template));
@@ -110,13 +97,13 @@ final class Assets
 	}
 
 
-	public function replaceHttpAuth(string & $template): void // Intentionally &
+	public function replaceHttpAuth(string &$template): void // Intentionally &
 	{
 		$template = str_replace('{httpAuth}', $this->getHttpAuthSnippet(), $template);
 	}
 
 
-	private function replaceTitle(string & $template, string $content): void // Intentionally &
+	private function replaceTitle(string &$template, string $content): void // Intentionally &
 	{
 		$template = preg_match('/<h1>(.+)<\/h1>/', $content, $matches) === 1
 			? str_replace('{title}', $matches[1], $template)
@@ -124,7 +111,7 @@ final class Assets
 	}
 
 
-	private function replaceContent(string & $template, string $content): void // Intentionally &
+	private function replaceContent(string &$template, string $content): void // Intentionally &
 	{
 		$template = str_replace('{content}', $content, $template);
 	}
@@ -133,7 +120,7 @@ final class Assets
 	private function getLayoutStyles(): string
 	{
 		if ($this->layoutStyles === null) {
-			$minifier = new CSS;
+			$minifier = new CSS();
 
 			foreach ($this->layoutStylesPaths as $file) {
 				$minifier->add($file);
@@ -148,7 +135,7 @@ final class Assets
 
 	private function getLayoutSripts(): string
 	{
-		$minifier = new JS;
+		$minifier = new JS();
 
 		foreach ($this->layoutSriptsPaths as $file) {
 			$minifier->add($file);
@@ -167,7 +154,7 @@ final class Assets
 		);
 
 		if ($return === null) {
-			throw new \UnexpectedValueException;
+			throw new UnexpectedValueException();
 		}
 
 		return $return;
@@ -189,4 +176,5 @@ final class Assets
 
 		return '';
 	}
+
 }

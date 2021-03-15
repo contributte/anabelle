@@ -1,16 +1,14 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace Contributte\Anabelle\Markdown\Macro;
 
 use Contributte\Anabelle\Generator\Exception\DocuGeneratorException;
+use UnexpectedValueException;
 
 final class MacroInclude implements IMacro
 {
 
 	private const INCLUDE_PATTERN = '/^#include (.+\.\w{1,4})/um';
-
 
 	/**
 	 * @throws DocuGeneratorException
@@ -18,7 +16,7 @@ final class MacroInclude implements IMacro
 	public function runMacro(
 		string $inputDirectory,
 		string $outputDirectory,
-		string & $content // Intentionally &
+		string &$content // Intentionally &
 	): void
 	{
 		/**
@@ -26,7 +24,7 @@ final class MacroInclude implements IMacro
 		 */
 		$content = preg_replace_callback(
 			self::INCLUDE_PATTERN,
-			function(array $input) use ($inputDirectory): string {
+			function (array $input) use ($inputDirectory): string {
 				$dir = $inputDirectory . '/' . dirname($input[1]);
 
 				return $this->includeFile($dir, basename($input[1]));
@@ -57,7 +55,7 @@ final class MacroInclude implements IMacro
 
 		$includeContent = preg_replace_callback(
 			self::INCLUDE_PATTERN,
-			function(array $input) use ($directory): string {
+			function (array $input) use ($directory): string {
 				$dir = $directory . '/' . dirname($input[1]);
 
 				return $this->includeFile($dir, basename($input[1]));
@@ -66,9 +64,10 @@ final class MacroInclude implements IMacro
 		);
 
 		if ($includeContent === null) {
-			throw new \UnexpectedValueException;
+			throw new UnexpectedValueException();
 		}
 
 		return $includeContent;
 	}
+
 }
