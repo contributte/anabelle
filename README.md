@@ -18,6 +18,10 @@
 Website 🚀 <a href="https://contributte.org">contributte.org</a> | Contact 👨🏻‍💻 <a href="https://f3l1x.io">f3l1x.io</a> | Twitter 🐦 <a href="https://twitter.com/contributte">@contributte</a>
 </p>
 
+<p align=center>
+  <img src="https://github.com/contributte/anabelle/blob/master/.docs/assets/anabelle.png">
+</p>
+
 ## Usage
 
 To install the latest version of `contributte/anabelle` use [Composer](https://getcomposer.org).
