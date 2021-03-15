@@ -1,17 +1,19 @@
-<?php declare(strict_types = 1);
+<?php
+
+declare(strict_types=1);
 
 namespace Contributte\Anabelle\Tests\Markdown\Macro;
 
 require_once __DIR__ . '/../../bootstrap.php';
 
-use Contributte\Anabelle\Console\Utils\Logger;
-use Contributte\Anabelle\Http\AuthCredentials;
-use Contributte\Anabelle\Markdown\DocuScope;
-use Contributte\Anabelle\Markdown\Macro\MacroSection;
 use Mockery;
 use Symfony\Component\Console\Output\OutputInterface;
 use Tester\Assert;
 use Tester\TestCase;
+use Contributte\Anabelle\Console\Utils\Logger;
+use Contributte\Anabelle\Http\AuthCredentials;
+use Contributte\Anabelle\Markdown\DocuScope;
+use Contributte\Anabelle\Markdown\Macro\MacroSection;
 
 /**
  * @testCase
@@ -21,7 +23,7 @@ class MacroSectionTest extends TestCase
 
 	public function testMacro(): void
 	{
-		$content = '
+		$content = "
 # Awesome cookbook JSON-RPC API doc
 
 #include variables.md
@@ -36,9 +38,9 @@ class MacroSectionTest extends TestCase
 @ Foo:foo.txt
 @ Foobar.txt
 
-';
+";
 
-		$expectedOutput = '
+		$expectedOutput = "
 # Awesome cookbook JSON-RPC API doc
 
 #include variables.md
@@ -53,7 +55,7 @@ class MacroSectionTest extends TestCase
 @ Foo:foo.txt
 @ Foobar.txt
 
-';
+";
 
 		$logger = Mockery::mock(OutputInterface::class);
 
@@ -72,7 +74,6 @@ class MacroSectionTest extends TestCase
 
 		Assert::same($expectedOutput, $content);
 	}
-
 }
 
 (new MacroSectionTest())->run();

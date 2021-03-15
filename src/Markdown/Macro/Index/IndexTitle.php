@@ -1,11 +1,14 @@
-<?php declare(strict_types = 1);
+<?php
+
+declare(strict_types=1);
 
 namespace Contributte\Anabelle\Markdown\Macro\Index;
 
 final class IndexTitle extends AbstractIndexSection
 {
 
-	/** @var string */
+	/**
+	 * @var string
+	 */
 	protected static $pattern = '/^# .+/';
-
 }

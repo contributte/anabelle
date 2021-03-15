@@ -1,4 +1,6 @@
-<?php declare(strict_types = 1);
+<?php
+
+declare(strict_types=1);
 
 namespace Contributte\Anabelle\Markdown;
 
@@ -7,14 +9,21 @@ use Contributte\Anabelle\Generator\Exception\DocuGeneratorException;
 final class DocuScope
 {
 
-	/** @var string */
+	/**
+	 * @var string
+	 */
 	private $outputDirectory;
 
-	/** @var string[] */
+	/**
+	 * @var string[]
+	 */
 	private $inlineVariables = [];
 
-	/** @var string[] */
+	/**
+	 * @var string[]
+	 */
 	private $blockVariables = [];
+
 
 	public function __construct(string $outputDirectory)
 	{
@@ -86,5 +95,4 @@ final class DocuScope
 
 		return $this->blockVariables[$varName];
 	}
-
 }

@@ -1,4 +1,6 @@
-<?php declare(strict_types = 1);
+<?php
+
+declare(strict_types=1);
 
 namespace Contributte\Anabelle\Markdown\Macro;
 
@@ -7,23 +9,26 @@ use Contributte\Anabelle\Generator\Exception\DocuGeneratorException;
 use Contributte\Anabelle\Http\AuthCredentials;
 use Contributte\Anabelle\Markdown\DocuScope;
 use Contributte\Anabelle\Markdown\Parser;
-use UnexpectedValueException;
 
 final class MacroSection implements IMacro
 {
 
-	/** @var Parser */
+	/**
+	 * @var Parser
+	 */
 	private $parser;
 
-	/** @var AuthCredentials */
+	/**
+	 * @var AuthCredentials
+	 */
 	private $authCredentials;
+
 
 	public function __construct(
 		Logger $logger,
 		AuthCredentials $authCredentials,
 		DocuScope $docuScope
-	)
-	{
+	) {
 		$this->authCredentials = $authCredentials;
 
 		$this->parser = new Parser(false, $authCredentials, $logger, $docuScope, null);
@@ -36,7 +41,7 @@ final class MacroSection implements IMacro
 	public function runMacro(
 		string $inputDirectory,
 		string $outputDirectory,
-		string &$content // Intentionally &
+		string & $content // Intentionally &
 	): void
 	{
 		$fileType = $this->authCredentials->getUser() === null
@@ -46,13 +51,13 @@ final class MacroSection implements IMacro
 		/**
 		 * Find "@@" sections and parse their child .md file
 		 * 	== normal section with json-rpc methods
-		 *
+		 * 
 		 * Find "@" sections and parse their child .md file
 		 * 	== home section, aditional description etc
 		 */
 		$content = preg_replace_callback(
 			'/^@@? (.+[^:]):(.+\.md)/m',
-			function (array $input) use ($inputDirectory, $outputDirectory, $fileType): string {
+			function(array $input) use ($inputDirectory, $outputDirectory, $fileType): string {
 				$inputFile = $inputDirectory . '/' . dirname($input[2]) . '/' . basename($input[2]);
 
 				/**
@@ -61,7 +66,7 @@ final class MacroSection implements IMacro
 				$outputFile = preg_replace('/md$/', $fileType, $inputFile);
 
 				if ($outputFile === null) {
-					throw new UnexpectedValueException();
+					throw new \UnexpectedValueException;
 				}
 
 				/**
@@ -74,7 +79,7 @@ final class MacroSection implements IMacro
 				$return = preg_replace('/md$/', $fileType, $input[0]);
 
 				if (!is_string($return)) {
-					throw new UnexpectedValueException();
+					throw new \UnexpectedValueException;
 				}
 
 				return $return;
@@ -82,5 +87,4 @@ final class MacroSection implements IMacro
 			$content
 		);
 	}
-
 }

@@ -1,15 +1,22 @@
-<?php declare(strict_types = 1);
+<?php
+
+declare(strict_types=1);
 
 namespace Contributte\Anabelle\Http;
 
 final class AuthCredentials
 {
 
-	/** @var string|null */
+	/**
+	 * @var string|null
+	 */
 	private $user;
 
-	/** @var string|null */
+	/**
+	 * @var string|null
+	 */
 	private $pass;
+
 
 	public function __construct(?string $user, ?string $pass)
 	{
@@ -28,5 +35,4 @@ final class AuthCredentials
 	{
 		return $this->pass;
 	}
-
 }

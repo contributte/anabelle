@@ -1,8 +1,8 @@
-<?php declare(strict_types = 1);
+<?php
+
+declare(strict_types=1);
 
 namespace Contributte\Anabelle\Markdown\Macro\Utils;
-
-use UnexpectedValueException;
 
 final class FileHash
 {
@@ -12,10 +12,9 @@ final class FileHash
 		$hash = md5_file($destination);
 
 		if ($hash === false) {
-			throw new UnexpectedValueException(sprintf('Could not md5_file(%s)', $destination));
+			throw new \UnexpectedValueException(sprintf('Could not md5_file(%s)', $destination));
 		}
 
 		return $hash;
 	}
-
 }

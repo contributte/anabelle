@@ -1,4 +1,6 @@
-<?php declare(strict_types = 1);
+<?php
+
+declare(strict_types=1);
 
 namespace Contributte\Anabelle\Console;
 
@@ -15,31 +17,45 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use UnexpectedValueException;
 
 final class GenerateDocuCommand extends Command
 {
 
-	/** @var ParamsValidator */
+	/**
+	 * @var ParamsValidator
+	 */
 	private $paramsValidator;
 
-	/** @var string */
+	/**
+	 * @var string
+	 */
 	private $inputDirectory;
 
-	/** @var string|null */
+	/**
+	 * @var string|null
+	 */
 	private $addCss;
 
-	/** @var string */
+	/**
+	 * @var string
+	 */
 	private $outputDirectory;
 
-	/** @var AuthCredentials */
+	/**
+	 * @var AuthCredentials
+	 */
 	private $authCredentials;
 
-	/** @var bool */
+	/**
+	 * @var bool
+	 */
 	private $overwriteOutputDir;
 
-	/** @var Logger */
+	/**
+	 * @var Logger
+	 */
 	private $logger;
+
 
 	public function __construct(string $binDir)
 	{
@@ -109,27 +125,27 @@ final class GenerateDocuCommand extends Command
 		$addCss = $input->getOption('addCss');
 
 		if (!is_string($inputDirectory)) {
-			throw new UnexpectedValueException();
+			throw new \UnexpectedValueException;
 		}
 
 		if (!is_string($outputDirectory)) {
-			throw new UnexpectedValueException();
+			throw new \UnexpectedValueException;
 		}
 
 		if (!is_string($httpAuthUser) && $httpAuthUser !== null) {
-			throw new UnexpectedValueException();
+			throw new \UnexpectedValueException;
 		}
 
 		if (!is_string($httpAuthPass) && $httpAuthPass !== null) {
-			throw new UnexpectedValueException();
+			throw new \UnexpectedValueException;
 		}
 
 		if (!is_bool($overwriteOutputDir)) {
-			throw new UnexpectedValueException();
+			throw new \UnexpectedValueException;
 		}
 
 		if (!is_string($addCss) && $addCss !== null) {
-			throw new UnexpectedValueException();
+			throw new \UnexpectedValueException;
 		}
 
 		$this->inputDirectory = $inputDirectory;
@@ -197,5 +213,4 @@ final class GenerateDocuCommand extends Command
 			$output->writeln("\n{$block}\n");
 		}
 	}
-
 }

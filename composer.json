@@ -32,17 +32,19 @@
 		"nette/utils": "^3.0"
 	},
 	"require-dev": {
-		"ninjify/nunjuck": "^0.3",
+		"nette/tester": "^2.3",
 		"mockery/mockery": "^1.0",
-		"ninjify/qa": "^0.12",
-		"phpstan/phpstan": "^0.12",
-		"phpstan/phpstan-deprecation-rules": "^0.12",
-		"phpstan/phpstan-nette": "^0.12",
-		"phpstan/phpstan-strict-rules": "^0.12"
+		"gamee/php-code-checker-rules": "^1.2"
 	},
 	"bin": [
 		"src/anabelle"
 	],
+	"scripts": {
+		"tests": "vendor/bin/tester tests",
+		"phpstan": "vendor/bin/phpstan analyse src -c vendor/gamee/php-code-checker-rules/phpstan.neon --level 7",
+		"phpcs": "vendor/bin/phpcs --standard=vendor/gamee/php-code-checker-rules/ruleset.xml --extensions=php,phpt --tab-width=4 --ignore=temp -sp src",
+		"phpcsfix": "vendor/bin/phpcbf --standard=vendor/gamee/php-code-checker-rules/ruleset.xml --extensions=php,phpt --tab-width=4 --ignore=temp -sp src"
+	},
 	"extra": {
 		"branch-alias": {
 			"dev-master": "4.0.x-dev"

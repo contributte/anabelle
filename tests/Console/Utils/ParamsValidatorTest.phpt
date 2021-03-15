@@ -1,14 +1,16 @@
-<?php declare(strict_types = 1);
+<?php
+
+declare(strict_types=1);
 
 namespace Contributte\Anabelle\Tests\Console\Utils;
 
 require_once __DIR__ . '/../../bootstrap.php';
 
+use Tester\Assert;
+use Tester\TestCase;
 use Contributte\Anabelle\Console\Utils\Exception\ParamsValidatorException;
 use Contributte\Anabelle\Console\Utils\ParamsValidator;
 use Contributte\Anabelle\Http\AuthCredentials;
-use Tester\Assert;
-use Tester\TestCase;
 
 class ParamsValidatorTest extends TestCase
 {
@@ -18,7 +20,7 @@ class ParamsValidatorTest extends TestCase
 		$auth = new AuthCredentials(null, null);
 		$paramsValidator = new ParamsValidator('');
 
-		Assert::exception(function () use ($paramsValidator, $auth): void {
+		Assert::exception(function() use ($paramsValidator, $auth): void {
 			$paramsValidator->validateInputParams(
 				'nonExistingDir',
 				'',
@@ -28,7 +30,7 @@ class ParamsValidatorTest extends TestCase
 			);
 		}, ParamsValidatorException::class, 'Input documentation directory does not exist');
 
-		Assert::exception(function () use ($paramsValidator, $auth): void {
+		Assert::exception(function() use ($paramsValidator, $auth): void {
 			$paramsValidator->validateInputParams(
 				__FILE__,
 				'',
@@ -38,7 +40,7 @@ class ParamsValidatorTest extends TestCase
 			);
 		}, ParamsValidatorException::class, 'Given path is not a directory');
 
-		Assert::exception(function () use ($paramsValidator, $auth): void {
+		Assert::exception(function() use ($paramsValidator, $auth): void {
 			$paramsValidator->validateInputParams(
 				__DIR__,
 				'',
@@ -48,10 +50,10 @@ class ParamsValidatorTest extends TestCase
 			);
 		}, ParamsValidatorException::class, 'Missing file ' . __DIR__ . '/index.md');
 
-		$m = 'Output directory path already exists.'
-				. ' Delete it or use option [-o] as for "overwrite" output directory';
+		$m = "Output directory path already exists."
+				. " Delete it or use option [-o] as for \"overwrite\" output directory";
 
-		Assert::exception(function () use ($paramsValidator, $auth): void {
+		Assert::exception(function() use ($paramsValidator, $auth, $m): void {
 			$paramsValidator->validateInputParams(
 				TEST_DOCU_DIR,
 				TEST_DOCU_DIR,
@@ -61,7 +63,7 @@ class ParamsValidatorTest extends TestCase
 			);
 		}, ParamsValidatorException::class, $m);
 
-		Assert::exception(function () use ($paramsValidator, $auth): void {
+		Assert::exception(function() use ($paramsValidator, $auth, $m): void {
 			$paramsValidator->validateInputParams(
 				TEST_DOCU_DIR,
 				TEST_DOCU_DIR,
@@ -71,7 +73,6 @@ class ParamsValidatorTest extends TestCase
 			);
 		}, ParamsValidatorException::class, 'CSS file does not exist');
 	}
-
 }
 
 (new ParamsValidatorTest())->run();

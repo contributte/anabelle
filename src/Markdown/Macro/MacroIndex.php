@@ -1,4 +1,6 @@
-<?php declare(strict_types = 1);
+<?php
+
+declare(strict_types=1);
 
 namespace Contributte\Anabelle\Markdown\Macro;
 
@@ -13,13 +15,14 @@ final class MacroIndex implements IMacro
 
 	private const DEFAULT_TITLE = '# API Docs';
 
+
 	/**
 	 * @throws DocuGeneratorException
 	 */
 	public function runMacro(
 		string $inputDirectory,
 		string $outputDirectory,
-		string &$content // Intentionally &
+		string & $content // Intentionally &
 	): void
 	{
 		$lines = explode("\n", $content);
@@ -58,5 +61,4 @@ final class MacroIndex implements IMacro
 			$content .= $section->getContentString() . PHP_EOL;
 		}
 	}
-
 }
