@@ -65,54 +65,6 @@ final class GenerateDocuCommand extends Command
 	}
 
 
-	protected function configure(): void
-	{
-		$this->setName('anabelle')
-			->setDescription('Generates a documentation from target directory')
-			->setHelp($this->getDescription());
-
-		$this->addArgument(
-			'inputDirectory',
-			InputArgument::REQUIRED,
-			'Input documentation directory'
-		);
-
-		$this->addArgument(
-			'outputDirectory',
-			InputArgument::REQUIRED,
-			'Output documentation directory'
-		);
-
-		$this->addOption(
-			'httpAuthUser',
-			'-u',
-			InputOption::VALUE_OPTIONAL,
-			'Should be there any HTTP authentication?'
-		);
-
-		$this->addOption(
-			'httpAuthPass',
-			'-p',
-			InputOption::VALUE_OPTIONAL,
-			'Should be there any HTTP authentication?'
-		);
-
-		$this->addOption(
-			'overwriteOutputDir',
-			'-o',
-			InputOption::VALUE_NONE,
-			'Should be the output directory overwritten with ne documentation?'
-		);
-
-		$this->addOption(
-			'addCss',
-			null,
-			InputOption::VALUE_REQUIRED,
-			'Include special css file?'
-		);
-	}
-
-
 	public function initialize(InputInterface $input, OutputInterface $output): void
 	{
 		$input->validate();
@@ -179,6 +131,54 @@ final class GenerateDocuCommand extends Command
 	}
 
 
+	protected function configure(): void
+	{
+		$this->setName('anabelle')
+			->setDescription('Generates a documentation from target directory')
+			->setHelp($this->getDescription());
+
+		$this->addArgument(
+			'inputDirectory',
+			InputArgument::REQUIRED,
+			'Input documentation directory'
+		);
+
+		$this->addArgument(
+			'outputDirectory',
+			InputArgument::REQUIRED,
+			'Output documentation directory'
+		);
+
+		$this->addOption(
+			'httpAuthUser',
+			'-u',
+			InputOption::VALUE_OPTIONAL,
+			'Should be there any HTTP authentication?'
+		);
+
+		$this->addOption(
+			'httpAuthPass',
+			'-p',
+			InputOption::VALUE_OPTIONAL,
+			'Should be there any HTTP authentication?'
+		);
+
+		$this->addOption(
+			'overwriteOutputDir',
+			'-o',
+			InputOption::VALUE_NONE,
+			'Should be the output directory overwritten with ne documentation?'
+		);
+
+		$this->addOption(
+			'addCss',
+			null,
+			InputOption::VALUE_REQUIRED,
+			'Include special css file?'
+		);
+	}
+
+
 	protected function execute(InputInterface $input, OutputInterface $output): int
 	{
 		$docuGenerator = new DocuGenerator(
@@ -193,9 +193,11 @@ final class GenerateDocuCommand extends Command
 			$docuGenerator->run();
 		} catch (DocuGeneratorException $e) {
 			$this->printError($output, $e->getMessage());
+
 			return 1;
 		} catch (DocuFileGeneratorException $e) {
 			$this->printError($output, $e->getMessage());
+
 			return 1;
 		}
 

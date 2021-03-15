@@ -28,7 +28,7 @@ final class MacroInlineFileLink implements IMacro
 	public function __construct(DocuScope $docuScope, ?callable $fileHashAlgo = null)
 	{
 		$this->docuScope = $docuScope;
-		$this->fileHashAlgo = $fileHashAlgo ?: [FileHash::class, 'md5File'];
+		$this->fileHashAlgo = $fileHashAlgo ?? [FileHash::class, 'md5File'];
 	}
 
 
@@ -38,7 +38,7 @@ final class MacroInlineFileLink implements IMacro
 	public function runMacro(
 		string $inputDirectory,
 		string $outputDirectory,
-		string & $content // Intentionally &
+		string &$content // Intentionally &
 	): void
 	{
 		/**

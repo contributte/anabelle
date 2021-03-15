@@ -22,7 +22,7 @@ final class MacroIndex implements IMacro
 	public function runMacro(
 		string $inputDirectory,
 		string $outputDirectory,
-		string & $content // Intentionally &
+		string &$content // Intentionally &
 	): void
 	{
 		$lines = explode("\n", $content);
