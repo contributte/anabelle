@@ -40,9 +40,9 @@ User uuid is {$uuid}
 ```md
 $$successEmptyResponse
 {
-"jsonrpc": "2.0",
-"result": {},
-"id": null
+	"jsonrpc": "2.0",
+	"result": {},
+	"id": null
 }
 $$
 ```
