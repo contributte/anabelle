@@ -1,4 +1,11 @@
-# Anabelle
+# Contributte\Anabelle
+
+## Content
+
+- [Api documentation generator \(JSON-RPC / REST\)](#api-documentation-generator-json-rpc--rest)
+- [How to use anabelle](#how-to-use-anabelle)
+- [Generator workflow](#generator-workflow)
+
 
 ## Api documentation generator (JSON-RPC / REST)
 
@@ -6,7 +13,7 @@
 
 ### Example (demo)
 
-There is an example repository: [here](http://github.com/planette/playground/tree/master/contributte-anabelle). Generated documentation can be viewed here: [examples.contributte.org/packages/anabelle/](https://examples.contributte.org/packages/datagrid/).
+There is an example repository: [here](http://github.com/planette/playground/tree/master/contributte-anabelle). Generated documentation can be viewed here: [examples.contributte.org/packages/anabelle/](https://examples.contributte.org/packages/anabelle/).
 
 ### Extended Markdown syntax
 
@@ -81,9 +88,9 @@ Method section definition. This macro available only in `index.md` file.
 ## How to use anabelle
 
 ```bash
-~ $ cd myApi
-~/myApi $ composer require contributte/anabelle
-~/myApi $ vendor/bin/anabelle docs-src docs
+cd myApi
+composer require contributte/anabelle
+vendor/bin/anabelle docs-src docs
 ```
 
 ### CLI options

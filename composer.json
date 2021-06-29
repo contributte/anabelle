@@ -2,9 +2,20 @@
 	"name": "contributte/anabelle",
 	"type": "library",
 	"description": "JSON-RPC Api documentation generator",
-	"keywords": ["json-rpc", "json", "rpc", "api", "documentation", "docs", "generator", "readme"],
+	"keywords": [
+		"json-rpc",
+		"json",
+		"rpc",
+		"api",
+		"documentation",
+		"docs",
+		"generator",
+		"readme"
+	],
 	"homepage": "https://contributte.org/anabelle",
-	"license": ["MIT"],
+	"license": [
+		"MIT"
+	],
 	"support": {
 		"issues": "https://github.com/contributte/anabelle/issues"
 	},
@@ -44,5 +55,10 @@
 		"phpstan": "vendor/bin/phpstan analyse src -c vendor/gamee/php-code-checker-rules/phpstan.neon --level 7",
 		"phpcs": "vendor/bin/phpcs --standard=vendor/gamee/php-code-checker-rules/ruleset.xml --extensions=php,phpt --tab-width=4 --ignore=temp -sp src",
 		"phpcsfix": "vendor/bin/phpcbf --standard=vendor/gamee/php-code-checker-rules/ruleset.xml --extensions=php,phpt --tab-width=4 --ignore=temp -sp src"
+	},
+	"extra": {
+		"branch-alias": {
+			"dev-master": "4.0.x-dev"
+		}
 	}
 }
