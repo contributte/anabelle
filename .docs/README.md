@@ -1,19 +1,15 @@
-# Contributte\Anabelle
+# Contributte Anabelle
 
 ## Content
 
 - [Api documentation generator \(JSON-RPC / REST\)](#api-documentation-generator-json-rpc--rest)
 - [How to use anabelle](#how-to-use-anabelle)
 - [Generator workflow](#generator-workflow)
-
+- [Examples](#examples)
 
 ## Api documentation generator (JSON-RPC / REST)
 
-(No matter whether you're using REST or JSON-RPC or some other api architecture/scheme)
-
-### Example (demo)
-
-There is an example repository: [here](http://github.com/planette/playground/tree/master/contributte-anabelle). Generated documentation can be viewed here: [examples.contributte.org/packages/anabelle/](https://examples.contributte.org/packages/anabelle/).
+No matter whether you're using REST or JSON-RPC or some other api architecture/scheme
 
 ### Extended Markdown syntax
 
@@ -128,3 +124,10 @@ vendor/bin/anabelle docs-src docs --httpAuthUser user -httpAuthPass pass
 1. `<h2>` can be used wherever you want in the sidebar
 1. `@` and `@@` sections are rendered in the sidebar nav
 1. Content of `@` and `@@` sections is rendered into separate files and loaded into the main section detail after clicking particular section link in the nav
+
+## Examples
+
+- http://github.com/planette/playground/tree/master/contributte-anabelle (example project)
+- https://examples.contributte.org/packages/anabelle/ (generated documentation)
+- https://github.com/contributte/playground (playground)
+- https://contributte.org/examples.html (more examples)
