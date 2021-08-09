@@ -127,7 +127,7 @@ vendor/bin/anabelle docs-src docs --httpAuthUser user -httpAuthPass pass
 
 ## Examples
 
-- http://github.com/planette/playground/tree/master/contributte-anabelle (example project)
+- http://github.com/contributte/playground/tree/master/contributte-anabelle (example project)
 - https://examples.contributte.org/packages/anabelle/ (generated documentation)
 - https://github.com/contributte/playground (playground)
 - https://contributte.org/examples.html (more examples)
