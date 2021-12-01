@@ -1,0 +1,13 @@
+<h2>Home</h2> <p>This is a documentation of our cookbook JSON-RPC API. If you are having any troubles baking your own API client, please contact our chef Pavel Janda.</p> <h3>Specification of project Awesome Cookbook (version 2.3.4)</h3> <h4>Endpoint</h4> <p>All api calls should be targeting uri <code>api.example.io</code>. According to <a href="http://www.jsonrpc.org/specification">JSON-RPC specification</a>, each and every request object has to contain following properties:</p> <ul> <li><code>jsonrpc</code>: JSON-RPC version (<code>"2.0"</code>)</li> <li><code>method</code>: Name of the method to be invoked</li> <li><code>params</code>: Parameters of particular call (optional)</li> <li><code>id</code>: A string identifying this call (may be <code>null</code> - in that case, <code>null</code> is also returned in the <code>id</code> property)</li> </ul> <h4>Example request payload:</h4> <pre><code class="language-json">{
+    "jsonrpc": "2.0",
+    "method": "Receipe.store",
+    "params": {
+        "name": "Bread with butter",
+        "ingredients": [
+            "bread",
+            "butter"
+        ],
+        "timeNeeded": 2
+    },
+    "id": null
+}</code></pre>
