@@ -1,0 +1,8 @@
+{
+  "require": {
+    "contributte/anabelle": "^3.0"
+  },
+  "scripts": {
+    "generateDocs": "vendor/bin/anabelle docs-src docs --overwriteOutputDir"
+  }
+}
