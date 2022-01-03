@@ -15,6 +15,6 @@ interface IMacro
 	public function runMacro(
 		string $inputDirectory,
 		string $outputDirectory,
-		string & $content // Intentionally &
+		string &$content // Intentionally &
 	): void;
 }

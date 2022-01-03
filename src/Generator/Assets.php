@@ -78,6 +78,29 @@ final class Assets
 	}
 
 
+	public function replaceHttpAuth(string &$template): void // Intentionally &
+	{
+		$template = str_replace('{httpAuth}', $this->getHttpAuthSnippet(), $template);
+	}
+
+
+	public function getHttpAuthSnippet(): string
+	{
+		if ($this->authCredentials->getUser() !== null) {
+			$u = $this->authCredentials->getUser();
+			$p = $this->authCredentials->getPass();
+
+			return "<?php if (!isset(\$_SERVER['PHP_AUTH_USER']) || \$_SERVER['PHP_AUTH_USER'] !== '{$u}' || \$_SERVER['PHP_AUTH_PW'] !== '{$p}') {"
+				. " header('WWW-Authenticate: Basic realm=\"API Docu\"');"
+				. " header('HTTP/1.0 401 Unauthorized');"
+				. " die('Invalid authentication');"
+				. '} ?>';
+		}
+
+		return '';
+	}
+
+
 	private function saveLayout(string $content, string $outputFile): void
 	{
 		$template = file_get_contents($this->layoutFile);
@@ -110,13 +133,7 @@ final class Assets
 	}
 
 
-	public function replaceHttpAuth(string & $template): void // Intentionally &
-	{
-		$template = str_replace('{httpAuth}', $this->getHttpAuthSnippet(), $template);
-	}
-
-
-	private function replaceTitle(string & $template, string $content): void // Intentionally &
+	private function replaceTitle(string &$template, string $content): void // Intentionally &
 	{
 		$template = preg_match('/<h1>(.+)<\/h1>/', $content, $matches) === 1
 			? str_replace('{title}', $matches[1], $template)
@@ -124,7 +141,7 @@ final class Assets
 	}
 
 
-	private function replaceContent(string & $template, string $content): void // Intentionally &
+	private function replaceContent(string &$template, string $content): void // Intentionally &
 	{
 		$template = str_replace('{content}', $content, $template);
 	}
@@ -171,22 +188,5 @@ final class Assets
 		}
 
 		return $return;
-	}
-
-
-	public function getHttpAuthSnippet(): string
-	{
-		if ($this->authCredentials->getUser() !== null) {
-			$u = $this->authCredentials->getUser();
-			$p = $this->authCredentials->getPass();
-
-			return "<?php if (!isset(\$_SERVER['PHP_AUTH_USER']) || \$_SERVER['PHP_AUTH_USER'] !== '{$u}' || \$_SERVER['PHP_AUTH_PW'] !== '{$p}') {"
-				. "	header('WWW-Authenticate: Basic realm=\"API Docu\"');"
-				. "	header('HTTP/1.0 401 Unauthorized');"
-				. "	die('Invalid authentication');"
-				. '} ?>';
-		}
-
-		return '';
 	}
 }

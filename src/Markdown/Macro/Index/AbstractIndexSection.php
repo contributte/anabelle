@@ -20,7 +20,7 @@ abstract class AbstractIndexSection implements IIndexSection
 	private $contentString;
 
 
-	private function __construct(string $contentString)
+	final private function __construct(string $contentString)
 	{
 		$this->contentString = $contentString;
 	}

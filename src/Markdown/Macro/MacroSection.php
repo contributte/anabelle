@@ -41,7 +41,7 @@ final class MacroSection implements IMacro
 	public function runMacro(
 		string $inputDirectory,
 		string $outputDirectory,
-		string & $content // Intentionally &
+		string &$content // Intentionally &
 	): void
 	{
 		$fileType = $this->authCredentials->getUser() === null

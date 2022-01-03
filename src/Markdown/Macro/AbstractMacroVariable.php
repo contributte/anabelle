@@ -30,7 +30,7 @@ abstract class AbstractMacroVariable
 	public function runMacro(
 		string $inputDirectory,
 		string $outputDirectory,
-		string & $content // Intentionally &
+		string &$content // Intentionally &
 	): void
 	{
 		$this->runVariableMacro($content, 1);
@@ -38,7 +38,7 @@ abstract class AbstractMacroVariable
 
 
 	abstract protected function runVariableMacro(
-		string & $content,
+		string &$content,
 		int $depth
 	): void; // Intentionally &
 

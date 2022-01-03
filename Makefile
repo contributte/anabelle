@@ -6,13 +6,13 @@ install:
 qa: phpstan cs
 
 cs:
-	vendor/bin/phpcs --standard=vendor/gamee/php-code-checker-rules/ruleset.xml --extensions=php,phpt --tab-width=4 --ignore=temp -sp src
+	vendor/bin/phpcs --standard=vendor/contributte/code-rules/paveljanda/ruleset.xml --extensions=php,phpt --tab-width=4 --ignore=temp -sp src
 
 csf:
-	vendor/bin/phpcbf --standard=vendor/gamee/php-code-checker-rules/ruleset.xml --extensions=php,phpt --tab-width=4 --ignore=temp -sp src
+	vendor/bin/phpcbf --standard=vendor/contributte/code-rules/paveljanda/ruleset.xml --extensions=php,phpt --tab-width=4 --ignore=temp -sp src
 
 phpstan:
-	vendor/bin/phpstan analyse src -c vendor/gamee/php-code-checker-rules/phpstan.neon --level 7
+	vendor/bin/phpstan analyse src -c vendor/contributte/code-rules/paveljanda/phpstan.neon --level 7
 
 tests:
 	vendor/bin/tester tests -C

@@ -18,7 +18,7 @@ final class MacroInclude implements IMacro
 	public function runMacro(
 		string $inputDirectory,
 		string $outputDirectory,
-		string & $content // Intentionally &
+		string &$content // Intentionally &
 	): void
 	{
 		/**
