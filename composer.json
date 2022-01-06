@@ -36,14 +36,14 @@
 		}
 	},
 	"require": {
-		"php": ">= 7.2.0",
-		"erusev/parsedown": "^1.6",
+		"php": ">= 8.0",
+		"erusev/parsedown": "^1.7",
 		"symfony/console": "^5.0|^6.0",
 		"matthiasmullie/minify": "^1.3",
 		"nette/utils": "^3.0"
 	},
 	"require-dev": {
-		"nette/tester": "^2.3",
+		"nette/tester": "^2.4",
 		"mockery/mockery": "^1.0",
 		"contributte/code-rules": "^1.1"
 	},
@@ -54,7 +54,12 @@
 	"prefer-stable": true,
 	"extra": {
 		"branch-alias": {
-			"dev-master": "4.0.x-dev"
+			"dev-master": "5.0.x-dev"
+		}
+	},
+	"config": {
+		"allow-plugins": {
+			"dealerdirect/phpcodesniffer-composer-installer": true
 		}
 	}
 }

@@ -36,14 +36,9 @@ final class Assets
 	 */
 	private $layoutFavicon;
 
-	/**
-	 * @var AuthCredentials
-	 */
-	private $authCredentials;
-
 
 	public function __construct(
-		AuthCredentials $authCredentials,
+		private AuthCredentials $authCredentials,
 		?string $addCss
 	) {
 		$this->layoutFile = __DIR__ . '/../../assets/layout.php';
@@ -62,8 +57,6 @@ final class Assets
 			__DIR__ . '/../../assets/layout.js',
 		];
 		$this->layoutFavicon = __DIR__ . '/../../assets/favicon.ico';
-
-		$this->authCredentials = $authCredentials;
 	}
 
 

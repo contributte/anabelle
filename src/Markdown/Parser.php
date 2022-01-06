@@ -24,26 +24,6 @@ final class Parser
 {
 
 	/**
-	 * @var bool
-	 */
-	private $isLayout;
-
-	/**
-	 * @var AuthCredentials
-	 */
-	private $authCredentials;
-
-	/**
-	 * @var Logger
-	 */
-	private $logger;
-
-	/**
-	 * @var DocuScope
-	 */
-	private $docuScope;
-
-	/**
 	 * @var CustomParsedown
 	 */
 	private $parsedown;
@@ -60,17 +40,12 @@ final class Parser
 
 
 	public function __construct(
-		bool $isLayout,
-		AuthCredentials $authCredentials,
-		Logger $logger,
-		DocuScope $docuScope,
+		private bool $isLayout,
+		private AuthCredentials $authCredentials,
+		private Logger $logger,
+		private DocuScope $docuScope,
 		?string $addCss
 	) {
-		$this->isLayout = $isLayout;
-		$this->authCredentials = $authCredentials;
-		$this->logger = $logger;
-		$this->docuScope = $docuScope;
-
 		$this->parsedown = new CustomParsedown;
 		$this->assets = new Assets($authCredentials, $addCss);
 

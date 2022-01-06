@@ -9,16 +9,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 final class Logger
 {
 
-	/**
-	 * @var OutputInterface
-	 */
-	private $output;
-
-
-	public function __construct(OutputInterface $output)
-	{
-		$this->output = $output;
-	}
+	public function __construct(private OutputInterface $output) {}
 
 
 	public function logProcessingFile(string $path): void

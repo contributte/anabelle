@@ -14,16 +14,8 @@ abstract class AbstractIndexSection implements IIndexSection
 	 */
 	protected static $pattern = '/.+/';
 
-	/**
-	 * @var string
-	 */
-	private $contentString;
 
-
-	final private function __construct(string $contentString)
-	{
-		$this->contentString = $contentString;
-	}
+	final private function __construct(private string $contentString) {}
 
 
 	/**

@@ -10,16 +10,7 @@ use Contributte\Anabelle\Http\AuthCredentials;
 final class ParamsValidator
 {
 
-	/**
-	 * @var string
-	 */
-	private $binDir;
-
-
-	public function __construct(string $binDir)
-	{
-		$this->binDir = $binDir;
-	}
+	public function __construct(private string $binDir) {}
 
 
 	/**
