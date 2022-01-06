@@ -18,19 +18,12 @@ final class MacroSection implements IMacro
 	 */
 	private $parser;
 
-	/**
-	 * @var AuthCredentials
-	 */
-	private $authCredentials;
-
 
 	public function __construct(
 		Logger $logger,
-		AuthCredentials $authCredentials,
+		private AuthCredentials $authCredentials,
 		DocuScope $docuScope
 	) {
-		$this->authCredentials = $authCredentials;
-
 		$this->parser = new Parser(false, $authCredentials, $logger, $docuScope, null);
 	}
 

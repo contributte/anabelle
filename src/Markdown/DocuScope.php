@@ -10,11 +10,6 @@ final class DocuScope
 {
 
 	/**
-	 * @var string
-	 */
-	private $outputDirectory;
-
-	/**
 	 * @var string[]
 	 */
 	private $inlineVariables = [];
@@ -25,10 +20,7 @@ final class DocuScope
 	private $blockVariables = [];
 
 
-	public function __construct(string $outputDirectory)
-	{
-		$this->outputDirectory = $outputDirectory;
-	}
+	public function __construct(private string $outputDirectory) {}
 
 
 	public function getOutputDirectory(): string

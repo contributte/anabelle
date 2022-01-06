@@ -15,19 +15,13 @@ final class MacroInlineFileLink implements IMacro
 	private const LINK_PATTERN = '/\[((?:[^][]++|(?R))*+)\]\(([^\)]*)\)/um';
 
 	/**
-	 * @var DocuScope
-	 */
-	private $docuScope;
-
-	/**
 	 * @var callable
 	 */
 	private $fileHashAlgo;
 
 
-	public function __construct(DocuScope $docuScope, ?callable $fileHashAlgo = null)
+	public function __construct(private DocuScope $docuScope, ?callable $fileHashAlgo = null)
 	{
-		$this->docuScope = $docuScope;
 		$this->fileHashAlgo = $fileHashAlgo ?? [FileHash::class, 'md5File'];
 	}
 

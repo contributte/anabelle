@@ -15,37 +15,18 @@ final class DocuGenerator
 {
 
 	/**
-	 * @var string
-	 */
-	private $inputDirectory;
-
-	/**
-	 * @var string
-	 */
-	private $outputDirectory;
-
-	/**
-	 * @var AuthCredentials
-	 */
-	private $authCredentials;
-
-	/**
 	 * @var Parser
 	 */
 	private $parser;
 
 
 	public function __construct(
-		string $inputDirectory,
-		string $outputDirectory,
+		private string $inputDirectory,
+		private string $outputDirectory,
 		?string $addCss,
-		AuthCredentials $authCredentials,
+		private AuthCredentials $authCredentials,
 		Logger $logger
 	) {
-		$this->inputDirectory = $inputDirectory;
-		$this->outputDirectory = $outputDirectory;
-		$this->authCredentials = $authCredentials;
-
 		$this->parser = new Parser(
 			true,
 			$authCredentials,

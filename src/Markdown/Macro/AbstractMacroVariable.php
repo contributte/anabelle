@@ -12,16 +12,8 @@ abstract class AbstractMacroVariable
 
 	protected const MAX_EXECUTE_DEPTH = 3;
 
-	/**
-	 * @var DocuScope
-	 */
-	protected $docuScope;
 
-
-	public function __construct(DocuScope $docuScope)
-	{
-		$this->docuScope = $docuScope;
-	}
+	public function __construct(protected DocuScope $docuScope) {}
 
 
 	/**
