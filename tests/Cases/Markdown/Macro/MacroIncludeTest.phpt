@@ -1,14 +1,14 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
-namespace Contributte\Anabelle\Tests\Markdown\Macro;
+namespace Contributte\Anabelle\Tests\Cases\Markdown\Macro;
 
-require_once __DIR__ . '/../../bootstrap.php';
-
+use Contributte\Anabelle\Markdown\Macro\MacroInclude;
 use Tester\Assert;
 use Tester\TestCase;
-use Contributte\Anabelle\Markdown\Macro\MacroInclude;
+
+require_once __DIR__ . '/../../../bootstrap.php';
 
 /**
  * @testCase

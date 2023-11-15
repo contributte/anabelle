@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Contributte\Anabelle\Tests\Markdown\Macro;
+namespace Contributte\Anabelle\Tests\Cases\Markdown\Macro;
 
-require_once __DIR__ . '/../../bootstrap.php';
-
+use Contributte\Anabelle\Markdown\Macro\MacroIndex;
 use Tester\Assert;
 use Tester\TestCase;
-use Contributte\Anabelle\Markdown\Macro\MacroIndex;
+
+require_once __DIR__ . '/../../../bootstrap.php';
 
 /**
  * @testCase

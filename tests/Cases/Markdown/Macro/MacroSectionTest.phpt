@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace Contributte\Anabelle\Tests\Markdown\Macro;
+namespace Contributte\Anabelle\Tests\Cases\Markdown\Macro;
 
-require_once __DIR__ . '/../../bootstrap.php';
-
-use Mockery;
-use Symfony\Component\Console\Output\OutputInterface;
-use Tester\Assert;
-use Tester\TestCase;
 use Contributte\Anabelle\Console\Utils\Logger;
 use Contributte\Anabelle\Http\AuthCredentials;
 use Contributte\Anabelle\Markdown\DocuScope;
 use Contributte\Anabelle\Markdown\Macro\MacroSection;
+use Mockery;
+use Symfony\Component\Console\Output\OutputInterface;
+use Tester\Assert;
+use Tester\TestCase;
+
+require_once __DIR__ . '/../../../bootstrap.php';
 
 /**
  * @testCase
