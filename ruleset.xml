@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ruleset name="Contributte" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="vendor/squizlabs/php_codesniffer/phpcs.xsd">
+	<!-- Rulesets -->
+	<rule ref="./vendor/contributte/qa/ruleset-8.0.xml">
+		<exclude name="Squiz.Strings.DoubleQuoteUsage.ContainsVar"/>
+		<exclude name="SlevomatCodingStandard.PHP.DisallowReference.DisallowedPassingByReference"/>
+	</rule>
+
+	<!-- Rules -->
+	<rule ref="SlevomatCodingStandard.Files.TypeNameMatchesFileName">
+		<properties>
+			<property name="rootNamespaces" type="array">
+				<element key="src" value="Contributte\Anabelle"/>
+				<element key="tests" value="Tests"/>
+			</property>
+		</properties>
+	</rule>
+
+	<!-- Excludes -->
+	<exclude-pattern>/tests</exclude-pattern>
+</ruleset>
