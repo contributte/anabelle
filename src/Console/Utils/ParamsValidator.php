@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace Contributte\Anabelle\Console\Utils;
 
@@ -10,8 +8,9 @@ use Contributte\Anabelle\Http\AuthCredentials;
 final class ParamsValidator
 {
 
-	public function __construct(private string $binDir) {}
-
+	public function __construct(private string $binDir)
+	{
+	}
 
 	/**
 	 * Validate directory structure (== check for <directory>/index.md)
@@ -32,7 +31,6 @@ final class ParamsValidator
 		$this->validateSpecialCssFile($specialCssFile);
 	}
 
-
 	/**
 	 * @throws ParamsValidatorException
 	 */
@@ -46,7 +44,6 @@ final class ParamsValidator
 			throw new ParamsValidatorException('CSS file does not exist');
 		}
 	}
-
 
 	/**
 	 * @throws ParamsValidatorException
@@ -80,12 +77,11 @@ final class ParamsValidator
 
 		if (file_exists($outputDirectory) && !$overwriteOutputDir) {
 			throw new ParamsValidatorException(
-				"Output directory path already exists."
-				. " Delete it or use option [-o] as for \"overwrite\" output directory"
+				'Output directory path already exists.'
+				. ' Delete it or use option [-o] as for "overwrite" output directory'
 			);
 		}
 	}
-
 
 	/**
 	 * @throws ParamsValidatorException
@@ -100,7 +96,6 @@ final class ParamsValidator
 		}
 	}
 
-
 	/**
 	 * @throws ParamsValidatorException
 	 */
@@ -110,11 +105,12 @@ final class ParamsValidator
 		 * Validate HTTP AUTH
 		 */
 		if ($authCredentials->getPass() === null && $authCredentials->getUser() !== null) {
-			throw new ParamsValidatorException("Please set --httpAuthPass [-p]");
+			throw new ParamsValidatorException('Please set --httpAuthPass [-p]');
 		}
 
 		if ($authCredentials->getPass() !== null && $authCredentials->getUser() === null) {
-			throw new ParamsValidatorException("Please set --httpAuthUser [-u]");
+			throw new ParamsValidatorException('Please set --httpAuthUser [-u]');
 		}
 	}
+
 }

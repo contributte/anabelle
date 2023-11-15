@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace Contributte\Anabelle\Generator;
 
@@ -14,11 +12,7 @@ use Contributte\Anabelle\Markdown\Parser;
 final class DocuGenerator
 {
 
-	/**
-	 * @var Parser
-	 */
-	private $parser;
-
+	private Parser $parser;
 
 	public function __construct(
 		private string $inputDirectory,
@@ -26,7 +20,8 @@ final class DocuGenerator
 		?string $addCss,
 		private AuthCredentials $authCredentials,
 		Logger $logger
-	) {
+	)
+	{
 		$this->parser = new Parser(
 			true,
 			$authCredentials,
@@ -35,7 +30,6 @@ final class DocuGenerator
 			$addCss
 		);
 	}
-
 
 	/**
 	 * @throws DocuGeneratorException
@@ -52,4 +46,5 @@ final class DocuGenerator
 			$this->outputDirectory . "/index.{$fileType}"
 		);
 	}
+
 }

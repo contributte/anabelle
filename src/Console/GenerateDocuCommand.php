@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace Contributte\Anabelle\Console;
 
@@ -21,41 +19,19 @@ use Symfony\Component\Console\Output\OutputInterface;
 final class GenerateDocuCommand extends Command
 {
 
-	/**
-	 * @var ParamsValidator
-	 */
-	private $paramsValidator;
+	private ParamsValidator $paramsValidator;
 
-	/**
-	 * @var string
-	 */
-	private $inputDirectory;
+	private string $inputDirectory;
 
-	/**
-	 * @var string|null
-	 */
-	private $addCss;
+	private ?string $addCss = null;
 
-	/**
-	 * @var string
-	 */
-	private $outputDirectory;
+	private string $outputDirectory;
 
-	/**
-	 * @var AuthCredentials
-	 */
-	private $authCredentials;
+	private AuthCredentials $authCredentials;
 
-	/**
-	 * @var bool
-	 */
-	private $overwriteOutputDir;
+	private bool $overwriteOutputDir;
 
-	/**
-	 * @var Logger
-	 */
-	private $logger;
-
+	private Logger $logger;
 
 	public function __construct(string $binDir)
 	{
@@ -63,7 +39,6 @@ final class GenerateDocuCommand extends Command
 
 		$this->paramsValidator = new ParamsValidator($binDir);
 	}
-
 
 	public function initialize(InputInterface $input, OutputInterface $output): void
 	{
@@ -77,27 +52,27 @@ final class GenerateDocuCommand extends Command
 		$addCss = $input->getOption('addCss');
 
 		if (!is_string($inputDirectory)) {
-			throw new \UnexpectedValueException;
+			throw new \UnexpectedValueException();
 		}
 
 		if (!is_string($outputDirectory)) {
-			throw new \UnexpectedValueException;
+			throw new \UnexpectedValueException();
 		}
 
 		if (!is_string($httpAuthUser) && $httpAuthUser !== null) {
-			throw new \UnexpectedValueException;
+			throw new \UnexpectedValueException();
 		}
 
 		if (!is_string($httpAuthPass) && $httpAuthPass !== null) {
-			throw new \UnexpectedValueException;
+			throw new \UnexpectedValueException();
 		}
 
 		if (!is_bool($overwriteOutputDir)) {
-			throw new \UnexpectedValueException;
+			throw new \UnexpectedValueException();
 		}
 
 		if (!is_string($addCss) && $addCss !== null) {
-			throw new \UnexpectedValueException;
+			throw new \UnexpectedValueException();
 		}
 
 		$this->inputDirectory = $inputDirectory;
@@ -129,7 +104,6 @@ final class GenerateDocuCommand extends Command
 			exit(1);
 		}
 	}
-
 
 	protected function configure(): void
 	{
@@ -178,7 +152,6 @@ final class GenerateDocuCommand extends Command
 		);
 	}
 
-
 	protected function execute(InputInterface $input, OutputInterface $output): int
 	{
 		$docuGenerator = new DocuGenerator(
@@ -204,7 +177,6 @@ final class GenerateDocuCommand extends Command
 		return 0;
 	}
 
-
 	private function printError(OutputInterface $output, string $message): void
 	{
 		$formatter = $this->getHelper('formatter');
@@ -215,4 +187,5 @@ final class GenerateDocuCommand extends Command
 			$output->writeln("\n{$block}\n");
 		}
 	}
+
 }

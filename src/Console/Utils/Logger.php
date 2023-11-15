@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace Contributte\Anabelle\Console\Utils;
 
@@ -9,8 +7,9 @@ use Symfony\Component\Console\Output\OutputInterface;
 final class Logger
 {
 
-	public function __construct(private OutputInterface $output) {}
-
+	public function __construct(private OutputInterface $output)
+	{
+	}
 
 	public function logProcessingFile(string $path): void
 	{
@@ -18,4 +17,5 @@ final class Logger
 
 		$this->output->writeln("Processing file [$path]...");
 	}
+
 }

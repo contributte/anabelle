@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace Contributte\Anabelle\Generator;
 
@@ -11,36 +9,23 @@ use MatthiasMullie\Minify\JS;
 final class Assets
 {
 
-	/**
-	 * @var string
-	 */
-	private $layoutFile;
+	private string $layoutFile;
 
-	/**
-	 * @var array
-	 */
-	private $layoutStylesPaths;
+	/** @var array<string> */
+	private array $layoutStylesPaths;
 
-	/**
-	 * @var array
-	 */
-	private $layoutSriptsPaths;
+	/** @var array<string> */
+	private array $layoutSriptsPaths;
 
-	/**
-	 * @var string|null
-	 */
-	private $layoutStyles;
+	private ?string $layoutStyles = null;
 
-	/**
-	 * @var string
-	 */
-	private $layoutFavicon;
-
+	private string $layoutFavicon;
 
 	public function __construct(
 		private AuthCredentials $authCredentials,
 		?string $addCss
-	) {
+	)
+	{
 		$this->layoutFile = __DIR__ . '/../../assets/layout.php';
 
 		$this->layoutStylesPaths = [
@@ -59,7 +44,6 @@ final class Assets
 		$this->layoutFavicon = __DIR__ . '/../../assets/favicon.ico';
 	}
 
-
 	public function saveFile(string $content, string $outputFile, bool $isLayout): void
 	{
 		if ($isLayout) {
@@ -70,12 +54,10 @@ final class Assets
 		}
 	}
 
-
 	public function replaceHttpAuth(string &$template): void // Intentionally &
 	{
 		$template = str_replace('{httpAuth}', $this->getHttpAuthSnippet(), $template);
 	}
-
 
 	public function getHttpAuthSnippet(): string
 	{
@@ -93,7 +75,6 @@ final class Assets
 		return '';
 	}
 
-
 	private function saveLayout(string $content, string $outputFile): void
 	{
 		$template = file_get_contents($this->layoutFile);
@@ -104,7 +85,7 @@ final class Assets
 		$content = preg_replace('/^<h1>.*<\/h1>\w*$/mU', '', $content);
 
 		if ($content === null) {
-			throw new \UnexpectedValueException;
+			throw new \UnexpectedValueException();
 		}
 
 		$this->replaceContent($template, $content);
@@ -113,18 +94,16 @@ final class Assets
 		$template = str_replace('{scripts}', $this->getLayoutSripts(), $template);
 
 		if (is_array($template)) {
-			throw new \UnexpectedValueException;
+			throw new \UnexpectedValueException();
 		}
 
 		file_put_contents($outputFile, $this->minifyHtml($template));
 	}
 
-
 	private function saveSection(string $content, string $outputFile): void
 	{
 		file_put_contents($outputFile, $this->minifyHtml($content));
 	}
-
 
 	private function replaceTitle(string &$template, string $content): void // Intentionally &
 	{
@@ -133,17 +112,15 @@ final class Assets
 			: str_replace('{title}', 'API Docs', $template);
 	}
 
-
 	private function replaceContent(string &$template, string $content): void // Intentionally &
 	{
 		$template = str_replace('{content}', $content, $template);
 	}
 
-
 	private function getLayoutStyles(): string
 	{
 		if ($this->layoutStyles === null) {
-			$minifier = new CSS;
+			$minifier = new CSS();
 
 			foreach ($this->layoutStylesPaths as $file) {
 				$minifier->add($file);
@@ -155,10 +132,9 @@ final class Assets
 		return $this->layoutStyles;
 	}
 
-
 	private function getLayoutSripts(): string
 	{
-		$minifier = new JS;
+		$minifier = new JS();
 
 		foreach ($this->layoutSriptsPaths as $file) {
 			$minifier->add($file);
@@ -166,7 +142,6 @@ final class Assets
 
 		return $minifier->minify();
 	}
-
 
 	private function minifyHtml(string $html): string
 	{
@@ -177,9 +152,10 @@ final class Assets
 		);
 
 		if ($return === null) {
-			throw new \UnexpectedValueException;
+			throw new \UnexpectedValueException();
 		}
 
 		return $return;
 	}
+
 }

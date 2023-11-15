@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace Contributte\Anabelle\Markdown\Macro;
 
@@ -14,17 +12,13 @@ final class MacroInlineFileLink implements IMacro
 
 	private const LINK_PATTERN = '/\[((?:[^][]++|(?R))*+)\]\(([^\)]*)\)/um';
 
-	/**
-	 * @var callable
-	 */
+	/** @var callable */
 	private $fileHashAlgo;
-
 
 	public function __construct(private DocuScope $docuScope, ?callable $fileHashAlgo = null)
 	{
 		$this->fileHashAlgo = $fileHashAlgo ?? [FileHash::class, 'md5File'];
 	}
-
 
 	/**
 	 * @throws DocuGeneratorException
@@ -40,7 +34,7 @@ final class MacroInlineFileLink implements IMacro
 		 */
 		$content = preg_replace_callback(
 			self::LINK_PATTERN,
-			function(array $input) use ($inputDirectory): string {
+			function (array $input) use ($inputDirectory): string {
 				$text = $input[1];
 				$path = trim($input[2], '/');
 
@@ -48,7 +42,7 @@ final class MacroInlineFileLink implements IMacro
 					$fileHash = call_user_func($this->fileHashAlgo, $inputDirectory . '/' . $path);
 					$fileName = $fileHash . '.' . pathinfo($path, PATHINFO_EXTENSION);
 
-					$targetPath = $this->docuScope->getOutputDirectory() . '/_files' . '/' . $fileName;
+					$targetPath = $this->docuScope->getOutputDirectory() . '/_files/' . $fileName;
 
 					if (!file_exists(dirname($targetPath))) {
 						mkdir(dirname($targetPath), 0755, true);
@@ -59,7 +53,7 @@ final class MacroInlineFileLink implements IMacro
 					$targetPath = preg_replace('~^[^/]+/~', '', $targetPath);
 
 					if ($targetPath === null) {
-						throw new \UnexpectedValueException;
+						throw new \UnexpectedValueException();
 					}
 
 					return (string) Html::el('a')->href('_files/' . basename($targetPath))
@@ -72,4 +66,5 @@ final class MacroInlineFileLink implements IMacro
 			$content
 		);
 	}
+
 }

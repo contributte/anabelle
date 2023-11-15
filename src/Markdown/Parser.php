@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace Contributte\Anabelle\Markdown;
 
@@ -23,21 +21,12 @@ use Contributte\Anabelle\Parsedown\CustomParsedown;
 final class Parser
 {
 
-	/**
-	 * @var CustomParsedown
-	 */
-	private $parsedown;
+	private CustomParsedown $parsedown;
 
-	/**
-	 * @var IMacro[]
-	 */
-	private $macros = [];
+	/** @var IMacro[] */
+	private array $macros = [];
 
-	/**
-	 * @var Assets
-	 */
-	private $assets;
-
+	private Assets $assets;
 
 	public function __construct(
 		private bool $isLayout,
@@ -45,13 +34,13 @@ final class Parser
 		private Logger $logger,
 		private DocuScope $docuScope,
 		?string $addCss
-	) {
-		$this->parsedown = new CustomParsedown;
+	)
+	{
+		$this->parsedown = new CustomParsedown();
 		$this->assets = new Assets($authCredentials, $addCss);
 
 		$this->setupMacros();
 	}
-
 
 	/**
 	 * @throws DocuGeneratorException
@@ -91,10 +80,9 @@ final class Parser
 		);
 	}
 
-
 	private function setupMacros(): void
 	{
-		$this->macros[] = new MacroInclude;
+		$this->macros[] = new MacroInclude();
 		$this->macros[] = new MacroInlineVariable($this->docuScope);
 		$this->macros[] = new MacroInlineVariableOutput($this->docuScope);
 		$this->macros[] = new MacroInlineFileLink($this->docuScope);
@@ -102,7 +90,7 @@ final class Parser
 		$this->macros[] = new MacroBlockVariableOutput($this->docuScope);
 
 		if ($this->isLayout) {
-			$this->macros[] = new MacroIndex;
+			$this->macros[] = new MacroIndex();
 			$this->macros[] = new MacroSection(
 				$this->logger,
 				$this->authCredentials,
@@ -110,4 +98,5 @@ final class Parser
 			);
 		}
 	}
+
 }

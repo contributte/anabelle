@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace Contributte\Anabelle\Markdown\Macro;
 
@@ -14,7 +12,7 @@ final class MacroInlineVariableOutput extends AbstractMacroVariable implements I
 		 */
 		$content = preg_replace_callback(
 			'/\{\$([a-zA-Z_0-9]+)\}/m',
-			function(array $input) use ($depth): string {
+			function (array $input) use ($depth): string {
 				$line = $this->docuScope->getInlineVariable($input[1]);
 
 				if ($depth <= parent::MAX_EXECUTE_DEPTH) {
@@ -28,4 +26,5 @@ final class MacroInlineVariableOutput extends AbstractMacroVariable implements I
 			$content
 		);
 	}
+
 }

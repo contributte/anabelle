@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace Contributte\Anabelle\Markdown\Macro\Index;
 
@@ -14,6 +12,6 @@ interface IIndexSection
 	 */
 	public static function createFromLine(string $line): IIndexSection;
 
-
 	public function getContentString(): string;
+
 }

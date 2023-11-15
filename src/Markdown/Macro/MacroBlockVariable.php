@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace Contributte\Anabelle\Markdown\Macro;
 
@@ -14,7 +12,7 @@ final class MacroBlockVariable extends AbstractMacroVariable implements IMacro
 		 */
 		$content = preg_replace_callback(
 			'/^\$\$([a-zA-Z_0-9]+)\n(.+?)\$\$$/ms',
-			function(array $input): string {
+			function (array $input): string {
 				$this->docuScope->addBlockVariable($input[1], $input[2]);
 
 				return '';
@@ -22,4 +20,5 @@ final class MacroBlockVariable extends AbstractMacroVariable implements IMacro
 			$content
 		);
 	}
+
 }

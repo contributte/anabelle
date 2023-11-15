@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace Contributte\Anabelle\Markdown\Macro;
 
@@ -14,7 +12,6 @@ final class MacroIndex implements IMacro
 {
 
 	private const DEFAULT_TITLE = '# API Docs';
-
 
 	/**
 	 * @throws DocuGeneratorException
@@ -35,6 +32,7 @@ final class MacroIndex implements IMacro
 
 				break;
 			} catch (PartDidNotMatchException $e) {
+				// Do nothing
 			}
 		}
 
@@ -44,11 +42,13 @@ final class MacroIndex implements IMacro
 			try {
 				$sections[] = IndexSection::createFromLine($line);
 			} catch (PartDidNotMatchException $e) {
+				// Do nothing
 			}
 
 			try {
 				$sections[] = IndexSubTitle::createFromLine($line);
 			} catch (PartDidNotMatchException $e) {
+				// Do nothing
 			}
 		}
 
@@ -61,4 +61,5 @@ final class MacroIndex implements IMacro
 			$content .= $section->getContentString() . PHP_EOL;
 		}
 	}
+
 }
